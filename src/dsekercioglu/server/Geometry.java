@@ -1,8 +1,5 @@
 package dsekercioglu.server;
 
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -23,8 +20,8 @@ public class Geometry {
         double centerY = rect.getY() + rect.getHeight() / 2;
         Point2D.Double center = new Point2D.Double(centerX, centerY);
         Line2D[] lines = getRectangleLines(rect);
-        for (int i = 0; i < lines.length; i++) {
-            lines[i].setLine(rotate(center, lines[i].getP1(), rotation), rotate(center, lines[i].getP2(), rotation));
+        for (Line2D line : lines) {
+            line.setLine(rotate(center, line.getP1(), rotation), rotate(center, line.getP2(), rotation));
         }
         return lines;
     }

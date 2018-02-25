@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -20,7 +21,7 @@ public class WildNature extends PApplet {
     private Visualizer v;
     
     private static ArrayList<DrawInfo> characters = new ArrayList();
-    private static String character;
+    private static Animal animal;
     private static String name;
     
     public static Client client;
@@ -28,7 +29,7 @@ public class WildNature extends PApplet {
     @Override
     public void setup() {
         size(1200, 600);
-        v = new Visualizer(name, character, this);
+        v = new Visualizer(name, animal, this);
         v.setImages();
     }
 
@@ -55,16 +56,16 @@ public class WildNature extends PApplet {
                 System.out.println("1) Marlin\n2) Black Marlin");
                 int characterNo = scn.nextInt();
                 if (characterNo == 1) {
-                    character = "Marlin";
+                    animal = Animal.MARLIN;
                     break;
                 } else if (characterNo == 2) {
-                    character = "BlackMarlin";
+                    animal = Animal.BLACK_MARLIN;
                     break;
                 }
             }
             
             System.out.println("Enter server IP address:");
-            String ip = scn.nextLine();
+            String ip = scn.next();
             
             client = new Client();
             new Thread(client).start();
@@ -76,7 +77,7 @@ public class WildNature extends PApplet {
             kryo.register(ArrayList.class);
             kryo.register(DrawInfo.class);
 
-            client.sendTCP(name + "/" + character);
+            client.sendTCP(name + "/" + animal.name());
             client.addListener(new Listener() {
                 @Override
                 public void received(Connection connection, Object object) {

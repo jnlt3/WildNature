@@ -1,6 +1,7 @@
 package dsekercioglu.client;
 
 import static dsekercioglu.general.Defaults.*;
+import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -14,14 +15,14 @@ public class Visualizer {
     private final HashMap<String, PImage> images = new HashMap<>();
     private final PApplet pa;
     private final String name;
-    private final String character;
+    private final Animal animal;
 
     PImage img;
 
-    public Visualizer(String name, String character, PApplet pa) {
+    public Visualizer(String name, Animal animal, PApplet pa) {
         this.pa = pa;
         this.name = name;
-        this.character = character;
+        this.animal = animal;
         Swimmer.pa = pa;
     }
 
