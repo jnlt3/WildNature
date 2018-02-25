@@ -69,7 +69,7 @@ public class WildNature extends PApplet {
             
             client = new Client();
             new Thread(client).start();
-            client.connect(5000, ip, 54556, 54778);
+            client.connect(5000, ip, 54555, 54777);
             Kryo kryo = client.getKryo();
             kryo.register(ControlInfo.class);
             kryo.register(CharacterInfo.class);
