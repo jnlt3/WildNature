@@ -46,6 +46,7 @@ public class Visualizer {
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
             if (d.name.equals(this.name)) {
+                drawHealthBar(d.health / d.maxHealth);
                 Swimmer.setCenter(d.x, d.y);
             }
         }
@@ -72,6 +73,17 @@ public class Visualizer {
         this.pa.stroke(255.0F, 0.0F, 0.0F);
         this.pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
         this.pa.rect(-5000.0F - Swimmer.cx + 600.0F, -5000.0F - Swimmer.cy + 300.0F, 10000.0F, 10000.0F);
+    }
+    
+    
+    private void drawHealthBar(double rate) {
+        int green = Math.min((int) (rate * 510), 255);
+        int red = Math.min((int) ((1 - rate) * 510), 255);
+        System.out.println(red + " " + green);
+        this.pa.fill(red, green, 0);
+        this.pa.stroke(red, green, 0);
+        float radius = (float) (rate * 30);
+        this.pa.ellipse(600, 200, radius, radius);
     }
     
 }

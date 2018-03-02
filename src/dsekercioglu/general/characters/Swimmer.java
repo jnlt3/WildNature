@@ -6,18 +6,19 @@ import processing.core.PImage;
 public abstract class Swimmer {
 
     private final String name;
-    
+
     public static PApplet pa;
     public static float cx;
     public static float cy;
     public float x;
     public float y;
+    public float angle;
+    public float damage;
 
     protected PImage img;
     protected String type;
-    protected float angle;
     protected float health;
-    protected float maxHealth;    
+    protected float maxHealth;
     protected float length;
     protected float weight;
     protected float velocity;
@@ -69,6 +70,11 @@ public abstract class Swimmer {
         di.name = this.name;
         di.img = this.type;
         return di;
+    }
+    
+    public void hit(double damage) {
+        health -= damage;
+        health = Math.max(health, 0);
     }
 
     public abstract int getWidth();

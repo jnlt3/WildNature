@@ -20,7 +20,8 @@ public class Marlin extends Swimmer {
         this.energyIncrease = MARLIN_ENERGY_INCREASE;
         this.maxTurn = MARLIN_TURN;
         this.health = MARLIN_MAX_HEALTH;
-        this.maxHealth = health;
+        this.maxHealth = MARLIN_MAX_HEALTH;
+        this.damage = MARLIN_DAMAGE;
         
         this.type = "Marlin";
     }
@@ -53,17 +54,14 @@ public class Marlin extends Swimmer {
             this.velocity = MARLIN_SPEED;
             this.maxTurn = MARLIN_TURN;
         }
-        this.health = Math.min(this.health + 1.0F, this.health);
+        this.health = Math.min(this.health + 1.0F, this.maxHealth);
     }
 
     @Override
     public void draw() {
         drawCostume(this.img, this.x, this.y, this.angle);
     }
-
-    public void hit() {
-    }
-
+    
     @Override
     public boolean isAlive() {
         return this.health > 0.0F;
