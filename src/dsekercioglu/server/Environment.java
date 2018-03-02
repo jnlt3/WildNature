@@ -48,17 +48,23 @@ public class Environment {
     }
 
     private void handleIntersections() {
+        ArrayList<Swimmer> knockback = new ArrayList<>();
         for (int i = 0; i < characters.size(); i++) {
             Swimmer p1 = characters.get(i);
-            Line2D[] r1 = getHitBox(p1);
+            Line2D r1 = getHitter(p1);
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
-                if (!p1.equals(p2) && Geometry.intersects(r1, r2)) {
+                if (!p1.equals(p2) && Geometry.intersects(new Line2D[] {r1}, r2)) {
                     p2.hit(p1.damage);
+                    knockback.add(p2);
                 }
             }
         }
+    }
+
+    private Line2D getHitter(Swimmer s) {
+        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[0];
     }
 
     private Line2D[] getHitBox(Swimmer s) {
