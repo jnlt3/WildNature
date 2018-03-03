@@ -1,5 +1,7 @@
 package dsekercioglu.server;
 
+import dsekercioglu.general.characters.Ability;
+import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -14,6 +16,15 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     private final int WIDTH = 5000;
     private final int HEIGHT = 5000;
+    private final float ABILITY_THRESHOLD = 10;//Every boost passes this value
+    private final int ABILITY_TIME = 150;//Every ability lasts this much;
+    private final float BLEED_DAMAGE = 3F;
+    private final float GRAB_DAMAGE = 2F;
+    
+    ArrayList<Ability> abilities = new ArrayList<>();
+    ArrayList<Swimmer> attackers = new ArrayList<>();
+    ArrayList<Swimmer> victims = new ArrayList<>();
+    ArrayList<Integer> time = new ArrayList<>();
 
     public Environment() {
         this.characters = new ArrayList();
@@ -35,6 +46,7 @@ public class Environment {
         characters.removeAll(toRemove);
         toRemove.clear();
         handleIntersections();
+        handleAbilities();
         CharacterInfo ci = new CharacterInfo();
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
@@ -58,18 +70,52 @@ public class Environment {
                 if (!p1.equals(p2) && Geometry.intersects(new Line2D[] {r1}, r2)) {
                     p2.hit(p1.damage);
                     knockback.add(p2);
+                    if(p1.velocity > ABILITY_THRESHOLD) {
+                        abilities.add(p1.ability);
+                        attackers.add(p1);
+                        victims.add(p2);
+                        time.add(ABILITY_TIME);
+                    }
                 }
             }
         }
         for(int i = 0; i < knockback.size(); i++) {
             Swimmer s = knockback.get(i);
-            s.x -= Math.cos(s.angle) * 20;
-            s.y -= Math.sin(s.angle) * 20;
+            s.x -= Math.cos(s.angle) * 50;
+            s.y -= Math.sin(s.angle) * 50;
+        }
+    }
+    
+    private void handleAbilities() {
+        ArrayList<Integer> indices = new ArrayList<>();
+        for(int i = 0; i < abilities.size(); i++) {
+            Ability a = abilities.get(i);
+            if(a.equals(BLEED)) {
+                victims.get(i).hit(BLEED_DAMAGE);
+            } else if(a.equals(GRAB)) {
+                Swimmer victim = victims.get(i);
+                Swimmer attacker = attackers.get(i);
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
+                victim.hit(GRAB_DAMAGE);
+            }
+            int newTime = time.get(i) - 1;
+            time.set(i, newTime);
+            if(newTime <= 0) {
+                indices.add(i);
+            }
+        }
+        for(int i = 0; i < indices.size(); i++) {
+            abilities.remove(indices.get(i) - i);
+            victims.remove(indices.get(i) - i);
+            attackers.remove(indices.get(i) - i);
+            time.remove(indices.get(i) - i);
         }
     }
 
     private Line2D getHitter(Swimmer s) {
-        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[0];
+        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[1];
     }
 
     private Line2D[] getHitBox(Swimmer s) {

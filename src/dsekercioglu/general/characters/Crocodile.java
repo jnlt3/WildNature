@@ -1,6 +1,7 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Swimmer.drawCostume;
 import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
@@ -25,6 +26,7 @@ public class Crocodile extends Swimmer {
         this.health = CROCODILE_MAX_HEALTH;
         this.maxHealth = CROCODILE_MAX_HEALTH;
         this.damage = CROCODILE_DAMAGE;
+        this.ability = GRAB;
         
         this.type = "Crocodile";
     }

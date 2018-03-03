@@ -1,6 +1,7 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Swimmer.drawCostume;
 import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
@@ -24,7 +25,8 @@ public class BlackMarlin extends Swimmer {
         this.maxTurn = BLACK_MARLIN_TURN;
         this.health = BLACK_MARLIN_MAX_HEALTH;
         this.maxHealth = BLACK_MARLIN_MAX_HEALTH;
-        this.damage = BLACK_MARLIN_DAMAGE;
+        this.damage = BLACK_MARLIN_DAMAGE;  
+        this.ability = BLEED;
         
         this.type = "BlackMarlin";
     }

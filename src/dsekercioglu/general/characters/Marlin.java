@@ -1,6 +1,7 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.BLEED;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -23,6 +24,7 @@ public class Marlin extends Swimmer {
         this.health = MARLIN_MAX_HEALTH;
         this.maxHealth = MARLIN_MAX_HEALTH;
         this.damage = MARLIN_DAMAGE;
+        this.ability = BLEED;
 
         this.type = "Marlin";
     }

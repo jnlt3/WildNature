@@ -14,6 +14,8 @@ public abstract class Swimmer {
     public float y;
     public float angle;
     public float damage;
+    public float velocity;
+    public Ability ability;
 
     protected PImage img;
     protected String type;
@@ -21,7 +23,6 @@ public abstract class Swimmer {
     protected float maxHealth;
     protected float length;
     protected float weight;
-    protected float velocity;
     protected float maxTurn;
     protected float passiveAbilityPower;
     protected float maxEnergy;
@@ -73,7 +74,7 @@ public abstract class Swimmer {
         di.hiding = this.hiding;
         return di;
     }
-    
+
     public void hit(double damage) {
         health -= damage;
         health = Math.max(health, 0);
