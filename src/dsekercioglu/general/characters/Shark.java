@@ -52,7 +52,7 @@ public class Shark extends Swimmer {
         this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
         if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
             this.energy -= 1.0F;
-            this.velocity *= 15.0F;
+            this.velocity *= 5.0F;
             this.maxTurn /= 30.0F;
             this.energyTime = 100;
         }
