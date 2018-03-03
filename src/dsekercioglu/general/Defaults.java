@@ -31,7 +31,7 @@ public class Defaults {
     public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.001F;
-    public static final float CROCODILE_MAX_HEALTH = 6000.0F;
+    public static final float CROCODILE_MAX_HEALTH = 9000.0F;
     public static final float CROCODILE_HEALTH_REGEN = 1.0F;
     public static final float CROCODILE_DAMAGE = 10F;
 

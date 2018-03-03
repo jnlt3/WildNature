@@ -18,9 +18,8 @@ public class Environment {
     private final int HEIGHT = 5000;
     private final float ABILITY_THRESHOLD = 10;//Every boost passes this value
     private final int ABILITY_TIME = 150;//Every ability lasts this much;
-    private final float BLEED_DAMAGE = 10F;
-    private final float GRAB_DAMAGE = 15F;
-    private final float SHOCK_DAMAGE = 30F;
+    private final float BLEED_DAMAGE = 5;
+    private final float SHOCK_DAMAGE = 15F;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -64,6 +63,9 @@ public class Environment {
         for (int i = 0; i < characters.size(); i++) {
             Swimmer p1 = characters.get(i);
             Line2D r1 = getHitter(p1);
+            double fx = p1.x + Math.cos(p1.angle) * p1.getWidth() / 2;
+            double fy = p1.y + Math.sin(p1.angle) * p1.getWidth() / 2;
+            System.out.println(((r1.getX1() + r1.getX2()) / 2 - fx) + " " + ((r1.getY1() + r1.getY2()) / 2 - fy));
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
@@ -92,7 +94,7 @@ public class Environment {
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(GRAB_DAMAGE);
+                victim.hit(attacker.damage);
             } else if(a.equals(SHOCK)) {
                 Swimmer victim = victims.get(i);
                 victim.hit(SHOCK_DAMAGE);
@@ -112,7 +114,7 @@ public class Environment {
     }
 
     private Line2D getHitter(Swimmer s) {
-        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[0];
+        return Geometry.rotateCenter(new Rectangle2D.Double(s.x - s.getWidth() / 2, s.y - s.getHeight() / 2, s.getWidth(), s.getHeight()), s.angle)[1];
     }
 
     private Line2D[] getHitBox(Swimmer s) {

@@ -27,12 +27,12 @@ public class Geometry {
     }
 
     private static Point2D.Double rotate(Point2D.Double center, Point2D point, double rotation) {
-        double angle = Math.atan2(point.getX() - center.x, point.getY() - center.y);
+        double angle = Math.atan2(point.getY() - center.y, point.getX() - center.x);
         return project(center, angle + rotation, center.distance(point));
     }
 
     public static Point2D.Double project(Point2D.Double source, double angle, double distance) {
-        return new Point2D.Double(source.x + Math.sin(angle) * distance, source.y + Math.cos(angle) * distance);
+        return new Point2D.Double(source.x + Math.cos(angle) * distance, source.y + Math.sin(angle) * distance);
     }
 
     public static boolean intersects(Line2D[] r1, Line2D[] r2) {

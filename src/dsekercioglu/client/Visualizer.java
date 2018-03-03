@@ -1,7 +1,9 @@
 package dsekercioglu.client;
 
+import com.sun.javafx.geom.Point2D;
 import static dsekercioglu.general.Defaults.*;
 import dsekercioglu.general.characters.Animal;
+import static dsekercioglu.general.characters.Animal.*;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -30,20 +32,20 @@ public class Visualizer {
         PImage marlin = pa.loadImage("img/Marlin.png");
         marlin.resize((int) MARLIN_LENGTH, 0);
         images.put("Marlin", marlin);
-        
+
         PImage blackMarlin = pa.loadImage("img/BlackMarlin.png");
         blackMarlin.resize((int) BLACK_MARLIN_LENGTH, 0);
         images.put("BlackMarlin", blackMarlin);
-        
+
         PImage crocodile = pa.loadImage("img/Crocodile.png");
         crocodile.resize((int) CROCODILE_LENGTH, 0);
         images.put("Crocodile", crocodile);
-        
+
         PImage shark = pa.loadImage("img/Shark.png");
         shark.resize((int) SHARK_LENGTH, 0);
         images.put("Shark", shark);
-        
-        PImage electricEel =  pa.loadImage("img/ElectricEel.png");
+
+        PImage electricEel = pa.loadImage("img/ElectricEel.png");
         electricEel.resize((int) ELECTRIC_EEL_LENGTH, 0);
         images.put("ElectricEel", electricEel);
     }
@@ -59,12 +61,12 @@ public class Visualizer {
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
             if (d.name.equals(this.name)) {
+                drawVision(animal.name(), characters);
                 Swimmer.setCenter(d.x, d.y);
                 this.pa.fill(0, 0, 0, 0);
                 this.pa.stroke(255);
                 this.pa.ellipse(600, 300, 200, 200);
             }
-
         }
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo di = (DrawInfo) characters.get(i);
@@ -101,7 +103,35 @@ public class Visualizer {
         this.pa.fill(red, green, 0);
         this.pa.stroke(red, green, 0);
         float radius = (float) (rate * 50);
-        this.pa.ellipse(x, y - 200, radius, radius);
+        this.pa.ellipse(x, y - 100, radius, radius);
+    }
+
+    private void drawVision(String type, ArrayList<DrawInfo> characters) {
+        if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name())) {
+            this.pa.fill(0);
+            this.pa.stroke(0);
+            for (int i = 0; i < characters.size(); i++) {
+                DrawInfo d = characters.get(i);
+                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 2500 && !d.name.equals(name)) {
+                    double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                    float x = (float) (600 + Math.cos(angle) * 100);
+                    float y = (float) (300 + Math.sin(angle) * 100);
+                    this.pa.ellipse(x, y, 20, 20);
+                }
+            }
+        } else if (type.equals(SHARK.name())) {
+            this.pa.fill(255, 0, 0);
+            this.pa.stroke(255, 0, 0);
+            for (int i = 0; i < characters.size(); i++) {
+                DrawInfo d = characters.get(i);
+                if (d.health != d.maxHealth && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 6000 && !d.name.equals(name)) {
+                    double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                    float x = (float) (600 + Math.cos(angle) * 100);
+                    float y = (float) (300 + Math.sin(angle) * 100);
+                    this.pa.ellipse(x, y, 20, 20);
+                }
+            }
+        }
     }
 
 }
