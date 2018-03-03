@@ -50,11 +50,11 @@ public class Defaults {
     public static final float ELECTRIC_EEL_LENGTH = 80.0F;
     public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
     public static final float ELECTRIC_EEL_SPEED = 2.0F;
-    public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 100.0F;
+    public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
     public static final float ELECTRIC_EEL_MAX_ENERGY = 1.0F;
     public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.002F;
     public static final float ELECTRIC_EEL_MAX_HEALTH = 900.0F;
-    public static final float ELECTRIC_EEL_HEALTH_REGEN = 1.0F;
-    public static final float ELECTRIC_EEL_DAMAGE = 8.8F;
+    public static final float ELECTRIC_EEL_HEALTH_REGEN = 3.0F;
+    public static final float ELECTRIC_EEL_DAMAGE = 0.088F;
 
 }

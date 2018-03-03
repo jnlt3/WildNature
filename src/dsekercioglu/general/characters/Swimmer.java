@@ -35,8 +35,6 @@ public abstract class Swimmer {
         pa = p;
     }
 
-    public abstract void setImages();
-
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);
 
     public abstract boolean isAlive();
@@ -45,8 +43,6 @@ public abstract class Swimmer {
         cx = x;
         cy = y;
     }
-
-    public abstract void draw();
 
     public static void drawCostume(PImage costume, float centerX, float centerY, float radians) {
         radians = (float) (radians + 3.141592653589793D);

@@ -1,5 +1,5 @@
 package dsekercioglu.general.characters;
 
 public enum Ability {
-    BLEED, GRAB
+    BLEED, GRAB, SHOCK
 }

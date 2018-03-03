@@ -20,6 +20,7 @@ public class Environment {
     private final int ABILITY_TIME = 150;//Every ability lasts this much;
     private final float BLEED_DAMAGE = 10F;
     private final float GRAB_DAMAGE = 15F;
+    private final float SHOCK_DAMAGE = 30F;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -63,7 +64,6 @@ public class Environment {
         for (int i = 0; i < characters.size(); i++) {
             Swimmer p1 = characters.get(i);
             Line2D r1 = getHitter(p1);
-            System.out.println(r1.getX1() - p1.x + "  " + (r1.getY1() - p1.y));
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
@@ -93,6 +93,9 @@ public class Environment {
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
                 victim.hit(GRAB_DAMAGE);
+            } else if(a.equals(SHOCK)) {
+                Swimmer victim = victims.get(i);
+                victim.hit(SHOCK_DAMAGE);
             }
             int newTime = time.get(i) - 1;
             time.set(i, newTime);

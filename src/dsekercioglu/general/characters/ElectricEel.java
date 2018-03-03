@@ -2,31 +2,33 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Swimmer.drawCostume;
+import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
-public class Marlin extends Swimmer {
+public class ElectricEel extends Swimmer {
 
     private int energyTime;
 
-    public Marlin(String name, float x, float y, PApplet p) {
+    public ElectricEel(String name, float x, float y, PApplet p) {
         super(name, p);
         this.x = x;
         this.y = y;
-        this.length = MARLIN_LENGTH;
-        this.weight = MARLIN_WEIGHT;
-        this.velocity = MARLIN_SPEED;
-        this.passiveAbilityPower = MARLIN_PASSIVE_ABILITY;
-        this.maxEnergy = MARLIN_MAX_ENERGY;
+        this.length = ELECTRIC_EEL_LENGTH;
+        this.weight = ELECTRIC_EEL_WEIGHT;
+        this.velocity = ELECTRIC_EEL_SPEED;
+        this.passiveAbilityPower = ELECTRIC_EEL_PASSIVE_ABILITY;
+        this.maxEnergy = ELECTRIC_EEL_MAX_ENERGY;
         this.energy = this.maxEnergy;
-        this.energyIncrease = MARLIN_ENERGY_INCREASE;
-        this.maxTurn = MARLIN_TURN;
-        this.health = MARLIN_MAX_HEALTH;
-        this.maxHealth = MARLIN_MAX_HEALTH;
-        this.damage = MARLIN_DAMAGE;
+        this.energyIncrease = ELECTRIC_EEL_ENERGY_INCREASE;
+        this.maxTurn = ELECTRIC_EEL_TURN;
+        this.health = ELECTRIC_EEL_MAX_HEALTH;
+        this.maxHealth = ELECTRIC_EEL_MAX_HEALTH;
+        this.damage = ELECTRIC_EEL_DAMAGE;
         this.ability = BLEED;
 
-        this.type = "Marlin";
+        this.type = "ElectricEel";
     }
 
     private double turn(double newAngle) {
@@ -50,16 +52,15 @@ public class Marlin extends Swimmer {
         this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
         if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
             this.energy -= 1.0F;
-            this.velocity *= 3.0F;
-            this.maxTurn /= 3.0F;
-            this.energyTime = 50;
+            this.velocity *= 6.0F;
+            this.energyTime = 150;
         }
         this.energyTime = Math.max(this.energyTime - 1, 0);
         if (this.energyTime == 0) {
-            this.velocity = MARLIN_SPEED;
-            this.maxTurn = MARLIN_TURN;
+            this.velocity = ELECTRIC_EEL_SPEED;
+            this.maxTurn = ELECTRIC_EEL_TURN;
         }
-        this.health = Math.min(this.health + MARLIN_HEALTH_REGEN, this.maxHealth);
+        this.health = Math.min(this.health + ELECTRIC_EEL_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override
@@ -69,11 +70,11 @@ public class Marlin extends Swimmer {
 
     @Override
     public int getWidth() {
-        return (int) MARLIN_LENGTH;
+        return (int) ELECTRIC_EEL_LENGTH;
     }
 
     @Override
     public int getHeight() {
-        return 44;
+        return 18;
     }
 }

@@ -54,7 +54,7 @@ public class WildNature extends PApplet {
             OUTER:
             while (true) {
                 System.out.println("Choose a character...");
-                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4) Shark");
+                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4) Shark\n5) Electric Eel");
                 int characterNo = scn.nextInt();
                 switch (characterNo) {
                     case 1:
@@ -68,6 +68,9 @@ public class WildNature extends PApplet {
                         break OUTER;
                     case 4:
                         animal = Animal.SHARK;
+                        break OUTER;
+                    case 5:
+                        animal = Animal.ELECTRIC_EEL;
                         break OUTER;
                     default:
                         break;

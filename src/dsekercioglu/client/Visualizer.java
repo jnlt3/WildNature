@@ -30,16 +30,22 @@ public class Visualizer {
         PImage marlin = pa.loadImage("img/Marlin.png");
         marlin.resize((int) MARLIN_LENGTH, 0);
         images.put("Marlin", marlin);
+        
         PImage blackMarlin = pa.loadImage("img/BlackMarlin.png");
         blackMarlin.resize((int) BLACK_MARLIN_LENGTH, 0);
         images.put("BlackMarlin", blackMarlin);
+        
         PImage crocodile = pa.loadImage("img/Crocodile.png");
         crocodile.resize((int) CROCODILE_LENGTH, 0);
         images.put("Crocodile", crocodile);
+        
         PImage shark = pa.loadImage("img/Shark.png");
         shark.resize((int) SHARK_LENGTH, 0);
         images.put("Shark", shark);
-        System.out.println(shark.height);
+        
+        PImage electricEel =  pa.loadImage("img/ElectricEel.png");
+        electricEel.resize((int) ELECTRIC_EEL_LENGTH, 0);
+        images.put("ElectricEel", electricEel);
     }
 
     public void update(ArrayList<DrawInfo> characters) {

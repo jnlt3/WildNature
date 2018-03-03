@@ -68,19 +68,8 @@ public class Crocodile extends Swimmer {
     }
 
     @Override
-    public void draw() {
-        drawCostume(this.img, this.x, this.y, this.angle);
-    }
-
-    @Override
     public boolean isAlive() {
         return this.health > 0.0F;
-    }
-
-    @Override
-    public void setImages() {
-        this.img = pa.loadImage("Crocodile.png");
-        this.img.resize((int) this.length, 0);
     }
 
     @Override

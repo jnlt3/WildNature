@@ -48,9 +48,6 @@ public class Shark extends Swimmer {
         if (Point2D.distance(600, 300, mouseX, mouseY) > 100 || energyTime != 0) {
             this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
             this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
-            this.hiding = false;
-        } else {
-            this.hiding = true;
         }
         this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
         if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
@@ -66,21 +63,10 @@ public class Shark extends Swimmer {
         }
         this.health = Math.min(this.health + SHARK_HEALTH_REGEN, this.maxHealth);
     }
-
-    @Override
-    public void draw() {
-        drawCostume(this.img, this.x, this.y, this.angle);
-    }
-
+    
     @Override
     public boolean isAlive() {
         return this.health > 0.0F;
-    }
-
-    @Override
-    public void setImages() {
-        this.img = pa.loadImage("Shark.png");
-        this.img.resize((int) this.length, 0);
     }
 
     @Override

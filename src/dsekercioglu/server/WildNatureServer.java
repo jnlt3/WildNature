@@ -8,6 +8,7 @@ import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
@@ -63,6 +64,8 @@ public class WildNatureServer {
                         p = new Crocodile(name, 0.0F, 0.0F, null);
                     } else if (Animal.SHARK.name().equals(s)) {
                         p = new Shark(name, 0.0F, 0.0F, null);
+                    }else if (Animal.ELECTRIC_EEL.name().equals(s)) {
+                        p = new ElectricEel(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         WildNatureServer.env.addCharacter(p);
