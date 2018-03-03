@@ -23,19 +23,28 @@ public class Defaults {
     public static final float BLACK_MARLIN_MAX_HEALTH = 3000.0F;
     public static final float BLACK_MARLIN_HEALTH_REGEN = 1.0F;
     public static final float BLACK_MARLIN_DAMAGE = 39.6F;
-    
-    
+
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
-    public static final float CROCODILE_WEIGHT = 7500.0F;
-    public static final float CROCODILE_SPEED = 2.4F;
-    public static final float CROCODILE_PASSIVE_ABILITY = 10.0F;
+    public static final float CROCODILE_WEIGHT = 2500.0F;
+    public static final float CROCODILE_SPEED = 2F;
+    public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.001F;
-    public static final float CROCODILE_MAX_HEALTH = 1500.0F;
+    public static final float CROCODILE_MAX_HEALTH = 6000.0F;
     public static final float CROCODILE_HEALTH_REGEN = 1.0F;
-    public static final float CROCODILE_DAMAGE = 50F;
-    
+    public static final float CROCODILE_DAMAGE = 10F;
+
+    public static final float SHARK_TURN = 0.08726646F;
+    public static final float SHARK_LENGTH = 170.0F;
+    public static final float SHARK_WEIGHT = 3200.0F;
+    public static final float SHARK_SPEED = 2.4F;
+    public static final float SHARK_PASSIVE_ABILITY = 1.0F;
+    public static final float SHARK_MAX_ENERGY = 2.0F;
+    public static final float SHARK_ENERGY_INCREASE = 0.0005F;
+    public static final float SHARK_MAX_HEALTH = 7680.0F;
+    public static final float SHARK_HEALTH_REGEN = 0.5F;
+    public static final float SHARK_DAMAGE = 15F;
 
     public static final float ELECTRIC_EEL_TURN = 0.08726646F;
     public static final float ELECTRIC_EEL_LENGTH = 80.0F;
@@ -47,5 +56,5 @@ public class Defaults {
     public static final float ELECTRIC_EEL_MAX_HEALTH = 900.0F;
     public static final float ELECTRIC_EEL_HEALTH_REGEN = 1.0F;
     public static final float ELECTRIC_EEL_DAMAGE = 8.8F;
-            
+
 }

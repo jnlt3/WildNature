@@ -9,6 +9,7 @@ import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Marlin;
+import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -58,8 +59,10 @@ public class WildNatureServer {
                         p = new Marlin(name, 0.0F, 0.0F, null);
                     } else if (Animal.BLACK_MARLIN.name().equals(s)) {
                         p = new BlackMarlin(name, 0.0F, 0.0F, null);
-                    } else if(Animal.CROCODILE.name().equals(s)) {
+                    } else if (Animal.CROCODILE.name().equals(s)) {
                         p = new Crocodile(name, 0.0F, 0.0F, null);
+                    } else if (Animal.SHARK.name().equals(s)) {
+                        p = new Shark(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         WildNatureServer.env.addCharacter(p);

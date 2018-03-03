@@ -18,9 +18,9 @@ public class Environment {
     private final int HEIGHT = 5000;
     private final float ABILITY_THRESHOLD = 10;//Every boost passes this value
     private final int ABILITY_TIME = 150;//Every ability lasts this much;
-    private final float BLEED_DAMAGE = 3F;
-    private final float GRAB_DAMAGE = 2F;
-    
+    private final float BLEED_DAMAGE = 10F;
+    private final float GRAB_DAMAGE = 15F;
+
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
     ArrayList<Swimmer> victims = new ArrayList<>();
@@ -45,8 +45,8 @@ public class Environment {
         }
         characters.removeAll(toRemove);
         toRemove.clear();
-        handleIntersections();
         handleAbilities();
+        handleIntersections();
         CharacterInfo ci = new CharacterInfo();
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
@@ -60,17 +60,16 @@ public class Environment {
     }
 
     private void handleIntersections() {
-        ArrayList<Swimmer> knockback = new ArrayList<>();
         for (int i = 0; i < characters.size(); i++) {
             Swimmer p1 = characters.get(i);
             Line2D r1 = getHitter(p1);
+            System.out.println(r1.getX1() - p1.x + "  " + (r1.getY1() - p1.y));
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
-                if (!p1.equals(p2) && Geometry.intersects(new Line2D[] {r1}, r2)) {
+                if (!p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
-                    knockback.add(p2);
-                    if(p1.velocity > ABILITY_THRESHOLD) {
+                    if (p1.velocity > ABILITY_THRESHOLD) {
                         abilities.add(p1.ability);
                         attackers.add(p1);
                         victims.add(p2);
@@ -79,20 +78,15 @@ public class Environment {
                 }
             }
         }
-        for(int i = 0; i < knockback.size(); i++) {
-            Swimmer s = knockback.get(i);
-            s.x -= Math.cos(s.angle) * 50;
-            s.y -= Math.sin(s.angle) * 50;
-        }
     }
-    
+
     private void handleAbilities() {
         ArrayList<Integer> indices = new ArrayList<>();
-        for(int i = 0; i < abilities.size(); i++) {
+        for (int i = 0; i < abilities.size(); i++) {
             Ability a = abilities.get(i);
-            if(a.equals(BLEED)) {
+            if (a.equals(BLEED)) {
                 victims.get(i).hit(BLEED_DAMAGE);
-            } else if(a.equals(GRAB)) {
+            } else if (a.equals(GRAB)) {
                 Swimmer victim = victims.get(i);
                 Swimmer attacker = attackers.get(i);
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -102,11 +96,11 @@ public class Environment {
             }
             int newTime = time.get(i) - 1;
             time.set(i, newTime);
-            if(newTime <= 0) {
+            if (newTime <= 0) {
                 indices.add(i);
             }
         }
-        for(int i = 0; i < indices.size(); i++) {
+        for (int i = 0; i < indices.size(); i++) {
             abilities.remove(indices.get(i) - i);
             victims.remove(indices.get(i) - i);
             attackers.remove(indices.get(i) - i);
@@ -115,10 +109,10 @@ public class Environment {
     }
 
     private Line2D getHitter(Swimmer s) {
-        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[1];
+        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle)[0];
     }
 
     private Line2D[] getHitBox(Swimmer s) {
-        return Geometry.rotateCenter(new Rectangle2D.Double(s.x, s.y, s.getWidth(), s.getHeight()), s.angle);
+        return Geometry.rotateCenter(new Rectangle2D.Double(s.x - s.getWidth() / 2, s.y - s.getHeight() / 2, s.getWidth(), s.getHeight()), s.angle);
     }
 }
