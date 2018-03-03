@@ -33,6 +33,9 @@ public class Visualizer {
         PImage blackMarlin = pa.loadImage("img/BlackMarlin.png");
         blackMarlin.resize((int) BLACK_MARLIN_LENGTH, 0);
         images.put("BlackMarlin", blackMarlin);
+        PImage crocodile = pa.loadImage("img/Crocodile.png");
+        crocodile.resize((int) CROCODILE_LENGTH, 0);
+        images.put("Crocodile", crocodile);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
@@ -48,11 +51,16 @@ public class Visualizer {
             if (d.name.equals(this.name)) {
                 drawHealthBar(d.health / d.maxHealth);
                 Swimmer.setCenter(d.x, d.y);
+                this.pa.fill(0, 0, 0, 0);
+                this.pa.stroke(255);
+                this.pa.ellipse(600, 300, 200, 200);
             }
         }
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo di = (DrawInfo) characters.get(i);
-            Swimmer.drawCostume(images.get(di.img), di.x, di.y, di.angle);
+            if (!di.hiding) {
+                Swimmer.drawCostume(images.get(di.img), di.x, di.y, di.angle);
+            }
         }
     }
 
@@ -74,16 +82,15 @@ public class Visualizer {
         this.pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
         this.pa.rect(-5000.0F - Swimmer.cx + 600.0F, -5000.0F - Swimmer.cy + 300.0F, 10000.0F, 10000.0F);
     }
-    
-    
+
     private void drawHealthBar(double rate) {
         int green = Math.min((int) (rate * 510), 255);
         int red = Math.min((int) ((1 - rate) * 510), 255);
         System.out.println(red + " " + green);
         this.pa.fill(red, green, 0);
         this.pa.stroke(red, green, 0);
-        float radius = (float) (rate * 30);
-        this.pa.ellipse(600, 200, radius, radius);
+        float radius = (float) (rate * 50);
+        this.pa.ellipse(600, 100, radius, radius);
     }
-    
+
 }

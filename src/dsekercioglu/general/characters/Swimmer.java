@@ -27,6 +27,7 @@ public abstract class Swimmer {
     protected float maxEnergy;
     protected float energy;
     protected float energyIncrease;
+    protected boolean hiding;
 
     public Swimmer(String name, PApplet p) {
         this.name = name;
@@ -69,6 +70,7 @@ public abstract class Swimmer {
         di.maxHealth = this.maxHealth;
         di.name = this.name;
         di.img = this.type;
+        di.hiding = this.hiding;
         return di;
     }
     

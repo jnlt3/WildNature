@@ -61,6 +61,11 @@ public class Environment {
                 }
             }
         }
+        for(int i = 0; i < knockback.size(); i++) {
+            Swimmer s = knockback.get(i);
+            s.x -= Math.cos(s.angle) * 20;
+            s.y -= Math.sin(s.angle) * 20;
+        }
     }
 
     private Line2D getHitter(Swimmer s) {

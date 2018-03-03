@@ -51,16 +51,23 @@ public class WildNature extends PApplet {
             System.out.println("Enter username:");
             name = scn.nextLine();
             
+            OUTER:
             while (true) {
                 System.out.println("Choose a character...");
-                System.out.println("1) Marlin\n2) Black Marlin");
+                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile");
                 int characterNo = scn.nextInt();
-                if (characterNo == 1) {
-                    animal = Animal.MARLIN;
-                    break;
-                } else if (characterNo == 2) {
-                    animal = Animal.BLACK_MARLIN;
-                    break;
+                switch (characterNo) {
+                    case 1:
+                        animal = Animal.MARLIN;
+                        break OUTER;
+                    case 2:
+                        animal = Animal.BLACK_MARLIN;
+                        break OUTER;
+                    case 3:
+                        animal = Animal.CROCODILE;
+                        break OUTER;
+                    default:
+                        break;
                 }
             }
             

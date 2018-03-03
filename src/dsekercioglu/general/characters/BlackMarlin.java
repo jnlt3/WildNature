@@ -3,6 +3,7 @@ package dsekercioglu.general.characters;
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Swimmer.drawCostume;
 import static dsekercioglu.general.characters.Swimmer.pa;
+import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
 public class BlackMarlin extends Swimmer {
@@ -42,8 +43,10 @@ public class BlackMarlin extends Swimmer {
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
         this.angle = ((float) (this.angle + turn((float) Math.atan2(mouseY - 300, mouseX - 600))));
-        this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
-        this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
+        if (Point2D.distance(600, 300, mouseX, mouseY) > 100 || energyTime != 0) {
+            this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
+            this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
+        }
         this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
         if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
             this.energy -= 1.0F;
@@ -56,7 +59,7 @@ public class BlackMarlin extends Swimmer {
             this.velocity = BLACK_MARLIN_SPEED;
             this.maxTurn = BLACK_MARLIN_TURN;
         }
-        this.health = Math.min(this.health + 1.0F, this.maxHealth);
+        this.health = Math.min(this.health + BLACK_MARLIN_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override
