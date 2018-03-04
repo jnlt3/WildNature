@@ -65,7 +65,6 @@ public class Environment {
             Line2D r1 = getHitter(p1);
             double fx = p1.x + Math.cos(p1.angle) * p1.getWidth() / 2;
             double fy = p1.y + Math.sin(p1.angle) * p1.getWidth() / 2;
-            System.out.println(((r1.getX1() + r1.getX2()) / 2 - fx) + " " + ((r1.getY1() + r1.getY2()) / 2 - fy));
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
