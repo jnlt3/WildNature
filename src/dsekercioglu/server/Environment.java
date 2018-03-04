@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Environment {
 
@@ -40,7 +41,7 @@ public class Environment {
                 swimmer.x = Math.max(-WIDTH, Math.min(swimmer.x, WIDTH));
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
             } else {
-                toRemove.add(swimmer);
+                swimmer.respawn(WIDTH, HEIGHT);
             }
         }
         characters.removeAll(toRemove);
@@ -63,8 +64,6 @@ public class Environment {
         for (int i = 0; i < characters.size(); i++) {
             Swimmer p1 = characters.get(i);
             Line2D r1 = getHitter(p1);
-            double fx = p1.x + Math.cos(p1.angle) * p1.getWidth() / 2;
-            double fy = p1.y + Math.sin(p1.angle) * p1.getWidth() / 2;
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);

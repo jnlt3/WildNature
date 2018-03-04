@@ -37,7 +37,9 @@ public abstract class Swimmer {
 
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);
 
-    public abstract boolean isAlive();
+    public boolean isAlive() {
+        return this.health > 0.0F;
+    }
 
     public static void setCenter(float x, float y) {
         cx = x;
@@ -79,4 +81,11 @@ public abstract class Swimmer {
     public abstract int getWidth();
 
     public abstract int getHeight();
+
+    public void respawn(int width, int height) {
+        x = (float) (Math.random() * 2 * width - width);
+        y = (float) (Math.random() * 2 * height - height);
+        health = maxHealth;
+        energy = maxEnergy;
+    }
 }

@@ -64,11 +64,6 @@ public class ElectricEel extends Swimmer {
     }
 
     @Override
-    public boolean isAlive() {
-        return this.health > 0.0F;
-    }
-
-    @Override
     public int getWidth() {
         return (int) ELECTRIC_EEL_LENGTH;
     }

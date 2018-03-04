@@ -63,11 +63,6 @@ public class Shark extends Swimmer {
         }
         this.health = Math.min(this.health + SHARK_HEALTH_REGEN, this.maxHealth);
     }
-    
-    @Override
-    public boolean isAlive() {
-        return this.health > 0.0F;
-    }
 
     @Override
     public int getWidth() {

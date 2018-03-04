@@ -65,11 +65,6 @@ public class BlackMarlin extends Swimmer {
     }
 
     @Override
-    public boolean isAlive() {
-        return this.health > 0.0F;
-    }
-
-    @Override
     public int getWidth() {
         return (int) BLACK_MARLIN_LENGTH;
     }
