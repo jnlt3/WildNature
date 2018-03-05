@@ -53,7 +53,9 @@ public class Crocodile extends Swimmer {
             System.out.println(energy);
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + CROCODILE_HEALTH_REGEN, this.maxHealth);
+        if (!hiding) {
+            this.health = Math.min(this.health + CROCODILE_HEALTH_REGEN, this.maxHealth);
+        }
     }
 
     @Override

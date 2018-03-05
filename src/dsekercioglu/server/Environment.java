@@ -17,9 +17,9 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     private final int WIDTH = 5000;
     private final int HEIGHT = 5000;
-    private final float BLEED_DAMAGE = 5;
-    private final float SHOCK_DAMAGE = 15;
-    private final float KNOCKBACK = 50;
+    private final float BLEED_DAMAGE = 20;
+    private final float SHOCK_DAMAGE = 80;
+    private final float KNOCKBACK = 10;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();

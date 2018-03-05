@@ -37,9 +37,9 @@ public class Defaults {
     public static final float CROCODILE_ENERGY_INCREASE = 0.001F;
     public static final float CROCODILE_MAX_HEALTH = 9000.0F;
     public static final float CROCODILE_HEALTH_REGEN = 1.0F;
-    public static final float CROCODILE_DAMAGE = 10F;
+    public static final float CROCODILE_DAMAGE = 20F;
     public static final int CROCODILE_BOOST_TIME = 20;
-    public static final int CROCODILE_ABILITY_TIME = 200;
+    public static final int CROCODILE_ABILITY_TIME = 100;
 
     public static final float SHARK_TURN = 0.08726646F;
     public static final float SHARK_LENGTH = 170.0F;
@@ -47,12 +47,12 @@ public class Defaults {
     public static final float SHARK_SPEED = 2.4F;
     public static final float SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float SHARK_MAX_ENERGY = 2.0F;
-    public static final float SHARK_ENERGY_INCREASE = 0.0005F;
+    public static final float SHARK_ENERGY_INCREASE = 0.001F;
     public static final float SHARK_MAX_HEALTH = 7680.0F;
-    public static final float SHARK_HEALTH_REGEN = 0.5F;
-    public static final float SHARK_DAMAGE = 15F;
+    public static final float SHARK_HEALTH_REGEN = 1.0F;
+    public static final float SHARK_DAMAGE = 30F;
     public static final int SHARK_BOOST_TIME = 300;
-    public static final int SHARK_ABILITY_TIME = 150;
+    public static final int SHARK_ABILITY_TIME = 75;
 
     public static final float ELECTRIC_EEL_TURN = 0.08726646F;
     public static final float ELECTRIC_EEL_LENGTH = 80.0F;
@@ -65,7 +65,7 @@ public class Defaults {
     public static final float ELECTRIC_EEL_HEALTH_REGEN = 2.0F;
     public static final float ELECTRIC_EEL_DAMAGE = 0.088F;
     public static final int ELECTRIC_EEL_BOOST_TIME = 50;
-    public static final int ELECTRIC_EEL_ABILITY_TIME = 50;
+    public static final int ELECTRIC_EEL_ABILITY_TIME = 100;
 
     public static final float BARRACUDA_TURN = 0.08726646F;
     public static final float BARRACUDA_LENGTH = 70.0F;
