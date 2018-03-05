@@ -5,6 +5,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DrawInfo;
@@ -64,8 +65,10 @@ public class WildNatureServer {
                         p = new Crocodile(name, 0.0F, 0.0F, null);
                     } else if (Animal.SHARK.name().equals(s)) {
                         p = new Shark(name, 0.0F, 0.0F, null);
-                    }else if (Animal.ELECTRIC_EEL.name().equals(s)) {
+                    } else if (Animal.ELECTRIC_EEL.name().equals(s)) {
                         p = new ElectricEel(name, 0.0F, 0.0F, null);
+                    } else if (Animal.BARRACUDA.name().equals(s)) {
+                        p = new Barracuda(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         WildNatureServer.env.addCharacter(p);

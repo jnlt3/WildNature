@@ -17,10 +17,9 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     private final int WIDTH = 5000;
     private final int HEIGHT = 5000;
-    private final float ABILITY_THRESHOLD = 10;//Every boost passes this value
-    private final int ABILITY_TIME = 150;//Every ability lasts this much;
     private final float BLEED_DAMAGE = 5;
-    private final float SHOCK_DAMAGE = 15F;
+    private final float SHOCK_DAMAGE = 15;
+    private final float KNOCKBACK = 50;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -69,11 +68,14 @@ public class Environment {
                 Line2D[] r2 = getHitBox(p2);
                 if (!p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
-                    if (p1.velocity > ABILITY_THRESHOLD) {
+                    if (p1.energyTime > 0) {
+                        p1.energyTime = 0;
                         abilities.add(p1.ability);
                         attackers.add(p1);
                         victims.add(p2);
-                        time.add(ABILITY_TIME);
+                        time.add(p1.abilityTime);
+                    } else {
+                        p1.move(-KNOCKBACK, p1.angle);
                     }
                 }
             }
@@ -93,9 +95,16 @@ public class Environment {
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
                 victim.hit(attacker.damage);
-            } else if(a.equals(SHOCK)) {
+            } else if (a.equals(SHOCK)) {
                 Swimmer victim = victims.get(i);
                 victim.hit(SHOCK_DAMAGE);
+            } else if (a.equals(STICK)) {
+                Swimmer victim = victims.get(i);
+                Swimmer attacker = attackers.get(i);
+                attacker.x = (float) (victim.x - (Math.cos(victim.angle) * (victim.getWidth() / 2 + 1)));
+                attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
+                attacker.angle = (float) victim.angle;
+                victim.hit(attacker.damage * 4);
             }
             int newTime = time.get(i) - 1;
             time.set(i, newTime);

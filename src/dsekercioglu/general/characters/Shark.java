@@ -9,8 +9,6 @@ import processing.core.PApplet;
 
 public class Shark extends Swimmer {
 
-    private int energyTime;
-
     public Shark(String name, float x, float y, PApplet p) {
         super(name, p);
         this.x = x;
@@ -26,41 +24,31 @@ public class Shark extends Swimmer {
         this.health = SHARK_MAX_HEALTH;
         this.maxHealth = SHARK_MAX_HEALTH;
         this.damage = SHARK_DAMAGE;
+        this.abilityTime = SHARK_ABILITY_TIME;
+        this.boostTime = SHARK_BOOST_TIME;
         this.ability = GRAB;
-        
+
         this.type = "Shark";
     }
     
-    private double turn(double newAngle) {
-        double dif = newAngle - this.angle;
-        while (dif < -3.141592653589793D) {
-            dif += 6.283185307179586D;
-        }
-        while (dif > 3.141592653589793D) {
-            dif -= 6.283185307179586D;
-        }
-        return Math.max(Math.min(dif, this.maxTurn), -this.maxTurn);
-    }
-
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        this.angle = ((float) (this.angle + turn((float) Math.atan2(mouseY - 300, mouseX - 600))));
-        if (Point2D.distance(600, 300, mouseX, mouseY) > 100 || energyTime != 0) {
-            this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
-            this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
+        double targetVelocity;
+        energyTime--;
+        if (energyTime <= 0) {
+            targetVelocity = SHARK_SPEED;
+            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+                targetVelocity = 0;
+            }
+        } else {
+            targetVelocity = SHARK_SPEED * 10;
         }
-        this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
-        if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
-            this.energy -= 1.0F;
-            this.velocity *= 5.0F;
-            this.maxTurn /= 30.0F;
-            this.energyTime = 100;
+        this.move(targetVelocity, Math.atan2(mouseY - 300, mouseX - 600));
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
+            energy -= 1;
+            energyTime = boostTime;
         }
-        this.energyTime = Math.max(this.energyTime - 1, 0);
-        if (this.energyTime == 0) {
-            this.velocity = SHARK_SPEED;
-            this.maxTurn = SHARK_TURN;
-        }
+        energy = Math.min(energy + energyIncrease, maxEnergy);
         this.health = Math.min(this.health + SHARK_HEALTH_REGEN, this.maxHealth);
     }
 
@@ -73,5 +61,5 @@ public class Shark extends Swimmer {
     public int getHeight() {
         return 62;
     }
-    
+
 }

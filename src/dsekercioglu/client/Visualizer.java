@@ -48,6 +48,10 @@ public class Visualizer {
         PImage electricEel = pa.loadImage("img/ElectricEel.png");
         electricEel.resize((int) ELECTRIC_EEL_LENGTH, 0);
         images.put("ElectricEel", electricEel);
+
+        PImage barracuda = pa.loadImage("img/Barracuda.png");
+        barracuda.resize((int) BARRACUDA_LENGTH, 0);
+        images.put("Barracuda", barracuda);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
@@ -99,7 +103,6 @@ public class Visualizer {
     private void drawHealthBar(double rate, float x, float y) {
         int green = Math.min((int) (rate * 510), 255);
         int red = Math.min((int) ((1 - rate) * 510), 255);
-        System.out.println(red + " " + green);
         this.pa.fill(red, green, 0);
         this.pa.stroke(red, green, 0);
         float radius = (float) (rate * 50);

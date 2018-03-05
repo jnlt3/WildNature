@@ -9,8 +9,6 @@ import processing.core.PApplet;
 
 public class Crocodile extends Swimmer {
 
-    private int energyTime;
-
     public Crocodile(String name, float x, float y, PApplet p) {
         super(name, p);
         this.x = x;
@@ -26,44 +24,35 @@ public class Crocodile extends Swimmer {
         this.health = CROCODILE_MAX_HEALTH;
         this.maxHealth = CROCODILE_MAX_HEALTH;
         this.damage = CROCODILE_DAMAGE;
+        this.abilityTime = CROCODILE_ABILITY_TIME;
+        this.boostTime = CROCODILE_BOOST_TIME;
         this.ability = GRAB;
-        
+
         this.type = "Crocodile";
-    }
-    
-    private double turn(double newAngle) {
-        double dif = newAngle - this.angle;
-        while (dif < -3.141592653589793D) {
-            dif += 6.283185307179586D;
-        }
-        while (dif > 3.141592653589793D) {
-            dif -= 6.283185307179586D;
-        }
-        return Math.max(Math.min(dif, this.maxTurn), -this.maxTurn);
     }
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        this.angle = ((float) (this.angle + turn((float) Math.atan2(mouseY - 300, mouseX - 600))));
-        if (Point2D.distance(600, 300, mouseX, mouseY) > 100 || energyTime != 0) {
-            this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
-            this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
-            this.hiding = false;
+        double targetVelocity;
+        energyTime--;
+        if (energyTime <= 0) {
+            targetVelocity = CROCODILE_SPEED;
+            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+                targetVelocity = 0;
+                hiding = true;
+            } else {
+                hiding = false;
+            }
         } else {
-            this.hiding = true;
+            targetVelocity = CROCODILE_SPEED * 20;
         }
-        this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
-        if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
-            this.energy -= 1.0F;
-            this.velocity *= 15.0F;
-            this.maxTurn /= 15.0F;
-            this.energyTime = 30;
+        this.move(targetVelocity, Math.atan2(mouseY - 300, mouseX - 600));
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
+            energy -= 1;
+            energyTime = boostTime;
+            System.out.println(energy);
         }
-        this.energyTime = Math.max(this.energyTime - 1, 0);
-        if (this.energyTime == 0) {
-            this.velocity = CROCODILE_SPEED;
-            this.maxTurn = CROCODILE_TURN;
-        }
+        energy = Math.min(energy + energyIncrease, maxEnergy);
         this.health = Math.min(this.health + CROCODILE_HEALTH_REGEN, this.maxHealth);
     }
 
@@ -76,5 +65,5 @@ public class Crocodile extends Swimmer {
     public int getHeight() {
         return 59;
     }
-    
+
 }

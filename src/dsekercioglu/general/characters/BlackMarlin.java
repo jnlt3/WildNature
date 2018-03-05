@@ -9,8 +9,6 @@ import processing.core.PApplet;
 
 public class BlackMarlin extends Swimmer {
 
-    private int energyTime;
-
     public BlackMarlin(String name, float x, float y, PApplet p) {
         super(name, p);
         this.x = x;
@@ -25,42 +23,32 @@ public class BlackMarlin extends Swimmer {
         this.maxTurn = BLACK_MARLIN_TURN;
         this.health = BLACK_MARLIN_MAX_HEALTH;
         this.maxHealth = BLACK_MARLIN_MAX_HEALTH;
-        this.damage = BLACK_MARLIN_DAMAGE;  
+        this.damage = BLACK_MARLIN_DAMAGE;
+        this.abilityTime = BLACK_MARLIN_ABILITY_TIME;
+        this.boostTime = BLACK_MARLIN_BOOST_TIME;
         this.ability = BLEED;
-        
+
         this.type = "BlackMarlin";
-    }
-    
-    private double turn(double newAngle) {
-        double dif = newAngle - this.angle;
-        while (dif < -3.141592653589793D) {
-            dif += 6.283185307179586D;
-        }
-        while (dif > 3.141592653589793D) {
-            dif -= 6.283185307179586D;
-        }
-        return Math.max(Math.min(dif, this.maxTurn), -this.maxTurn);
     }
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        this.angle = ((float) (this.angle + turn((float) Math.atan2(mouseY - 300, mouseX - 600))));
-        if (Point2D.distance(600, 300, mouseX, mouseY) > 100 || energyTime != 0) {
-            this.x = ((float) (this.x + Math.cos(this.angle) * this.velocity));
-            this.y = ((float) (this.y + Math.sin(this.angle) * this.velocity));
+        energyTime--;
+        double targetVelocity;
+        if (energyTime <= 0) {
+            targetVelocity = BLACK_MARLIN_SPEED;
+            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+                targetVelocity = 0;
+            }
+        } else {
+            targetVelocity = BLACK_MARLIN_SPEED * 5;
         }
-        this.energy = Math.min(this.energy + this.energyIncrease, this.maxEnergy);
-        if ((mousePressed) && (this.energy >= 1.0F) && (this.energyTime == 0)) {
-            this.energy -= 1.0F;
-            this.velocity *= 3.0F;
-            this.maxTurn /= 3.0F;
-            this.energyTime = 50;
+        this.move(targetVelocity, Math.atan2(mouseY - 300, mouseX - 600));
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
+            energy -= 1;
+            energyTime = boostTime;
         }
-        this.energyTime = Math.max(this.energyTime - 1, 0);
-        if (this.energyTime == 0) {
-            this.velocity = BLACK_MARLIN_SPEED;
-            this.maxTurn = BLACK_MARLIN_TURN;
-        }
+        energy = Math.min(energy + energyIncrease, maxEnergy);
         this.health = Math.min(this.health + BLACK_MARLIN_HEALTH_REGEN, this.maxHealth);
     }
 
@@ -73,5 +61,5 @@ public class BlackMarlin extends Swimmer {
     public int getHeight() {
         return 49;
     }
-    
+
 }

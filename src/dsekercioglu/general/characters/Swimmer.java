@@ -1,10 +1,12 @@
 package dsekercioglu.general.characters;
 
+import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public abstract class Swimmer {
 
+    private static final double MOMENTUM = 0.3;
     private final String name;
 
     public static PApplet pa;
@@ -15,6 +17,8 @@ public abstract class Swimmer {
     public float angle;
     public float damage;
     public float velocity;
+    public int energyTime;
+    public int abilityTime;
     public Ability ability;
 
     protected PImage img;
@@ -28,7 +32,11 @@ public abstract class Swimmer {
     protected float maxEnergy;
     protected float energy;
     protected float energyIncrease;
+    protected int boostTime;
     protected boolean hiding;
+
+    private double xChange;
+    private double yChange;
 
     public Swimmer(String name, PApplet p) {
         this.name = name;
@@ -36,6 +44,27 @@ public abstract class Swimmer {
     }
 
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);
+
+    public void move(double velocity, double angle) {
+        this.angle += turn(angle);
+        xChange += (float) (Math.cos(this.angle) * velocity);
+        yChange += (float) (Math.sin(this.angle) * velocity);
+        xChange *= MOMENTUM;
+        yChange *= MOMENTUM;
+        x += xChange;
+        y += yChange;
+    }
+
+    private double turn(double newAngle) {
+        double dif = newAngle - this.angle;
+        while (dif < -3.141592653589793D) {
+            dif += 6.283185307179586D;
+        }
+        while (dif > 3.141592653589793D) {
+            dif -= 6.283185307179586D;
+        }
+        return Math.max(Math.min(dif, this.maxTurn), -this.maxTurn);
+    }
 
     public boolean isAlive() {
         return this.health > 0.0F;
