@@ -11,6 +11,7 @@ import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.Marlin;
+import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
@@ -72,16 +73,11 @@ public class WildNatureServer {
                         p = new ElectricEel(name, 0.0F, 0.0F, null);
                     } else if (Animal.BARRACUDA.name().equals(s)) {
                         p = new Barracuda(name, 0.0F, 0.0F, null);
+                    } else if (Animal.MEGA_MOUTH.name().equals(s)) {
+                        p = new MegaMouth(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;
-
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(WildNatureServer.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
                         ControlInfo c = new ControlInfo();
                         c.mouseX = 0;
                         c.mouseY = 0;
@@ -116,7 +112,7 @@ public class WildNatureServer {
                 }
             }
         };
-        
+
         new Thread(r).start();
     }
 }

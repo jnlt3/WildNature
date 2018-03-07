@@ -79,5 +79,20 @@ public class Defaults {
     public static final float BARRACUDA_DAMAGE = 30F;
     public static final int BARRACUDA_BOOST_TIME = 50;
     public static final int BARRACUDA_ABILITY_TIME = 300;
+    
+    
+    public static final float MEGA_MOUTH_SHARK_TURN = 0.05F;
+    public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
+    public static final float MEGA_MOUTH_SHARK_WEIGHT = 1600.0F;
+    public static final float MEGA_MOUTH_SHARK_SPEED = 3F;
+    public static final float MEGA_MOUTH_SHARK_PASSIVE_ABILITY = 1.0F;
+    public static final float MEGA_MOUTH_SHARK_MAX_ENERGY = 2.0F;
+    public static final float MEGA_MOUTH_SHARK_ENERGY_INCREASE = 0.001F;
+    public static final float MEGA_MOUTH_SHARK_MAX_HEALTH = 600.0F;
+    public static final float MEGA_MOUTH_SHARK_HEALTH_REGEN = 1.0F;
+    public static final float MEGA_MOUTH_SHARK_DAMAGE = 200F;
+    public static final int MEGA_MOUTH_SHARK_BOOST_TIME = 200;
+    public static final int MEGA_MOUTH_SHARK_ABILITY_TIME = 150;
+
 
 }

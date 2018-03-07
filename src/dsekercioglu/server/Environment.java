@@ -21,6 +21,7 @@ public class Environment {
     private final float SHOCK_DAMAGE = 30;
     private final float GRAB_DAMAGE = 2;
     private final float KNOCKBACK = 300;
+    private final float REGEN = 2;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -87,6 +88,7 @@ public class Environment {
         ArrayList<Integer> indices = new ArrayList<>();
         for (int i = 0; i < abilities.size(); i++) {
             Ability a = abilities.get(i);
+            int newTime = time.get(i) - 1;
             if (a.equals(BLEED)) {
                 victims.get(i).hit(BLEED_DAMAGE);
             } else if (a.equals(GRAB)) {
@@ -96,6 +98,9 @@ public class Environment {
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
                 victim.hit(GRAB_DAMAGE);
+                if (newTime <= 0) {
+                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                }
             } else if (a.equals(SHOCK)) {
                 Swimmer victim = victims.get(i);
                 victim.hit(SHOCK_DAMAGE);
@@ -106,8 +111,18 @@ public class Environment {
                 attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.angle = (float) victim.angle;
                 victim.hit(attacker.damage / 15.0);
+            } else if (a.equals(REGEN_TIME)) {
+                Swimmer victim = victims.get(i);
+                Swimmer attacker = attackers.get(i);
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
+                if (newTime <= 0) {
+                    victim.setMoveInAngle(KNOCKBACK * 2, attacker.angle);
+                }
+                attacker.hit(-REGEN);
+                victim.hit(0.5F);
             }
-            int newTime = time.get(i) - 1;
             time.set(i, newTime);
             if (newTime <= 0) {
                 indices.add(i);

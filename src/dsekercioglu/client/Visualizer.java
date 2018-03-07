@@ -52,6 +52,10 @@ public class Visualizer {
         PImage barracuda = pa.loadImage("img/Barracuda.png");
         barracuda.resize((int) BARRACUDA_LENGTH, 0);
         images.put("Barracuda", barracuda);
+
+        PImage megaMouth = pa.loadImage("img/MegaMouth.png");
+        megaMouth.resize((int) MEGA_MOUTH_SHARK_LENGTH, 0);
+        images.put("MegaMouth", megaMouth);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
