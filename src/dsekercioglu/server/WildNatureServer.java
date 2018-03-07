@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,8 @@ public class WildNatureServer {
     private static final HashMap<String, ControlInfo> currentControls = new HashMap();
     private static final Environment env = new Environment();
     public static Server server;
+
+    static boolean loop = true;
 
     public static void main(String[] args) throws IOException {
         server = new Server();
@@ -71,13 +74,22 @@ public class WildNatureServer {
                         p = new Barracuda(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
-                        WildNatureServer.env.addCharacter(p);
+                        loop = false;
+
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(WildNatureServer.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
                         ControlInfo c = new ControlInfo();
                         c.mouseX = 0;
                         c.mouseY = 0;
                         c.mousePressed = false;
                         c.name = name;
+                        WildNatureServer.env.addCharacter(p);
                         WildNatureServer.currentControls.put(c.name, c);
+                        loop = true;
                     }
                 } else if ((object instanceof ControlInfo)) {
                     ControlInfo controlInfo = (ControlInfo) object;
@@ -92,15 +104,19 @@ public class WildNatureServer {
             }
         });
         System.out.println("done: " + System.currentTimeMillis());
-        for (;;) {
-            if (!env.characters.isEmpty()) {
-                env.update(currentControls);
+        Runnable r = () -> {
+            for (;;) {
+                if (!env.characters.isEmpty() && loop) {
+                    env.update(currentControls);
+                }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            try {
-                Thread.sleep(10L);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        };
+        
+        new Thread(r).start();
     }
 }

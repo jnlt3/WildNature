@@ -55,6 +55,14 @@ public abstract class Swimmer {
         y += yChange;
     }
 
+    public void setMove(double velocity, double angle) {
+        this.angle += turn(angle);
+        xChange += (float) (Math.cos(this.angle) * velocity);
+        yChange += (float) (Math.sin(this.angle) * velocity);
+        xChange *= MOMENTUM;
+        yChange *= MOMENTUM;
+    }
+
     private double turn(double newAngle) {
         double dif = newAngle - this.angle;
         while (dif < -3.141592653589793D) {

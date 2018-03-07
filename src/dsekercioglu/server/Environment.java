@@ -17,9 +17,10 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     private final int WIDTH = 5000;
     private final int HEIGHT = 5000;
-    private final float BLEED_DAMAGE = 20;
-    private final float SHOCK_DAMAGE = 80;
-    private final float KNOCKBACK = 10;
+    private final float BLEED_DAMAGE = 5;
+    private final float SHOCK_DAMAGE = 30;
+    private final float GRAB_DAMAGE = 2;
+    private final float KNOCKBACK = 300;
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -75,7 +76,7 @@ public class Environment {
                         victims.add(p2);
                         time.add(p1.abilityTime);
                     } else {
-                        p1.move(-KNOCKBACK, p1.angle);
+                        p1.setMove(-KNOCKBACK, p1.angle);
                     }
                 }
             }
@@ -94,7 +95,7 @@ public class Environment {
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(attacker.damage);
+                victim.hit(GRAB_DAMAGE);
             } else if (a.equals(SHOCK)) {
                 Swimmer victim = victims.get(i);
                 victim.hit(SHOCK_DAMAGE);
@@ -104,7 +105,7 @@ public class Environment {
                 attacker.x = (float) (victim.x - (Math.cos(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.angle = (float) victim.angle;
-                victim.hit(attacker.damage * 4);
+                victim.hit(attacker.damage / 15.0);
             }
             int newTime = time.get(i) - 1;
             time.set(i, newTime);
