@@ -31,7 +31,7 @@ public class Defaults {
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
     public static final float CROCODILE_WEIGHT = 2500.0F;
-    public static final float CROCODILE_SPEED = 2F;
+    public static final float CROCODILE_SPEED = 2.1F;
     public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.001F;
@@ -44,7 +44,7 @@ public class Defaults {
     public static final float SHARK_TURN = 0.03F;
     public static final float SHARK_LENGTH = 170.0F;
     public static final float SHARK_WEIGHT = 3200.0F;
-    public static final float SHARK_SPEED = 2.4F;
+    public static final float SHARK_SPEED = 2.5F;
     public static final float SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float SHARK_MAX_ENERGY = 2.0F;
     public static final float SHARK_ENERGY_INCREASE = 0.001F;
@@ -96,7 +96,7 @@ public class Defaults {
     public static final float ORCA_TURN = 0.03F;
     public static final float ORCA_LENGTH = 170.0F;
     public static final float ORCA_WEIGHT = 3200.0F;
-    public static final float ORCA_SPEED = 2.6F;
+    public static final float ORCA_SPEED = 3F;
     public static final float ORCA_PASSIVE_ABILITY = 1.0F;
     public static final float ORCA_MAX_ENERGY = 2.0F;
     public static final float ORCA_ENERGY_INCREASE = 0.001F;
