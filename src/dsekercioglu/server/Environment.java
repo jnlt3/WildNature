@@ -17,9 +17,9 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     private final int WIDTH = 5000;
     private final int HEIGHT = 5000;
-    private final float BLEED_DAMAGE = 10;
-    private final float SHOCK_DAMAGE = 30;
-    private final float HOLD_DAMAGE = 3;
+    private final float BLEED_DAMAGE = 5;
+    private final float SHOCK_DAMAGE = 15;
+    private final float HOLD_DAMAGE = 2;
     private final float GRAB_DAMAGE = 1.5F;
     private final float REGEN = 2;
     private final float KNOCKBACK_MULTIPLIER = 4;
@@ -36,8 +36,8 @@ public class Environment {
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
-        handleAbilities();
         handleIntersections();
+        handleAbilities();
         ArrayList<Swimmer> toRemove = new ArrayList<>();
         for (int i = 0; i < this.characters.size(); i++) {
             Swimmer swimmer = (Swimmer) this.characters.get(i);
@@ -136,6 +136,7 @@ public class Environment {
                 victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
                 victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * KNOCKBACK, attacker.angle);
                 attacker.move(-KNOCKBACK, attacker.angle);
+                newTime = 0;
             } else if (a.equals(GRAB)) {
                 Swimmer victim = victims.get(i);
                 Swimmer attacker = attackers.get(i);
