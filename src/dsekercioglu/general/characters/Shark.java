@@ -1,11 +1,11 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Swimmer.drawCostume;
 import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 
 public class Shark extends Swimmer {
 
@@ -26,24 +26,23 @@ public class Shark extends Swimmer {
         this.damage = SHARK_DAMAGE;
         this.abilityTime = SHARK_ABILITY_TIME;
         this.boostTime = SHARK_BOOST_TIME;
-        this.ability = GRAB;
+        this.ability = KNOCKBACK;
 
         this.type = "Shark";
     }
     
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        double targetVelocity;
         energyTime--;
         if (energyTime <= 0) {
-            targetVelocity = SHARK_SPEED;
+            velocity = SHARK_SPEED;
             if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
-                targetVelocity = 0;
+                velocity = 0;
             }
         } else {
-            targetVelocity = SHARK_SPEED * 10;
+            velocity = SHARK_SPEED * 10;
         }
-        this.move(targetVelocity, Math.atan2(mouseY - 300, mouseX - 600));
+        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;

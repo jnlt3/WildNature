@@ -45,17 +45,12 @@ public abstract class Swimmer {
 
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);
 
-    public void move(double velocity, double angle) {
-        this.angle += turn(angle);
-        xChange += (float) (Math.cos(this.angle) * velocity);
-        yChange += (float) (Math.sin(this.angle) * velocity);
-        xChange *= MOMENTUM;
-        yChange *= MOMENTUM;
+    public void updateMove() {
         x += xChange;
         y += yChange;
     }
 
-    public void setMove(double velocity, double angle) {
+    public void move(double velocity, double angle) {
         this.angle += turn(angle);
         xChange += (float) (Math.cos(this.angle) * velocity);
         yChange += (float) (Math.sin(this.angle) * velocity);

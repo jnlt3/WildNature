@@ -1,7 +1,7 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Ability.HOLD;
 import static dsekercioglu.general.characters.Swimmer.drawCostume;
 import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
@@ -26,27 +26,26 @@ public class Crocodile extends Swimmer {
         this.damage = CROCODILE_DAMAGE;
         this.abilityTime = CROCODILE_ABILITY_TIME;
         this.boostTime = CROCODILE_BOOST_TIME;
-        this.ability = GRAB;
+        this.ability = HOLD;
 
         this.type = "Crocodile";
     }
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        double targetVelocity;
         energyTime--;
         if (energyTime <= 0) {
-            targetVelocity = CROCODILE_SPEED;
+            velocity = CROCODILE_SPEED;
             if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
-                targetVelocity = 0;
+                velocity = 0;
                 hiding = true;
             } else {
                 hiding = false;
             }
         } else {
-            targetVelocity = CROCODILE_SPEED * 20;
+            velocity = CROCODILE_SPEED * 20;
         }
-        this.move(targetVelocity, Math.atan2(mouseY - 300, mouseX - 600));
+        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;

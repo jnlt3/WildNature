@@ -12,6 +12,7 @@ import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
+import dsekercioglu.general.characters.Orca;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
@@ -75,6 +76,8 @@ public class WildNatureServer {
                         p = new Barracuda(name, 0.0F, 0.0F, null);
                     } else if (Animal.MEGA_MOUTH.name().equals(s)) {
                         p = new MegaMouth(name, 0.0F, 0.0F, null);
+                    } else if (Animal.ORCA.name().equals(s)) {
+                        p = new Orca(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;
