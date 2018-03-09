@@ -64,7 +64,6 @@ public class Visualizer {
         PImage hippo = pa.loadImage("img/Hippo.png");
         hippo.resize((int) HIPPO_LENGTH, 0);
         images.put("Hippo", hippo);
-        System.out.println(hippo.height);
     }
 
     public void update(ArrayList<DrawInfo> characters) {

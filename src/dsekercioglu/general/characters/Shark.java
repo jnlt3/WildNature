@@ -1,8 +1,6 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Swimmer.drawCostume;
-import static dsekercioglu.general.characters.Swimmer.pa;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
