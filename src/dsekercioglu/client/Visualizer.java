@@ -64,6 +64,10 @@ public class Visualizer {
         PImage hippo = pa.loadImage("img/Hippo.png");
         hippo.resize((int) HIPPO_LENGTH, 0);
         images.put("Hippo", hippo);
+
+        PImage colossalSquid = pa.loadImage("img/ColossalSquid.png");
+        colossalSquid.resize((int) COLOSSAL_SQUID_LENGTH, 0);
+        images.put("ColossalSquid", colossalSquid);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
@@ -74,6 +78,7 @@ public class Visualizer {
         c.name = this.name;
         WildNature.client.sendUDP(c);
         drawGrids();
+        boolean blind = false;
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
             if (d.name.equals(this.name)) {
@@ -82,13 +87,16 @@ public class Visualizer {
                 this.pa.fill(0, 0, 0, 0);
                 this.pa.stroke(255);
                 this.pa.ellipse(600, 300, 200, 200);
+                blind = d.blind;
             }
         }
-        for (int i = 0; i < characters.size(); i++) {
-            DrawInfo di = (DrawInfo) characters.get(i);
-            if (!di.hiding) {
-                Swimmer.drawCostume(images.get(di.img), di.x, di.y, di.angle);
-                drawHealthBar(di.health / di.maxHealth, di.x - Swimmer.cx + 600, di.y - Swimmer.cy + 300);
+        if (!blind) {
+            for (int i = 0; i < characters.size(); i++) {
+                DrawInfo di = (DrawInfo) characters.get(i);
+                if (!di.hiding) {
+                    Swimmer.drawCostume(images.get(di.img), di.x, di.y, di.angle);
+                    drawHealthBar(di.health / di.maxHealth, di.x - Swimmer.cx + 600, di.y - Swimmer.cy + 300);
+                }
             }
         }
     }
@@ -140,6 +148,18 @@ public class Visualizer {
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 if (d.health != d.maxHealth && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 6000 && !d.name.equals(name)) {
+                    double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                    float x = (float) (600 + Math.cos(angle) * 100);
+                    float y = (float) (300 + Math.sin(angle) * 100);
+                    this.pa.ellipse(x, y, 20, 20);
+                }
+            }
+        } else if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name())) {
+            this.pa.fill(0);
+            this.pa.stroke(0);
+            for (int i = 0; i < characters.size(); i++) {
+                DrawInfo d = characters.get(i);
+                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1200 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);

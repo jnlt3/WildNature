@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Server;
 import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
+import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
@@ -81,6 +82,8 @@ public class WildNatureServer {
                         p = new Orca(name, 0.0F, 0.0F, null);
                     } else if (Animal.HIPPO.name().equals(s)) {
                         p = new Hippo(name, 0.0F, 0.0F, null);
+                    } else if (Animal.COLOSSAL_SQUID.name().equals(s)) {
+                        p = new ColossalSquid(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;

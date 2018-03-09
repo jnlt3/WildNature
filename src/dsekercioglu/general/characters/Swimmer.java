@@ -34,6 +34,7 @@ public abstract class Swimmer {
     protected float energyIncrease;
     protected int boostTime;
     protected boolean hiding;
+    private int blind;
 
     private double xChange;
     private double yChange;
@@ -48,6 +49,8 @@ public abstract class Swimmer {
     public void updateMove() {
         x += xChange;
         y += yChange;
+        blind--;
+        blind = Math.max(blind, 0);
     }
 
     public void move(double velocity, double angle) {
@@ -110,6 +113,7 @@ public abstract class Swimmer {
         di.name = this.name;
         di.img = this.type;
         di.hiding = this.hiding;
+        di.blind = blind > 0;
         return di;
     }
 
@@ -127,5 +131,9 @@ public abstract class Swimmer {
         y = (float) (Math.random() * 2 * height - height);
         health = maxHealth;
         energy = maxEnergy;
+    }
+    
+    public void setBlind(int blind) {
+        this.blind = blind;
     }
 }

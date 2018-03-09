@@ -10,5 +10,6 @@ public class DrawInfo {
     public String img;
     public String name;
     public boolean hiding;
+    public boolean blind;
     
 }

@@ -100,7 +100,7 @@ public class Defaults {
     public static final float ORCA_PASSIVE_ABILITY = 1.0F;
     public static final float ORCA_MAX_ENERGY = 2.0F;
     public static final float ORCA_ENERGY_INCREASE = 0.001F;
-    public static final float ORCA_MAX_HEALTH = 780.0F;
+    public static final float ORCA_MAX_HEALTH = 900.0F;
     public static final float ORCA_HEALTH_REGEN = 0.1F;
     public static final float ORCA_DAMAGE = 160F;
     public static final int ORCA_BOOST_TIME = 300;
@@ -118,5 +118,18 @@ public class Defaults {
     public static final float HIPPO_DAMAGE = 100F;
     public static final int HIPPO_BOOST_TIME = 1000;
     public static final int HIPPO_ABILITY_TIME = 100;
+
+    public static final float COLOSSAL_SQUID_TURN = 0.08726646F;
+    public static final float COLOSSAL_SQUID_LENGTH = 175.0F;
+    public static final float COLOSSAL_SQUID_WEIGHT = 1000.0F;
+    public static final float COLOSSAL_SQUID_SPEED = 4.8F;
+    public static final float COLOSSAL_SQUID_PASSIVE_ABILITY = 2.0F;
+    public static final float COLOSSAL_SQUID_MAX_ENERGY = 2.0F;
+    public static final float COLOSSAL_SQUID_ENERGY_INCREASE = 0.002F;
+    public static final float COLOSSAL_SQUID_MAX_HEALTH = 650;
+    public static final float COLOSSAL_SQUID_HEALTH_REGEN = 0.1F;
+    public static final float COLOSSAL_SQUID_DAMAGE = 130F;
+    public static final int COLOSSAL_SQUID_BOOST_TIME = 75;
+    public static final int COLOSSAL_SQUID_ABILITY_TIME = 30;
 
 }

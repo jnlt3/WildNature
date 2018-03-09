@@ -24,6 +24,7 @@ public class Environment {
     private final float REGEN = 2;
     private final float KNOCKBACK_MULTIPLIER = 2;
     private final float SUPERBITE_MULTIPLIER = 3;
+    private final int BLINDNESS = 300;
 
     private final float KNOCKBACK = 300;
 
@@ -155,6 +156,14 @@ public class Environment {
                 victim.hit(attacker.damage * SUPERBITE_MULTIPLIER);
                 victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
                 newTime = 0;
+            } else if (a.equals(INKSPILL)) {
+                Swimmer victim = victims.get(i);
+                Swimmer attacker = attackers.get(i);
+                attacker.energyTime = 0;
+                victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI);
+                victim.setBlind(BLINDNESS);
             }
             time.set(i, newTime);
             if (newTime <= 0) {
