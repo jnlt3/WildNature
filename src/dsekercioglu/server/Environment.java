@@ -22,7 +22,8 @@ public class Environment {
     private final float HOLD_DAMAGE = 2;
     private final float GRAB_DAMAGE = 1.5F;
     private final float REGEN = 2;
-    private final float KNOCKBACK_MULTIPLIER = 4;
+    private final float KNOCKBACK_MULTIPLIER = 2;
+    private final float SUPERBITE_MULTIPLIER = 3;
 
     private final float KNOCKBACK = 300;
 
@@ -130,7 +131,7 @@ public class Environment {
                 }
                 attacker.hit(-REGEN);
                 victim.hit(0.5F);
-            } else if (a.equals(KNOCKBACK)) {
+            } else if (a.equals(Ability.KNOCKBACK)) {
                 Swimmer victim = victims.get(i);
                 Swimmer attacker = attackers.get(i);
                 victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
@@ -148,6 +149,12 @@ public class Environment {
                 if (newTime <= 0) {
                     victim.setMoveInAngle(KNOCKBACK, attacker.angle);
                 }
+            } else if (a.equals(SUPERBITE)) {
+                Swimmer victim = victims.get(i);
+                Swimmer attacker = attackers.get(i);
+                victim.hit(attacker.damage * SUPERBITE_MULTIPLIER);
+                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
+                newTime = 0;
             }
             time.set(i, newTime);
             if (newTime <= 0) {

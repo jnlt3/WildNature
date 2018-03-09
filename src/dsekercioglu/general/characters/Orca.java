@@ -40,7 +40,7 @@ public class Orca extends Swimmer {
                 velocity = 0;
             }
         } else {
-            velocity = ORCA_SPEED * 10;
+            velocity = ORCA_SPEED * 5;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {

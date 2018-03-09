@@ -60,6 +60,11 @@ public class Visualizer {
         PImage orca = pa.loadImage("img/Orca.png");
         orca.resize((int) ORCA_LENGTH, 0);
         images.put("Orca", orca);
+
+        PImage hippo = pa.loadImage("img/Hippo.png");
+        hippo.resize((int) HIPPO_LENGTH, 0);
+        images.put("Hippo", hippo);
+        System.out.println(hippo.height);
     }
 
     public void update(ArrayList<DrawInfo> characters) {

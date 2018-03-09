@@ -5,7 +5,7 @@ public class Defaults {
     public static final float MARLIN_TURN = 0.08726646F;
     public static final float MARLIN_LENGTH = 140.0F;
     public static final float MARLIN_WEIGHT = 2000.0F;
-    public static final float MARLIN_SPEED = 6.0F;
+    public static final float MARLIN_SPEED = 7.0F;
     public static final float MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MARLIN_MAX_ENERGY = 2.0F;
     public static final float MARLIN_ENERGY_INCREASE = 0.001F;
@@ -31,7 +31,7 @@ public class Defaults {
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
     public static final float CROCODILE_WEIGHT = 2500.0F;
-    public static final float CROCODILE_SPEED = 2.1F;
+    public static final float CROCODILE_SPEED = 5.1F;
     public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.001F;
@@ -44,7 +44,7 @@ public class Defaults {
     public static final float SHARK_TURN = 0.03F;
     public static final float SHARK_LENGTH = 170.0F;
     public static final float SHARK_WEIGHT = 3200.0F;
-    public static final float SHARK_SPEED = 2.5F;
+    public static final float SHARK_SPEED = 5.3F;
     public static final float SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float SHARK_MAX_ENERGY = 2.0F;
     public static final float SHARK_ENERGY_INCREASE = 0.001F;
@@ -57,7 +57,7 @@ public class Defaults {
     public static final float ELECTRIC_EEL_TURN = 0.08726646F;
     public static final float ELECTRIC_EEL_LENGTH = 80.0F;
     public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
-    public static final float ELECTRIC_EEL_SPEED = 2.0F;
+    public static final float ELECTRIC_EEL_SPEED = 5.0F;
     public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
     public static final float ELECTRIC_EEL_MAX_ENERGY = 2.0F;
     public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.002F;
@@ -70,7 +70,7 @@ public class Defaults {
     public static final float BARRACUDA_TURN = 0.08726646F;
     public static final float BARRACUDA_LENGTH = 70.0F;
     public static final float BARRACUDA_WEIGHT = 88.0F;
-    public static final float BARRACUDA_SPEED = 2.5F;
+    public static final float BARRACUDA_SPEED = 5.3F;
     public static final float BARRACUDA_PASSIVE_ABILITY = 3.0F;
     public static final float BARRACUDA_MAX_ENERGY = 5.0F;
     public static final float BARRACUDA_ENERGY_INCREASE = 0.001F;
@@ -83,7 +83,7 @@ public class Defaults {
     public static final float MEGA_MOUTH_SHARK_TURN = 0.05F;
     public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
     public static final float MEGA_MOUTH_SHARK_WEIGHT = 1600.0F;
-    public static final float MEGA_MOUTH_SHARK_SPEED = 3F;
+    public static final float MEGA_MOUTH_SHARK_SPEED = 5.5F;
     public static final float MEGA_MOUTH_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float MEGA_MOUTH_SHARK_MAX_ENERGY = 2.0F;
     public static final float MEGA_MOUTH_SHARK_ENERGY_INCREASE = 0.001F;
@@ -96,7 +96,7 @@ public class Defaults {
     public static final float ORCA_TURN = 0.03F;
     public static final float ORCA_LENGTH = 170.0F;
     public static final float ORCA_WEIGHT = 3200.0F;
-    public static final float ORCA_SPEED = 3F;
+    public static final float ORCA_SPEED = 5.6F;
     public static final float ORCA_PASSIVE_ABILITY = 1.0F;
     public static final float ORCA_MAX_ENERGY = 2.0F;
     public static final float ORCA_ENERGY_INCREASE = 0.001F;
@@ -105,5 +105,18 @@ public class Defaults {
     public static final float ORCA_DAMAGE = 160F;
     public static final int ORCA_BOOST_TIME = 300;
     public static final int ORCA_ABILITY_TIME = 75;
+
+    public static final float HIPPO_TURN = 0.08726646F;
+    public static final float HIPPO_LENGTH = 165.0F;
+    public static final float HIPPO_WEIGHT = 7000.0F;
+    public static final float HIPPO_SPEED = 5.5F;
+    public static final float HIPPO_PASSIVE_ABILITY = 2.0F;
+    public static final float HIPPO_MAX_ENERGY = 2.0F;
+    public static final float HIPPO_ENERGY_INCREASE = 0.001F;
+    public static final float HIPPO_MAX_HEALTH = 1000F;
+    public static final float HIPPO_HEALTH_REGEN = 0.1F;
+    public static final float HIPPO_DAMAGE = 100F;
+    public static final int HIPPO_BOOST_TIME = 1000;
+    public static final int HIPPO_ABILITY_TIME = 100;
 
 }

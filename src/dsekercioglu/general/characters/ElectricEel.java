@@ -40,7 +40,7 @@ public class ElectricEel extends Swimmer {
                 velocity = 0;
             }
         } else {
-            velocity = ELECTRIC_EEL_SPEED * 10;
+            velocity = ELECTRIC_EEL_SPEED * 6;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {

@@ -28,7 +28,6 @@ public class WildNature extends PApplet {
 
     @Override
     public void setup() {
-        size(1200, 600);
         v = new Visualizer(name, animal, this);
         v.setImages();
     }
@@ -54,7 +53,9 @@ public class WildNature extends PApplet {
             OUTER:
             while (true) {
                 System.out.println("Choose a character...");
-                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4) Shark\n5) Electric Eel\n6) Barracuda\n7) Mega Mouth\n8) Orca");
+                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4)"
+                        + " Shark\n5) Electric Eel\n6) Barracuda\n7)"
+                        + " Mega Mouth\n8) Orca\n9) Hippo");
                 int characterNo = scn.nextInt();
                 switch (characterNo) {
                     case 1:
@@ -80,6 +81,9 @@ public class WildNature extends PApplet {
                         break OUTER;
                     case 8:
                         animal = Animal.ORCA;
+                        break OUTER;
+                    case 9:
+                        animal = Animal.HIPPO;
                         break OUTER;
                     default:
                         break;

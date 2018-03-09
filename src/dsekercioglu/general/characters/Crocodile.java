@@ -43,7 +43,7 @@ public class Crocodile extends Swimmer {
                 hiding = false;
             }
         } else {
-            velocity = CROCODILE_SPEED * 20;
+            velocity = CROCODILE_SPEED * 10;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {

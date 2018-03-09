@@ -40,7 +40,7 @@ public class Shark extends Swimmer {
                 velocity = 0;
             }
         } else {
-            velocity = SHARK_SPEED * 10;
+            velocity = SHARK_SPEED * 5;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
         if (mousePressed && energy >= 1 && energyTime <= 0) {
