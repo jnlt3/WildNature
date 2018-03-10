@@ -2,6 +2,7 @@ package dsekercioglu.server;
 
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
+import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -20,11 +21,13 @@ public class Environment {
     private final float BLEED_DAMAGE = 5;
     private final float SHOCK_DAMAGE = 15;
     private final float HOLD_DAMAGE = 2;
+    private final float STICK_DAMAGE = 1;
     private final float GRAB_DAMAGE = 1.5F;
     private final float REGEN = 2;
     private final float KNOCKBACK_MULTIPLIER = 2;
     private final float SUPERBITE_MULTIPLIER = 3;
     private final int BLINDNESS = 300;
+    private final int POISON_DAMAGE = 1;
 
     private final float KNOCKBACK = 300;
 
@@ -32,6 +35,8 @@ public class Environment {
     ArrayList<Swimmer> attackers = new ArrayList<>();
     ArrayList<Swimmer> victims = new ArrayList<>();
     ArrayList<Integer> time = new ArrayList<>();
+
+    HashMap<Animal, Rectangle2D.Double[]> animalTypes = new HashMap<>();
 
     public Environment() {
         this.characters = new ArrayList();
@@ -49,6 +54,7 @@ public class Environment {
                 swimmer.update(c.mouseX, c.mouseY, c.mousePressed);
                 swimmer.x = Math.max(-WIDTH, Math.min(swimmer.x, WIDTH));
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
+                swimmer.regen();
             } else {
                 swimmer.respawn(WIDTH, HEIGHT);
             }
@@ -64,6 +70,7 @@ public class Environment {
     }
 
     public void addCharacter(Swimmer s) {
+        s.respawn(WIDTH, HEIGHT);
         this.characters.add(s);
     }
 
@@ -118,8 +125,10 @@ public class Environment {
                 attacker.x = (float) (victim.x - (Math.cos(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.angle = (float) victim.angle;
-                victim.hit(attacker.damage / 15.0);
-                attacker.move(-KNOCKBACK, attacker.angle);
+                victim.hit(STICK_DAMAGE);
+                if (newTime <= 0) {
+                    attacker.move(-KNOCKBACK, attacker.angle);
+                }
             } else if (a.equals(REGEN_TIME)) {
                 Swimmer victim = victims.get(i);
                 Swimmer attacker = attackers.get(i);
@@ -164,6 +173,9 @@ public class Environment {
                 victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI);
                 victim.setBlind(BLINDNESS);
+            } else if(a.equals(POISON)) {
+                attackers.get(i).energyTime = 0;
+                victims.get(i).hit(POISON_DAMAGE);
             }
             time.set(i, newTime);
             if (newTime <= 0) {

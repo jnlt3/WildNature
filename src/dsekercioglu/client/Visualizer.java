@@ -7,6 +7,7 @@ import static dsekercioglu.general.characters.Animal.*;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.ControlInfo;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import processing.core.PApplet;
@@ -14,6 +15,8 @@ import processing.core.PImage;
 
 public class Visualizer {
 
+    private final int WIDTH = 5000;
+    private final int HEIGHT = 5000;
     private final HashMap<String, PImage> images = new HashMap<>();
     private final PApplet pa;
     private final String name;
@@ -31,43 +34,48 @@ public class Visualizer {
     public void setImages() {
         PImage marlin = pa.loadImage("img/Marlin.png");
         marlin.resize((int) MARLIN_LENGTH, 0);
-        images.put("Marlin", marlin);
+        images.put("MARLIN", marlin);
 
         PImage blackMarlin = pa.loadImage("img/BlackMarlin.png");
         blackMarlin.resize((int) BLACK_MARLIN_LENGTH, 0);
-        images.put("BlackMarlin", blackMarlin);
+        images.put("BLACK_MARLIN", blackMarlin);
 
         PImage crocodile = pa.loadImage("img/Crocodile.png");
         crocodile.resize((int) CROCODILE_LENGTH, 0);
-        images.put("Crocodile", crocodile);
+        images.put("CROCODILE", crocodile);
 
         PImage shark = pa.loadImage("img/Shark.png");
         shark.resize((int) SHARK_LENGTH, 0);
-        images.put("Shark", shark);
+        images.put("SHARK", shark);
 
         PImage electricEel = pa.loadImage("img/ElectricEel.png");
         electricEel.resize((int) ELECTRIC_EEL_LENGTH, 0);
-        images.put("ElectricEel", electricEel);
+        images.put("ELECTRIC_EEL", electricEel);
 
         PImage barracuda = pa.loadImage("img/Barracuda.png");
         barracuda.resize((int) BARRACUDA_LENGTH, 0);
-        images.put("Barracuda", barracuda);
+        images.put("BARRACUDA", barracuda);
 
         PImage megaMouth = pa.loadImage("img/MegaMouth.png");
         megaMouth.resize((int) MEGA_MOUTH_SHARK_LENGTH, 0);
-        images.put("MegaMouth", megaMouth);
+        images.put("MEGA_MOUTH", megaMouth);
 
         PImage orca = pa.loadImage("img/Orca.png");
         orca.resize((int) ORCA_LENGTH, 0);
-        images.put("Orca", orca);
+        images.put("ORCA", orca);
 
         PImage hippo = pa.loadImage("img/Hippo.png");
         hippo.resize((int) HIPPO_LENGTH, 0);
-        images.put("Hippo", hippo);
+        images.put("HIPPO", hippo);
 
         PImage colossalSquid = pa.loadImage("img/ColossalSquid.png");
         colossalSquid.resize((int) COLOSSAL_SQUID_LENGTH, 0);
-        images.put("ColossalSquid", colossalSquid);
+        images.put("COLOSSAL_SQUID", colossalSquid);
+
+        PImage doodFish = pa.loadImage("img/Doodfish.png");
+        doodFish.resize((int) DOOD_FISH_LENGTH, 0);
+        images.put("DOOD_FISH", doodFish);
+        System.out.println(doodFish.height);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
@@ -102,10 +110,10 @@ public class Visualizer {
     }
 
     private void drawGrids() {
-        this.pa.stroke(0.0F, 0.0F, 255.0F);
-        this.pa.fill(0.0F, 0.0F, 255.0F);
+        this.pa.stroke(0, 0, 255);
+        this.pa.fill(0, 0, 255);
         this.pa.rect(0.0F, 0.0F, 1200.0F, 600.0F);
-        this.pa.stroke(0.0F, 0.0F, 230.0F);
+        this.pa.stroke(0.0F, 0, 230);
         this.pa.strokeWeight(3.0F);
         float cx = Swimmer.cx % 60.0F;
         float cy = Swimmer.cy % 60.0F;
@@ -117,7 +125,7 @@ public class Visualizer {
         }
         this.pa.stroke(255.0F, 0.0F, 0.0F);
         this.pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
-        this.pa.rect(-5000.0F - Swimmer.cx + 600.0F, -5000.0F - Swimmer.cy + 300.0F, 10000.0F, 10000.0F);
+        this.pa.rect(-WIDTH - Swimmer.cx + 600.0F, -HEIGHT - Swimmer.cy + 300.0F, WIDTH * 2, HEIGHT * 2);
     }
 
     private void drawHealthBar(double rate, float x, float y) {
@@ -154,16 +162,30 @@ public class Visualizer {
                     this.pa.ellipse(x, y, 20, 20);
                 }
             }
-        } else if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name())) {
+        } else if (type.equals(COLOSSAL_SQUID.name())) {
             this.pa.fill(0);
             this.pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
-                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1200 && !d.name.equals(name)) {
+                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1250 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
                     this.pa.ellipse(x, y, 20, 20);
+                }
+            }
+        } else if (type.equals(DOOD_FISH.name())) {
+            this.pa.fill(0);
+            this.pa.stroke(0);
+            for (int i = 0; i < characters.size(); i++) {
+                DrawInfo d = characters.get(i);
+                double distance = Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y);
+                if (distance < 4000 && !d.name.equals(name)) {
+                    double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                    float x = (float) (600 + Math.cos(angle) * 100);
+                    float y = (float) (300 + Math.sin(angle) * 100);
+                    float radius = 30 - (float) (10 + (distance / 200));
+                    this.pa.ellipse(x, y, radius, radius);
                 }
             }
         }

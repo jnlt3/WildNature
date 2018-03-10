@@ -17,12 +17,13 @@ public abstract class Swimmer {
     public float angle;
     public float damage;
     public float velocity;
+    public float regen;
     public int energyTime;
     public int abilityTime;
     public Ability ability;
 
     protected PImage img;
-    protected String type;
+    protected Animal type;
     protected float health;
     protected float maxHealth;
     protected float length;
@@ -51,6 +52,10 @@ public abstract class Swimmer {
         y += yChange;
         blind--;
         blind = Math.max(blind, 0);
+    }
+
+    public void regen() {
+        health = Math.min(health + regen, maxHealth);
     }
 
     public void move(double velocity, double angle) {
@@ -103,6 +108,10 @@ public abstract class Swimmer {
         return this.name;
     }
 
+    public Animal getType() {
+        return this.type;
+    }
+
     public DrawInfo getDrawInfo() {
         DrawInfo di = new DrawInfo();
         di.x = this.x;
@@ -111,7 +120,7 @@ public abstract class Swimmer {
         di.health = this.health;
         di.maxHealth = this.maxHealth;
         di.name = this.name;
-        di.img = this.type;
+        di.img = this.type + "";
         di.hiding = this.hiding;
         di.blind = blind > 0;
         return di;
@@ -132,7 +141,7 @@ public abstract class Swimmer {
         health = maxHealth;
         energy = maxEnergy;
     }
-    
+
     public void setBlind(int blind) {
         this.blind = blind;
     }

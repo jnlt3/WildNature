@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.SHOCK;
+import static dsekercioglu.general.characters.Animal.ELECTRIC_EEL;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class ElectricEel extends Swimmer {
         this.velocity = ELECTRIC_EEL_SPEED;
         this.passiveAbilityPower = ELECTRIC_EEL_PASSIVE_ABILITY;
         this.maxEnergy = ELECTRIC_EEL_MAX_ENERGY;
+        this.regen = ELECTRIC_EEL_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = ELECTRIC_EEL_ENERGY_INCREASE;
         this.maxTurn = ELECTRIC_EEL_TURN;
@@ -26,7 +28,7 @@ public class ElectricEel extends Swimmer {
         this.boostTime = ELECTRIC_EEL_BOOST_TIME;
         this.ability = SHOCK;
 
-        this.type = "ElectricEel";
+        this.type = ELECTRIC_EEL;
     }
     
     @Override
@@ -46,7 +48,6 @@ public class ElectricEel extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + ELECTRIC_EEL_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override

@@ -59,9 +59,9 @@ public class Defaults {
     public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
     public static final float ELECTRIC_EEL_SPEED = 5.0F;
     public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
-    public static final float ELECTRIC_EEL_MAX_ENERGY = 2.0F;
+    public static final float ELECTRIC_EEL_MAX_ENERGY = 5.0F;
     public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.002F;
-    public static final float ELECTRIC_EEL_MAX_HEALTH = 350.0F;
+    public static final float ELECTRIC_EEL_MAX_HEALTH = 400.0F;
     public static final float ELECTRIC_EEL_HEALTH_REGEN = 0.2F;
     public static final float ELECTRIC_EEL_DAMAGE = 20;
     public static final int ELECTRIC_EEL_BOOST_TIME = 50;
@@ -74,7 +74,7 @@ public class Defaults {
     public static final float BARRACUDA_PASSIVE_ABILITY = 3.0F;
     public static final float BARRACUDA_MAX_ENERGY = 5.0F;
     public static final float BARRACUDA_ENERGY_INCREASE = 0.001F;
-    public static final float BARRACUDA_MAX_HEALTH = 400.0F;
+    public static final float BARRACUDA_MAX_HEALTH = 450.0F;
     public static final float BARRACUDA_HEALTH_REGEN = 0.15F;
     public static final float BARRACUDA_DAMAGE = 30F;
     public static final int BARRACUDA_BOOST_TIME = 50;
@@ -131,5 +131,18 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_DAMAGE = 130F;
     public static final int COLOSSAL_SQUID_BOOST_TIME = 75;
     public static final int COLOSSAL_SQUID_ABILITY_TIME = 30;
+
+    public static final float DOOD_FISH_TURN = 0.12F;
+    public static final float DOOD_FISH_LENGTH = 90.0F;
+    public static final float DOOD_FISH_WEIGHT = 600.0F;
+    public static final float DOOD_FISH_SPEED = 6.2F;
+    public static final float DOOD_FISH_PASSIVE_ABILITY = 2.0F;
+    public static final float DOOD_FISH_MAX_ENERGY = 2.0F;
+    public static final float DOOD_FISH_ENERGY_INCREASE = 0.001F;
+    public static final float DOOD_FISH_MAX_HEALTH = 400;
+    public static final float DOOD_FISH_HEALTH_REGEN = 0.1F;
+    public static final float DOOD_FISH_DAMAGE = 70;
+    public static final int DOOD_FISH_BOOST_TIME = 1000;
+    public static final int DOOD_FISH_ABILITY_TIME = 125;
 
 }

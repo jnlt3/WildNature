@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Animal.MARLIN;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class Marlin extends Swimmer {
         this.velocity = MARLIN_SPEED;
         this.passiveAbilityPower = MARLIN_PASSIVE_ABILITY;
         this.maxEnergy = MARLIN_MAX_ENERGY;
+        this.regen = MARLIN_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = MARLIN_ENERGY_INCREASE;
         this.maxTurn = MARLIN_TURN;
@@ -26,7 +28,7 @@ public class Marlin extends Swimmer {
         this.boostTime = MARLIN_BOOST_TIME;
         this.ability = BLEED;
 
-        this.type = "Marlin";
+        this.type = MARLIN;
     }
 
     @Override
@@ -46,7 +48,6 @@ public class Marlin extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + MARLIN_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override

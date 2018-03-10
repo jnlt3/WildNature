@@ -4,6 +4,7 @@ import static dsekercioglu.general.Defaults.*;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
+import static dsekercioglu.general.characters.Animal.SHARK;
 
 public class Shark extends Swimmer {
 
@@ -17,6 +18,7 @@ public class Shark extends Swimmer {
         this.passiveAbilityPower = SHARK_PASSIVE_ABILITY;
         this.maxEnergy = SHARK_MAX_ENERGY;
         this.energy = this.maxEnergy;
+        this.regen = SHARK_HEALTH_REGEN;
         this.energyIncrease = SHARK_ENERGY_INCREASE;
         this.maxTurn = SHARK_TURN;
         this.health = SHARK_MAX_HEALTH;
@@ -26,7 +28,7 @@ public class Shark extends Swimmer {
         this.boostTime = SHARK_BOOST_TIME;
         this.ability = KNOCKBACK;
 
-        this.type = "Shark";
+        this.type = SHARK;
     }
     
     @Override
@@ -46,7 +48,6 @@ public class Shark extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + SHARK_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override

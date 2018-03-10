@@ -9,6 +9,7 @@ import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
+import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.Hippo;
@@ -84,6 +85,8 @@ public class WildNatureServer {
                         p = new Hippo(name, 0.0F, 0.0F, null);
                     } else if (Animal.COLOSSAL_SQUID.name().equals(s)) {
                         p = new ColossalSquid(name, 0.0F, 0.0F, null);
+                    } else if(Animal.DOOD_FISH.name().equals(s)) {
+                        p = new DoodFish(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;

@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.SUPERBITE;
+import static dsekercioglu.general.characters.Animal.HIPPO;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class Hippo extends Swimmer {
         this.velocity = HIPPO_SPEED;
         this.passiveAbilityPower = HIPPO_PASSIVE_ABILITY;
         this.maxEnergy = HIPPO_MAX_ENERGY;
+        this.regen = HIPPO_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = HIPPO_ENERGY_INCREASE;
         this.maxTurn = HIPPO_TURN;
@@ -26,7 +28,7 @@ public class Hippo extends Swimmer {
         this.boostTime = HIPPO_BOOST_TIME;
         this.ability = SUPERBITE;
 
-        this.type = "Hippo";
+        this.type = HIPPO;
     }
 
     @Override
@@ -43,9 +45,6 @@ public class Hippo extends Swimmer {
             System.out.println(energy);
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        if (!hiding) {
-            this.health = Math.min(this.health + HIPPO_HEALTH_REGEN, this.maxHealth);
-        }
     }
 
     @Override

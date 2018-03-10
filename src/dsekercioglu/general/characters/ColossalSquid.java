@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.INKSPILL;
+import static dsekercioglu.general.characters.Animal.COLOSSAL_SQUID;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class ColossalSquid extends Swimmer {
         this.velocity = COLOSSAL_SQUID_SPEED;
         this.passiveAbilityPower = COLOSSAL_SQUID_PASSIVE_ABILITY;
         this.maxEnergy = COLOSSAL_SQUID_MAX_ENERGY;
+        this.regen = COLOSSAL_SQUID_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = COLOSSAL_SQUID_ENERGY_INCREASE;
         this.maxTurn = COLOSSAL_SQUID_TURN;
@@ -26,7 +28,7 @@ public class ColossalSquid extends Swimmer {
         this.boostTime = COLOSSAL_SQUID_BOOST_TIME;
         this.ability = INKSPILL;
 
-        this.type = "ColossalSquid";
+        this.type = COLOSSAL_SQUID;
     }
 
     @Override
@@ -47,9 +49,6 @@ public class ColossalSquid extends Swimmer {
             System.out.println(energy);
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        if (!hiding) {
-            this.health = Math.min(this.health + COLOSSAL_SQUID_HEALTH_REGEN, this.maxHealth);
-        }
     }
 
     @Override

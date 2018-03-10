@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.REGEN_TIME;
+import static dsekercioglu.general.characters.Animal.MEGA_MOUTH;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class MegaMouth extends Swimmer {
         this.velocity = MEGA_MOUTH_SHARK_SPEED;
         this.passiveAbilityPower = MEGA_MOUTH_SHARK_PASSIVE_ABILITY;
         this.maxEnergy = MEGA_MOUTH_SHARK_MAX_ENERGY;
+        this.regen = MEGA_MOUTH_SHARK_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = MEGA_MOUTH_SHARK_ENERGY_INCREASE;
         this.maxTurn = MEGA_MOUTH_SHARK_TURN;
@@ -26,7 +28,7 @@ public class MegaMouth extends Swimmer {
         this.boostTime = MEGA_MOUTH_SHARK_BOOST_TIME;
         this.ability = REGEN_TIME;
 
-        this.type = "MegaMouth";
+        this.type = MEGA_MOUTH;
     }
     
     @Override
@@ -46,7 +48,6 @@ public class MegaMouth extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + MEGA_MOUTH_SHARK_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override

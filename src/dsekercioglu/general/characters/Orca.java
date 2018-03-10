@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Animal.ORCA;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -17,6 +18,7 @@ public class Orca extends Swimmer {
         this.passiveAbilityPower = ORCA_PASSIVE_ABILITY;
         this.maxEnergy = ORCA_MAX_ENERGY;
         this.energy = this.maxEnergy;
+        this.regen = ORCA_HEALTH_REGEN;
         this.energyIncrease = ORCA_ENERGY_INCREASE;
         this.maxTurn = ORCA_TURN;
         this.health = ORCA_MAX_HEALTH;
@@ -26,7 +28,7 @@ public class Orca extends Swimmer {
         this.boostTime = ORCA_BOOST_TIME;
         this.ability = GRAB;
 
-        this.type = "Orca";
+        this.type = ORCA;
     }
     
     @Override
@@ -46,7 +48,6 @@ public class Orca extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        this.health = Math.min(this.health + ORCA_HEALTH_REGEN, this.maxHealth);
     }
 
     @Override

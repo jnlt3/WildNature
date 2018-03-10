@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.HOLD;
+import static dsekercioglu.general.characters.Animal.CROCODILE;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
@@ -16,6 +17,7 @@ public class Crocodile extends Swimmer {
         this.velocity = CROCODILE_SPEED;
         this.passiveAbilityPower = CROCODILE_PASSIVE_ABILITY;
         this.maxEnergy = CROCODILE_MAX_ENERGY;
+        this.regen = CROCODILE_HEALTH_REGEN;
         this.energy = this.maxEnergy;
         this.energyIncrease = CROCODILE_ENERGY_INCREASE;
         this.maxTurn = CROCODILE_TURN;
@@ -26,7 +28,7 @@ public class Crocodile extends Swimmer {
         this.boostTime = CROCODILE_BOOST_TIME;
         this.ability = HOLD;
 
-        this.type = "Crocodile";
+        this.type = CROCODILE;
     }
 
     @Override
@@ -50,9 +52,6 @@ public class Crocodile extends Swimmer {
             System.out.println(energy);
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
-        if (!hiding) {
-            this.health = Math.min(this.health + CROCODILE_HEALTH_REGEN, this.maxHealth);
-        }
     }
 
     @Override
