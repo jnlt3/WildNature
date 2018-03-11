@@ -8,6 +8,8 @@ public abstract class Swimmer {
 
     private static final double MOMENTUM = 0.3;
     private final String name;
+    
+    public Team team;
 
     public static PApplet pa;
     public static float cx;
@@ -43,6 +45,7 @@ public abstract class Swimmer {
     public Swimmer(String name, PApplet p) {
         this.name = name;
         pa = p;
+        this.team = team;
     }
 
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);

@@ -22,6 +22,7 @@ import dsekercioglu.general.characters.OrcaAI;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
+import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import dsekercioglu.general.multiPlayer.PlayerInfo;
@@ -54,6 +55,7 @@ public class WildNatureServer {
         kryo.register(PlayerInfo.class);
         kryo.register(ArrayList.class);
         kryo.register(DrawInfo.class);
+        kryo.register(Team.class);
 
         server.addListener(new Listener() {
             @Override
@@ -64,8 +66,9 @@ public class WildNatureServer {
 
             @Override
             public void received(Connection connection, Object object) {
-                if ((object instanceof String)) {
-                    String s = (String) object;
+                if ((object instanceof PlayerInfo)) {
+                    PlayerInfo pi = (PlayerInfo) object;
+                    String s = pi.character;
                     String name = s.substring(0, s.indexOf("/"));
                     s = s.replace(name + "/", "");
                     Swimmer p = null;
@@ -108,6 +111,7 @@ public class WildNatureServer {
                         c.mouseY = 0;
                         c.mousePressed = false;
                         c.name = name;
+                        p.team = pi.team;
                         WildNatureServer.env.addCharacter(p);
                         WildNatureServer.currentControls.put(c.name, c);
                         loop = true;

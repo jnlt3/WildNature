@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import dsekercioglu.general.multiPlayer.PlayerInfo;
@@ -50,19 +51,35 @@ public class WildNature extends PApplet {
             System.out.println("Enter username:");
             name = scn.nextLine();
 
-            OUTER:
             while (true) {
                 System.out.println("Choose a character...");
-                
+
                 Animal[] animals = Animal.values();
-                for(int i = 0; i < animals.length; i++) {
-                    System.out.println( (i + 1) + ")" + animals[i].name().replaceAll("_", " "));
+                for (int i = 0; i < animals.length; i++) {
+                    System.out.println((i + 1) + ")" + animals[i].name().replaceAll("_", " "));
                 }
-                
+
                 int characterNo = scn.nextInt();
-                
-                if(characterNo >= 1 && characterNo <= Animal.values().length) {
+
+                if (characterNo >= 1 && characterNo <= Animal.values().length) {
                     animal = animals[characterNo - 1];
+                    break;
+                }
+            }
+
+            Team team;
+            while (true) {
+                System.out.println("Choose your favorite color...");
+
+                Team[] teams = Team.values();
+                for (int i = 0; i < teams.length; i++) {
+                    System.out.println((i + 1) + ")" + teams[i].name());
+                }
+
+                int characterNo = scn.nextInt();
+
+                if (characterNo >= 1 && characterNo <= Animal.values().length) {
+                    team = teams[characterNo - 1];
                     break;
                 }
             }
@@ -79,8 +96,12 @@ public class WildNature extends PApplet {
             kryo.register(PlayerInfo.class);
             kryo.register(ArrayList.class);
             kryo.register(DrawInfo.class);
+            kryo.register(Team.class);
 
-            client.sendTCP(name + "/" + animal.name());
+            PlayerInfo pi = new PlayerInfo();
+            pi.character = name + "/" + animal.name();
+            pi.team = team;
+            client.sendTCP(pi);
             client.addListener(new Listener() {
                 @Override
                 public void received(Connection connection, Object object) {

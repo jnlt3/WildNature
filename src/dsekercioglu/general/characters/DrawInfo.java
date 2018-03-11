@@ -13,5 +13,6 @@ public class DrawInfo {
     public String name;
     public boolean hiding;
     public boolean blind;
+    public Team team;
 
 }

@@ -92,7 +92,7 @@ public class Environment {
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
-                if (!p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
+                if (p1.team.equals(p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
                     if (p1.energyTime > 0) {
                         p1.energyTime = 0;
