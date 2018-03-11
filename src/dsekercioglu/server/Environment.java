@@ -92,7 +92,7 @@ public class Environment {
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
-                if (p1.team.equals(p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
+                if (!p1.team.equals(p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
                     if (p1.energyTime > 0) {
                         p1.energyTime = 0;
@@ -113,11 +113,11 @@ public class Environment {
         for (int i = 0; i < abilities.size(); i++) {
             Ability a = abilities.get(i);
             int newTime = time.get(i) - 1;
+            Swimmer victim = victims.get(i);
+            Swimmer attacker = attackers.get(i);
             if (a.equals(BLEED)) {
                 victims.get(i).hit(BLEED_DAMAGE);
             } else if (a.equals(HOLD)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 attacker.move(0, attacker.angle);
                 attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -128,11 +128,8 @@ public class Environment {
                     victim.setMoveInAngle(KNOCKBACK, attacker.angle);
                 }
             } else if (a.equals(SHOCK)) {
-                Swimmer victim = victims.get(i);
                 victim.hit(SHOCK_DAMAGE);
             } else if (a.equals(STICK)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 attacker.x = (float) (victim.x - (Math.cos(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
                 attacker.angle = (float) victim.angle;
@@ -141,8 +138,6 @@ public class Environment {
                     attacker.move(-KNOCKBACK, attacker.angle);
                 }
             } else if (a.equals(REGEN_TIME)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -153,15 +148,11 @@ public class Environment {
                 attacker.hit(-REGEN);
                 victim.hit(0.5F);
             } else if (a.equals(Ability.KNOCKBACK)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
                 victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * KNOCKBACK, attacker.angle);
                 attacker.move(-KNOCKBACK, attacker.angle);
                 newTime = 0;
             } else if (a.equals(GRAB)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -171,22 +162,21 @@ public class Environment {
                     victim.setMoveInAngle(KNOCKBACK, attacker.angle);
                 }
             } else if (a.equals(SUPERBITE)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 victim.hit(attacker.damage * SUPERBITE_MULTIPLIER);
                 victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
                 newTime = 0;
             } else if (a.equals(INKSPILL)) {
-                Swimmer victim = victims.get(i);
-                Swimmer attacker = attackers.get(i);
                 attacker.energyTime = 0;
                 victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI);
                 victim.setBlind(BLINDNESS);
             } else if (a.equals(POISON)) {
-                attackers.get(i).energyTime = 0;
-                victims.get(i).hit(POISON_DAMAGE);
+                attacker.energyTime = 0;
+                victim.hit(POISON_DAMAGE);
+            }
+            if(!(victim.isAlive() && attacker.isAlive())) {
+                newTime = 0;
             }
             time.set(i, newTime);
             if (newTime <= 0) {

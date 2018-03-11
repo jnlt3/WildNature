@@ -124,7 +124,7 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_WEIGHT = 1000.0F;
     public static final float COLOSSAL_SQUID_SPEED = 4.8F;
     public static final float COLOSSAL_SQUID_PASSIVE_ABILITY = 2.0F;
-    public static final float COLOSSAL_SQUID_MAX_ENERGY = 2.0F;
+    public static final float COLOSSAL_SQUID_MAX_ENERGY = 3.0F;
     public static final float COLOSSAL_SQUID_ENERGY_INCREASE = 0.002F;
     public static final float COLOSSAL_SQUID_MAX_HEALTH = 650;
     public static final float COLOSSAL_SQUID_HEALTH_REGEN = 0.1F;

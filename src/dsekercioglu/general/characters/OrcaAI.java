@@ -63,7 +63,7 @@ public class OrcaAI extends Swimmer {
                 Double danger = 0.0;
                 for (int k = 0; k < e.characters.size(); k++) {
                     Swimmer s = e.characters.get(k);
-                    if (!(s instanceof OrcaAI)) {
+                    if (!(s.team.equals(team))) {
                         if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
                             danger += Math.max((this.health * this.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
                             seen++;
