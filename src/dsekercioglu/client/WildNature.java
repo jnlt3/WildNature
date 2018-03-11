@@ -53,59 +53,17 @@ public class WildNature extends PApplet {
             OUTER:
             while (true) {
                 System.out.println("Choose a character...");
-                System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4)"
-                        + " Shark\n5) Electric Eel\n6) Barracuda\n7)"
-                        + " Mega Mouth\n8) Orca\n9) Hippo\n10) Colossal Squid\n11)"
-                        + " DoodFish\n12) Electric Marlin\n14) Orca AI\n15) SharkAI\n16) HippoAI");
+                
+                Animal[] animals = Animal.values();
+                for(int i = 0; i < animals.length; i++) {
+                    System.out.println( (i + 1) + ")" + animals[i].name().replaceAll("_", " "));
+                }
+                
                 int characterNo = scn.nextInt();
-                switch (characterNo) {
-                    case 1:
-                        animal = Animal.MARLIN;
-                        break OUTER;
-                    case 2:
-                        animal = Animal.BLACK_MARLIN;
-                        break OUTER;
-                    case 3:
-                        animal = Animal.CROCODILE;
-                        break OUTER;
-                    case 4:
-                        animal = Animal.SHARK;
-                        break OUTER;
-                    case 5:
-                        animal = Animal.ELECTRIC_EEL;
-                        break OUTER;
-                    case 6:
-                        animal = Animal.BARRACUDA;
-                        break OUTER;
-                    case 7:
-                        animal = Animal.MEGA_MOUTH;
-                        break OUTER;
-                    case 8:
-                        animal = Animal.ORCA;
-                        break OUTER;
-                    case 9:
-                        animal = Animal.HIPPO;
-                        break OUTER;
-                    case 10:
-                        animal = Animal.COLOSSAL_SQUID;
-                        break OUTER;
-                    case 11:
-                        animal = Animal.DOOD_FISH;
-                        break OUTER;
-                    case 12:
-                        animal = Animal.ELECTRIC_MARLIN;
-                        break OUTER;
-                    case 13:
-                        animal = Animal.ORCA_AI;
-                        break OUTER;
-                    case 14:
-                        animal = Animal.SHARK_AI;
-                        break OUTER;
-                    case 15:
-                        animal = Animal.HIPPO_AI;
-                        break OUTER;
-                    default:
-                        break;
+                
+                if(characterNo >= 1 && characterNo <= Animal.values().length) {
+                    animal = animals[characterNo - 1];
+                    break;
                 }
             }
 
