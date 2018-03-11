@@ -15,8 +15,8 @@ import processing.core.PImage;
 
 public class Visualizer {
 
-    private final int WIDTH = 5000;
-    private final int HEIGHT = 5000;
+    private final int WIDTH = 2000;
+    private final int HEIGHT = 2000;
     private final HashMap<String, PImage> images = new HashMap<>();
     private final PApplet pa;
     private final String name;
@@ -75,7 +75,10 @@ public class Visualizer {
         PImage doodFish = pa.loadImage("img/Doodfish.png");
         doodFish.resize((int) DOOD_FISH_LENGTH, 0);
         images.put("DOOD_FISH", doodFish);
-        System.out.println(doodFish.height);
+
+        PImage electricMarlin = pa.loadImage("img/ElectricMarlin.png");
+        electricMarlin.resize((int) ELECTRIC_MARLIN_LENGTH, 0);
+        images.put("ELECTRIC_MARLIN", electricMarlin);
     }
 
     public void update(ArrayList<DrawInfo> characters) {
@@ -138,7 +141,7 @@ public class Visualizer {
     }
 
     private void drawVision(String type, ArrayList<DrawInfo> characters) {
-        if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name())) {
+        if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name()) || type.equals(ELECTRIC_MARLIN.name())) {
             this.pa.fill(0);
             this.pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
@@ -180,15 +183,25 @@ public class Visualizer {
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 double distance = Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y);
-                if (distance < 4000 && !d.name.equals(name)) {
+                if (distance < 15000 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
-                    float radius = 30 - (float) (10 + (distance / 200));
+                    float radius = 30 - (float) (10 + (distance / 750));
                     this.pa.ellipse(x, y, radius, radius);
                 }
             }
         }
+        this.pa.fill(0);
+        this.pa.stroke(0);
+        for (int i = 0; i < characters.size(); i++) {
+            DrawInfo d = characters.get(i);
+            if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1500 && !d.name.equals(name)) {
+                double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                float x = (float) (600 + Math.cos(angle) * 100);
+                float y = (float) (300 + Math.sin(angle) * 100);
+                this.pa.ellipse(x, y, 10, 10);
+            }
+        }
     }
-
 }

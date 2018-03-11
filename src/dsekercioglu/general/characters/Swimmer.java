@@ -35,7 +35,7 @@ public abstract class Swimmer {
     protected float energyIncrease;
     protected int boostTime;
     protected boolean hiding;
-    private int blind;
+    protected int blind;
 
     private double xChange;
     private double yChange;

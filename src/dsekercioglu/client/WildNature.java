@@ -56,7 +56,7 @@ public class WildNature extends PApplet {
                 System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4)"
                         + " Shark\n5) Electric Eel\n6) Barracuda\n7)"
                         + " Mega Mouth\n8) Orca\n9) Hippo\n10) Colossal Squid\n11)"
-                        + " DoodFish");
+                        + " DoodFish\n12) Electric Marlin ");
                 int characterNo = scn.nextInt();
                 switch (characterNo) {
                     case 1:
@@ -92,6 +92,11 @@ public class WildNature extends PApplet {
                     case 11:
                         animal = Animal.DOOD_FISH;
                         break OUTER;
+                    case 12:
+                        animal = Animal.ELECTRIC_MARLIN;
+                        break OUTER;
+                    case 13:
+                        animal = null;
                     default:
                         break;
                 }

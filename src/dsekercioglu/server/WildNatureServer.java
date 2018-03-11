@@ -12,11 +12,14 @@ import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
+import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
+import dsekercioglu.general.characters.OrcaAI;
 import dsekercioglu.general.characters.Shark;
+import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -65,6 +68,7 @@ public class WildNatureServer {
                     String name = s.substring(0, s.indexOf("/"));
                     s = s.replace(name + "/", "");
                     Swimmer p = null;
+                    System.out.println(s);
                     if (Animal.MARLIN.name().equals(s)) {
                         p = new Marlin(name, 0.0F, 0.0F, null);
                     } else if (Animal.BLACK_MARLIN.name().equals(s)) {
@@ -85,8 +89,10 @@ public class WildNatureServer {
                         p = new Hippo(name, 0.0F, 0.0F, null);
                     } else if (Animal.COLOSSAL_SQUID.name().equals(s)) {
                         p = new ColossalSquid(name, 0.0F, 0.0F, null);
-                    } else if(Animal.DOOD_FISH.name().equals(s)) {
+                    } else if (Animal.DOOD_FISH.name().equals(s)) {
                         p = new DoodFish(name, 0.0F, 0.0F, null);
+                    } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
+                        p = new ElectricMarlin(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;

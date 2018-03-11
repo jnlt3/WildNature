@@ -3,6 +3,9 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.HippoAI;
+import dsekercioglu.general.characters.OrcaAI;
+import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -12,12 +15,13 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import processing.core.PApplet;
 
 public class Environment {
 
     public ArrayList<Swimmer> characters = new ArrayList();
-    private final int WIDTH = 5000;
-    private final int HEIGHT = 5000;
+    private final int WIDTH = 2000;
+    private final int HEIGHT = 2000;
     private final float BLEED_DAMAGE = 5;
     private final float SHOCK_DAMAGE = 15;
     private final float HOLD_DAMAGE = 2;
@@ -40,6 +44,13 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
+        characters.add(new OrcaAI("X1", 0, 0, null, this));
+        characters.add(new OrcaAI("X2", 0, 0, null, this));
+        characters.add(new OrcaAI("X3", 0, 0, null, this));
+        characters.add(new OrcaAI("X4", 0, 0, null, this));
+        for (int i = 0; i < characters.size(); i++) {
+            characters.get(i).respawn(WIDTH, HEIGHT);
+        }
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -50,8 +61,12 @@ public class Environment {
             Swimmer swimmer = (Swimmer) this.characters.get(i);
             if (swimmer.isAlive()) {
                 swimmer.updateMove();
-                ControlInfo c = (ControlInfo) hashMap.get(swimmer.getName());
-                swimmer.update(c.mouseX, c.mouseY, c.mousePressed);
+                if (hashMap.containsKey(swimmer.getName())) {
+                    ControlInfo c = (ControlInfo) hashMap.get(swimmer.getName());
+                    swimmer.update(c.mouseX, c.mouseY, c.mousePressed);
+                } else {
+                    swimmer.update(0, 0, true);
+                }
                 swimmer.x = Math.max(-WIDTH, Math.min(swimmer.x, WIDTH));
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
                 swimmer.regen();
@@ -173,7 +188,7 @@ public class Environment {
                 victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI);
                 victim.setBlind(BLINDNESS);
-            } else if(a.equals(POISON)) {
+            } else if (a.equals(POISON)) {
                 attackers.get(i).energyTime = 0;
                 victims.get(i).hit(POISON_DAMAGE);
             }
