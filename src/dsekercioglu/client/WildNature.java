@@ -88,8 +88,6 @@ public class WildNature extends PApplet {
             String ip = scn.next();
 
             client = new Client();
-            new Thread(client).start();
-            client.connect(5000, ip, 54555, 54777);
             Kryo kryo = client.getKryo();
             kryo.register(ControlInfo.class);
             kryo.register(CharacterInfo.class);
@@ -97,6 +95,8 @@ public class WildNature extends PApplet {
             kryo.register(ArrayList.class);
             kryo.register(DrawInfo.class);
             kryo.register(Team.class);
+            new Thread(client).start();
+            client.connect(5000, ip, 54555, 54777);
 
             PlayerInfo pi = new PlayerInfo();
             pi.character = name + "/" + animal.name();

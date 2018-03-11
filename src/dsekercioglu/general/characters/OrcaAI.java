@@ -45,12 +45,10 @@ public class OrcaAI extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        mousePressed = false;
         energyTime--;
         if (energyTime <= 0) {
             velocity = ORCA_SPEED;
-//            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
-//                velocity = 0;
-//            }
         } else {
             velocity = ORCA_SPEED * 5;
         }
@@ -65,6 +63,9 @@ public class OrcaAI extends Swimmer {
                     Swimmer s = e.characters.get(k);
                     if (!(s.team.equals(team))) {
                         if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
+                            if(Math.pow(Math.atan2(s.y - y, s.x - x) - angle, 2) < 0.1) {
+                                mousePressed = true;
+                            }
                             danger += Math.max((this.health * this.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
                             seen++;
                         }
@@ -81,7 +82,6 @@ public class OrcaAI extends Swimmer {
             Pair<Double, Point2D.Double> best = targetPoints.get((int) (Math.random() * 5));
             this.move(velocity, Math.atan2(best.value.y - y, best.value.x - x));
         }
-        mousePressed = true;
         if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;

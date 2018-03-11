@@ -6,6 +6,7 @@ import dsekercioglu.general.characters.Animal;
 import static dsekercioglu.general.characters.Animal.*;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Swimmer;
+import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class Visualizer {
     private final PApplet pa;
     private final String name;
     private final Animal animal;
+    private Team team;
 
     PImage img;
 
@@ -93,6 +95,7 @@ public class Visualizer {
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
             if (d.name.equals(this.name)) {
+                team = d.team;
                 drawVision(animal.name(), characters);
                 Swimmer.setCenter(d.x, d.y);
                 this.pa.fill(0, 0, 0, 0);
@@ -180,7 +183,7 @@ public class Visualizer {
             this.pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
-                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1250 && !d.name.equals(name)) {
+                if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 2000 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
@@ -202,11 +205,21 @@ public class Visualizer {
                 }
             }
         }
-        this.pa.fill(0);
-        this.pa.stroke(0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
+            this.pa.fill(0);
             if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1500 && !d.name.equals(name)) {
+                double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
+                float x = (float) (600 + Math.cos(angle) * 100);
+                float y = (float) (300 + Math.sin(angle) * 100);
+                this.pa.ellipse(x, y, 10, 10);
+            }
+        }
+
+        for (int i = 0; i < characters.size(); i++) {
+            DrawInfo d = characters.get(i);
+            this.pa.fill(0, 255, 0);
+            if (!d.name.equals(name) && d.team.equals(this.team)) {
                 double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                 float x = (float) (600 + Math.cos(angle) * 100);
                 float y = (float) (300 + Math.sin(angle) * 100);

@@ -44,11 +44,6 @@ public class WildNatureServer {
 
     public static void main(String[] args) throws IOException {
         server = new Server();
-        server.start();
-        server.bind(54555, 54777);
-
-        System.out.println(InetAddress.getLocalHost().getHostAddress());
-
         Kryo kryo = server.getKryo();
         kryo.register(ControlInfo.class);
         kryo.register(CharacterInfo.class);
@@ -56,6 +51,10 @@ public class WildNatureServer {
         kryo.register(ArrayList.class);
         kryo.register(DrawInfo.class);
         kryo.register(Team.class);
+        server.start();
+        server.bind(54555, 54777);
+
+        System.out.println(InetAddress.getLocalHost().getHostAddress());
 
         server.addListener(new Listener() {
             @Override
