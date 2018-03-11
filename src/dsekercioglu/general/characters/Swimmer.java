@@ -119,6 +119,8 @@ public abstract class Swimmer {
         di.angle = this.angle;
         di.health = this.health;
         di.maxHealth = this.maxHealth;
+        di.maxEnergy = this.maxEnergy;
+        di.energy = this.energy;
         di.name = this.name;
         di.img = this.type + "";
         di.hiding = this.hiding;

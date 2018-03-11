@@ -99,6 +99,7 @@ public class Visualizer {
                 this.pa.stroke(255);
                 this.pa.ellipse(600, 300, 200, 200);
                 blind = d.blind;
+                drawEnergyBar(d.energy / d.maxEnergy);
             }
         }
         if (!blind) {
@@ -138,6 +139,15 @@ public class Visualizer {
         this.pa.stroke(red, green, 0);
         float radius = (float) (rate * 50);
         this.pa.ellipse(x, y - 100, radius, radius);
+    }
+
+    private void drawEnergyBar(double rate) {
+        this.pa.fill(0, 0, 0, 0);
+        this.pa.strokeWeight(3);
+        this.pa.stroke(0, 255, 255);
+        this.pa.rect(0, 600, 20, 600);
+        this.pa.fill(0, 255, 255, 50);
+        this.pa.rect(0, 600, 20, (float) -(600 * rate));
     }
 
     private void drawVision(String type, ArrayList<DrawInfo> characters) {

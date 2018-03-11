@@ -44,10 +44,6 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
-        characters.add(new OrcaAI("X1", 0, 0, null, this));
-        characters.add(new OrcaAI("X2", 0, 0, null, this));
-        characters.add(new OrcaAI("X3", 0, 0, null, this));
-        characters.add(new OrcaAI("X4", 0, 0, null, this));
         for (int i = 0; i < characters.size(); i++) {
             characters.get(i).respawn(WIDTH, HEIGHT);
         }
