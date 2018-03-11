@@ -143,7 +143,7 @@ public class Defaults {
     public static final float DOOD_FISH_HEALTH_REGEN = 0.1F;
     public static final float DOOD_FISH_DAMAGE = 70;
     public static final int DOOD_FISH_BOOST_TIME = 300;
-    public static final int DOOD_FISH_ABILITY_TIME = 125;
+    public static final int DOOD_FISH_ABILITY_TIME = 150;
 
     public static final float ELECTRIC_MARLIN_TURN = 0.08726646F;
     public static final float ELECTRIC_MARLIN_LENGTH = 140.0F;

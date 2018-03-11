@@ -14,6 +14,7 @@ import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Hippo;
+import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
@@ -93,6 +94,12 @@ public class WildNatureServer {
                         p = new DoodFish(name, 0.0F, 0.0F, null);
                     } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
                         p = new ElectricMarlin(name, 0.0F, 0.0F, null);
+                    } else if (Animal.ORCA_AI.name().equals(s)) {
+                        p = new OrcaAI(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.SHARK_AI.name().equals(s)) {
+                        p = new SharkAI(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.HIPPO_AI.name().equals(s)) {
+                        p = new HippoAI(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         loop = false;

@@ -44,6 +44,7 @@ public class DoodFish extends Swimmer {
                 hiding = false;
             }
         } else {
+            velocity = DOOD_FISH_SPEED * 1.5F;
             hiding = true;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));

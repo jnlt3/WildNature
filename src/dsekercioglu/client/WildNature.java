@@ -19,11 +19,11 @@ import processing.core.PApplet;
 public class WildNature extends PApplet {
 
     private Visualizer v;
-    
+
     private static ArrayList<DrawInfo> characters = new ArrayList();
     private static Animal animal;
     private static String name;
-    
+
     public static Client client;
 
     @Override
@@ -45,18 +45,18 @@ public class WildNature extends PApplet {
 
     public static void main(String[] args) {
         try {
-            
+
             Scanner scn = new Scanner(System.in);
             System.out.println("Enter username:");
             name = scn.nextLine();
-            
+
             OUTER:
             while (true) {
                 System.out.println("Choose a character...");
                 System.out.println("1) Marlin\n2) Black Marlin\n3) Crocodile\n4)"
                         + " Shark\n5) Electric Eel\n6) Barracuda\n7)"
                         + " Mega Mouth\n8) Orca\n9) Hippo\n10) Colossal Squid\n11)"
-                        + " DoodFish\n12) Electric Marlin ");
+                        + " DoodFish\n12) Electric Marlin\n14) Orca AI\n15) SharkAI\n16) HippoAI");
                 int characterNo = scn.nextInt();
                 switch (characterNo) {
                     case 1:
@@ -86,7 +86,7 @@ public class WildNature extends PApplet {
                     case 9:
                         animal = Animal.HIPPO;
                         break OUTER;
-                    case 10: 
+                    case 10:
                         animal = Animal.COLOSSAL_SQUID;
                         break OUTER;
                     case 11:
@@ -96,15 +96,22 @@ public class WildNature extends PApplet {
                         animal = Animal.ELECTRIC_MARLIN;
                         break OUTER;
                     case 13:
-                        animal = null;
+                        animal = Animal.ORCA_AI;
+                        break OUTER;
+                    case 14:
+                        animal = Animal.SHARK_AI;
+                        break OUTER;
+                    case 15:
+                        animal = Animal.HIPPO_AI;
+                        break OUTER;
                     default:
                         break;
                 }
             }
-            
+
             System.out.println("Enter server IP address:");
             String ip = scn.next();
-            
+
             client = new Client();
             new Thread(client).start();
             client.connect(5000, ip, 54555, 54777);
@@ -129,5 +136,5 @@ public class WildNature extends PApplet {
         }
         PApplet.main(new String[]{WildNature.class.getName()});
     }
-    
+
 }
