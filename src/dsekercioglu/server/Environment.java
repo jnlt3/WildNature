@@ -18,6 +18,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import processing.core.PApplet;
 
 public class Environment {
@@ -69,7 +71,21 @@ public class Environment {
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
                 swimmer.regen();
             } else {
-                swimmer.respawn(WIDTH, HEIGHT);
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                       characters.remove(swimmer);
+                        try {
+                            Thread.sleep(3000L);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        swimmer.respawn(WIDTH, HEIGHT);
+                        characters.add(swimmer);
+                    }
+                };
+                Thread t = new Thread(r);
+                t.start();
             }
         }
         characters.removeAll(toRemove);
