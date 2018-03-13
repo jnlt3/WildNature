@@ -128,6 +128,7 @@ public abstract class Swimmer {
         di.img = this.type + "";
         di.hiding = this.hiding;
         di.blind = blind > 0;
+        di.team = this.team;
         return di;
     }
 

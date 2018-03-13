@@ -128,7 +128,7 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_ENERGY_INCREASE = 0.002F;
     public static final float COLOSSAL_SQUID_MAX_HEALTH = 650;
     public static final float COLOSSAL_SQUID_HEALTH_REGEN = 0.1F;
-    public static final float COLOSSAL_SQUID_DAMAGE = 130F;
+    public static final float COLOSSAL_SQUID_DAMAGE = 170F;
     public static final int COLOSSAL_SQUID_BOOST_TIME = 75;
     public static final int COLOSSAL_SQUID_ABILITY_TIME = 30;
 

@@ -136,12 +136,10 @@ public class Visualizer {
     }
 
     private void drawHealthBar(double rate, float x, float y) {
-        int green = Math.min((int) (rate * 510), 255);
-        int red = Math.min((int) ((1 - rate) * 510), 255);
-        this.pa.fill(red, green, 0);
-        this.pa.stroke(red, green, 0);
+        this.pa.fill(0, 0, 0, 50);
+        this.pa.stroke(0, 0, 0, 50);
         float radius = (float) (rate * 50);
-        this.pa.ellipse(x, y - 100, radius, radius);
+        this.pa.ellipse(x, y - 150, radius, radius);
     }
 
     private void drawEnergyBar(double rate) {
@@ -205,9 +203,10 @@ public class Visualizer {
                 }
             }
         }
+        this.pa.fill(0);
+        this.pa.stroke(0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
-            this.pa.fill(0);
             if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1500 && !d.name.equals(name)) {
                 double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                 float x = (float) (600 + Math.cos(angle) * 100);
@@ -215,10 +214,10 @@ public class Visualizer {
                 this.pa.ellipse(x, y, 10, 10);
             }
         }
-
+        this.pa.fill(0, 255, 0);
+        this.pa.stroke(0, 255, 0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
-            this.pa.fill(0, 255, 0);
             if (!d.name.equals(name) && d.team.equals(this.team)) {
                 double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                 float x = (float) (600 + Math.cos(angle) * 100);

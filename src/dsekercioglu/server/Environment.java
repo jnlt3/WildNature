@@ -3,10 +3,13 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.OrcaAI;
 import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
+import static dsekercioglu.general.characters.Team.GREEN;
+import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Line2D;
@@ -24,14 +27,14 @@ public class Environment {
     private final int HEIGHT = 2000;
     private final float BLEED_DAMAGE = 5;
     private final float SHOCK_DAMAGE = 15;
-    private final float HOLD_DAMAGE = 2;
+    private final float HOLD_DAMAGE = 3.5F;
     private final float STICK_DAMAGE = 1;
-    private final float GRAB_DAMAGE = 1.5F;
+    private final float GRAB_DAMAGE = 2.5F;
     private final float REGEN = 2;
-    private final float KNOCKBACK_MULTIPLIER = 2;
+    private final float KNOCKBACK_MULTIPLIER = 1;
     private final float SUPERBITE_MULTIPLIER = 3;
     private final int BLINDNESS = 300;
-    private final int POISON_DAMAGE = 1;
+    private final int POISON_DAMAGE = 3;
 
     private final float KNOCKBACK = 300;
 
@@ -42,11 +45,10 @@ public class Environment {
 
     HashMap<Animal, Rectangle2D.Double[]> animalTypes = new HashMap<>();
 
+    HashMap<String, Integer> scores = new HashMap<>();
+
     public Environment() {
         this.characters = new ArrayList();
-        for (int i = 0; i < characters.size(); i++) {
-            characters.get(i).respawn(WIDTH, HEIGHT);
-        }
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -83,6 +85,7 @@ public class Environment {
     public void addCharacter(Swimmer s) {
         s.respawn(WIDTH, HEIGHT);
         this.characters.add(s);
+        scores.put(s.getName(), 0);
     }
 
     private void handleIntersections() {
@@ -94,15 +97,19 @@ public class Environment {
                 Line2D[] r2 = getHitBox(p2);
                 if (!p1.team.equals(p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
-                    if (p1.energyTime > 0) {
+                    if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
                         abilities.add(p1.ability);
                         attackers.add(p1);
                         victims.add(p2);
                         time.add(p1.abilityTime);
                     } else {
+                        if (!p2.isAlive()) {
+                            scores.put(p1.getName(), scores.get(p1.getName()) + 1);
+                        }
                         p1.move(-KNOCKBACK, p1.angle);
                     }
+                    p1.energyTime = 0;
                 }
             }
         }
@@ -119,7 +126,6 @@ public class Environment {
                 victims.get(i).hit(BLEED_DAMAGE);
             } else if (a.equals(HOLD)) {
                 attacker.move(0, attacker.angle);
-                attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
@@ -138,7 +144,6 @@ public class Environment {
                     attacker.move(-KNOCKBACK, attacker.angle);
                 }
             } else if (a.equals(REGEN_TIME)) {
-                attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
@@ -153,7 +158,6 @@ public class Environment {
                 attacker.move(-KNOCKBACK, attacker.angle);
                 newTime = 0;
             } else if (a.equals(GRAB)) {
-                attacker.energyTime = 0;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
@@ -166,16 +170,18 @@ public class Environment {
                 victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
                 newTime = 0;
             } else if (a.equals(INKSPILL)) {
-                attacker.energyTime = 0;
                 victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI);
                 victim.setBlind(BLINDNESS);
             } else if (a.equals(POISON)) {
-                attacker.energyTime = 0;
                 victim.hit(POISON_DAMAGE);
             }
-            if(!(victim.isAlive() && attacker.isAlive())) {
+            if (!victim.isAlive()) {
+                scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
+                newTime = 0;
+            }
+            if (!attacker.isAlive()) {
                 newTime = 0;
             }
             time.set(i, newTime);

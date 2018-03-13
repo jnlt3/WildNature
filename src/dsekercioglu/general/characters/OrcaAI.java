@@ -63,7 +63,7 @@ public class OrcaAI extends Swimmer {
                     Swimmer s = e.characters.get(k);
                     if (!(s.team.equals(team))) {
                         if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
-                            if(Math.pow(Math.atan2(s.y - y, s.x - x) - angle, 2) < 0.1) {
+                            if(Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI  < Math.PI / 9) {
                                 mousePressed = true;
                             }
                             danger += Math.max((this.health * this.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);

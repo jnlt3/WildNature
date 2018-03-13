@@ -42,6 +42,8 @@ public class WildNatureServer {
 
     static boolean loop = true;
 
+    static int i = 0;
+
     public static void main(String[] args) throws IOException {
         server = new Server();
         Kryo kryo = server.getKryo();
@@ -130,6 +132,12 @@ public class WildNatureServer {
         System.out.println("done: " + System.currentTimeMillis());
         Runnable r = () -> {
             for (;;) {
+                i++;
+                if(i >= 200) {
+                    i = 0;
+                    System.out.println(env.scores.keySet());
+                    System.out.println(env.scores.values());
+                }
                 if (!env.characters.isEmpty() && loop) {
                     env.update(currentControls);
                 }
