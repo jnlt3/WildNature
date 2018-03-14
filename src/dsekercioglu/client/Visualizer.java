@@ -81,6 +81,10 @@ public class Visualizer {
         PImage electricMarlin = pa.loadImage("img/ElectricMarlin.png");
         electricMarlin.resize((int) ELECTRIC_MARLIN_LENGTH, 0);
         images.put("ELECTRIC_MARLIN", electricMarlin);
+
+        PImage guardian = pa.loadImage("img/Guardian.png");
+        guardian.resize((int) GUARDIAN_LENGTH, 0);
+        images.put("GUARDIAN", guardian);
     }
 
     public void update(ArrayList<DrawInfo> characters) {

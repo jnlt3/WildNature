@@ -13,6 +13,7 @@ import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
+import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.Marlin;
@@ -104,6 +105,8 @@ public class WildNatureServer {
                         p = new SharkAI(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.HIPPO_AI.name().equals(s)) {
                         p = new HippoAI(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.GUARDIAN.name().equals(s)) {
+                        p = new Guardian(name, 0.0F, 0.0F, null);
                     }
                     if (p != null) {
                         loop = false;
@@ -133,7 +136,7 @@ public class WildNatureServer {
         Runnable r = () -> {
             for (;;) {
                 i++;
-                if(i >= 200) {
+                if (i >= 200) {
                     i = 0;
                     System.out.println(env.scores.keySet());
                     System.out.println(env.scores.values());

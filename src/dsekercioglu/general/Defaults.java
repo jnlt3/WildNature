@@ -158,4 +158,17 @@ public class Defaults {
     public static final int ELECTRIC_MARLIN_BOOST_TIME = 100;
     public static final int ELECTRIC_MARLIN_ABILITY_TIME = 10;
 
+    public static final float GUARDIAN_TURN = 0.08726646F;
+    public static final float GUARDIAN_LENGTH = 90.0F;
+    public static final float GUARDIAN_WEIGHT = 3000.0F;
+    public static final float GUARDIAN_SPEED = 4.0F;
+    public static final float GUARDIAN_PASSIVE_ABILITY = 3.0F;
+    public static final float GUARDIAN_MAX_ENERGY = 2.0F;
+    public static final float GUARDIAN_ENERGY_INCREASE = 0.001F;
+    public static final float GUARDIAN_MAX_HEALTH = 1200.0F;
+    public static final float GUARDIAN_HEALTH_REGEN = 0.3F;
+    public static final float GUARDIAN_DAMAGE = 60F;
+    public static final int GUARDIAN_BOOST_TIME = 100;
+    public static final int GUARDIAN_ABILITY_TIME = 300;
+
 }

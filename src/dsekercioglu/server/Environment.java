@@ -3,6 +3,7 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.OrcaAI;
@@ -74,7 +75,7 @@ public class Environment {
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
-                       characters.remove(swimmer);
+                        characters.remove(swimmer);
                         try {
                             Thread.sleep(3000L);
                         } catch (InterruptedException ex) {
@@ -192,12 +193,17 @@ public class Environment {
                 victim.setBlind(BLINDNESS);
             } else if (a.equals(POISON)) {
                 victim.hit(POISON_DAMAGE);
+            } else if (a.equals(PRISON)) {
+                victim.x = ((Guardian) attacker).mouseX;
+                victim.y = ((Guardian) attacker).mouseY;
+                victim.velocity = 0;
+                victim.angle += Math.PI / 9;
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
                 newTime = 0;
             }
-            if (!attacker.isAlive()) {
+            if (!attacker.isAlive() || victim instanceof Guardian) {
                 newTime = 0;
             }
             time.set(i, newTime);
@@ -206,10 +212,13 @@ public class Environment {
             }
         }
         for (int i = 0; i < indices.size(); i++) {
-            abilities.remove(indices.get(i) - i);
-            victims.remove(indices.get(i) - i);
-            attackers.remove(indices.get(i) - i);
-            time.remove(indices.get(i) - i);
+            int index = indices.get(i) - i;
+            if (index >= 0) {
+                abilities.remove(index);
+                victims.remove(index);
+                attackers.remove(index);
+                time.remove(index);
+            }
         }
     }
 
