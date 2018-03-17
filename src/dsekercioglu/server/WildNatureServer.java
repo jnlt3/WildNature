@@ -30,7 +30,11 @@ import dsekercioglu.general.multiPlayer.PlayerInfo;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,7 +117,7 @@ public class WildNatureServer {
                         ControlInfo c = new ControlInfo();
                         c.mouseX = 0;
                         c.mouseY = 0;
-                        c.mousePressed = false;
+                        c.one = false;
                         c.name = name;
                         p.team = pi.team;
                         WildNatureServer.env.addCharacter(p);
@@ -134,7 +138,8 @@ public class WildNatureServer {
         });
         System.out.println("done: " + System.currentTimeMillis());
         Runnable r = () -> {
-            for (;;) {
+            long time = System.currentTimeMillis();
+            while (true) {
                 i++;
                 if (i >= 200) {
                     i = 0;

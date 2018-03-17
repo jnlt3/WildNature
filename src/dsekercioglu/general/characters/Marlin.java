@@ -2,9 +2,11 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Animal.MARLIN;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class Marlin extends Swimmer {
 
@@ -26,7 +28,9 @@ public class Marlin extends Swimmer {
         this.damage = MARLIN_DAMAGE;
         this.abilityTime = MARLIN_ABILITY_TIME;
         this.boostTime = MARLIN_BOOST_TIME;
-        this.ability = BLEED;
+        this.ability1 = BLEED;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = HORN;
 
         this.type = MARLIN;
     }
@@ -43,7 +47,7 @@ public class Marlin extends Swimmer {
             velocity = MARLIN_SPEED * 5;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-         if (mousePressed && energy >= 1 && energyTime <= 0) {
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

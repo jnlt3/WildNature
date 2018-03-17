@@ -2,6 +2,8 @@ package dsekercioglu.general.characters;
 
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Animal.SHARK;
 import dsekercioglu.server.Environment;
@@ -35,7 +37,9 @@ public class SharkAI extends Swimmer {
         this.damage = SHARK_DAMAGE;
         this.abilityTime = SHARK_ABILITY_TIME;
         this.boostTime = SHARK_BOOST_TIME;
-        this.ability = KNOCKBACK;
+        this.ability1 = KNOCKBACK;
+        this.ability2 = GRAB;
+        this.ability3 = BLEED;
 
         this.type = SHARK;
 

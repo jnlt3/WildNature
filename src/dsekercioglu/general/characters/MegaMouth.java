@@ -1,10 +1,13 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.REGEN_TIME;
 import static dsekercioglu.general.characters.Animal.MEGA_MOUTH;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_GRAB;
+import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Ability.HOLD;
+import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 
 public class MegaMouth extends Swimmer {
 
@@ -26,7 +29,9 @@ public class MegaMouth extends Swimmer {
         this.damage = MEGA_MOUTH_SHARK_DAMAGE;
         this.abilityTime = MEGA_MOUTH_SHARK_ABILITY_TIME;
         this.boostTime = MEGA_MOUTH_SHARK_BOOST_TIME;
-        this.ability = REGEN_TIME;
+        this.ability1 = DRAIN_GRAB;
+        this.ability2 = GRAB;
+        this.ability3 = HOLD;
 
         this.type = MEGA_MOUTH;
     }

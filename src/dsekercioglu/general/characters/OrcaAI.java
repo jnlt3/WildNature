@@ -3,12 +3,15 @@ package dsekercioglu.general.characters;
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Ability.KNOCKBACK;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Animal.ORCA;
 import dsekercioglu.server.Environment;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class OrcaAI extends Swimmer {
 
@@ -35,7 +38,9 @@ public class OrcaAI extends Swimmer {
         this.damage = ORCA_DAMAGE;
         this.abilityTime = ORCA_ABILITY_TIME;
         this.boostTime = ORCA_BOOST_TIME;
-        this.ability = GRAB;
+        this.ability1 = GRAB;
+        this.ability2 = REGEN_BOOST;
+        this.ability3 = DRAIN_HIT;
 
         this.type = ORCA;
 
@@ -63,7 +68,7 @@ public class OrcaAI extends Swimmer {
                     Swimmer s = e.characters.get(k);
                     if (!(s.team.equals(team))) {
                         if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
-                            if(Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI  < Math.PI / 9) {
+                            if (Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI < Math.PI / 9) {
                                 mousePressed = true;
                             }
                             danger += Math.max((this.health * this.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);

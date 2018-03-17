@@ -2,9 +2,12 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Ability.KNOCKBACK;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Animal.ORCA;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class Orca extends Swimmer {
 
@@ -26,7 +29,9 @@ public class Orca extends Swimmer {
         this.damage = ORCA_DAMAGE;
         this.abilityTime = ORCA_ABILITY_TIME;
         this.boostTime = ORCA_BOOST_TIME;
-        this.ability = GRAB;
+        this.ability1 = GRAB;
+        this.ability2 = REGEN_BOOST;
+        this.ability3 = DRAIN_HIT;
 
         this.type = ORCA;
     }

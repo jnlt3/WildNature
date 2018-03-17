@@ -1,10 +1,12 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Ability.STICK;
 import static dsekercioglu.general.characters.Animal.BARRACUDA;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class Barracuda extends Swimmer {
 
@@ -26,7 +28,9 @@ public class Barracuda extends Swimmer {
         this.damage = BARRACUDA_DAMAGE;
         this.abilityTime = BARRACUDA_ABILITY_TIME;
         this.boostTime = BARRACUDA_BOOST_TIME;
-        this.ability = STICK;
+        this.ability1 = STICK;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = REGEN_BOOST;
 
         this.type = BARRACUDA;
     }

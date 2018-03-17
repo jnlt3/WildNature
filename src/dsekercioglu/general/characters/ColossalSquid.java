@@ -1,10 +1,12 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
 import static dsekercioglu.general.characters.Ability.INKSPILL;
 import static dsekercioglu.general.characters.Animal.COLOSSAL_SQUID;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class ColossalSquid extends Swimmer {
 
@@ -26,7 +28,9 @@ public class ColossalSquid extends Swimmer {
         this.damage = COLOSSAL_SQUID_DAMAGE;
         this.abilityTime = COLOSSAL_SQUID_ABILITY_TIME;
         this.boostTime = COLOSSAL_SQUID_BOOST_TIME;
-        this.ability = INKSPILL;
+        this.ability1 = INKSPILL;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = DAMAGE_BOOST;
 
         this.type = COLOSSAL_SQUID;
     }

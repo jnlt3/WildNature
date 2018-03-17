@@ -8,7 +8,7 @@ public abstract class Swimmer {
 
     private static final double MOMENTUM = 0.3;
     private final String name;
-    
+
     public Team team;
 
     public static PApplet pa;
@@ -22,21 +22,23 @@ public abstract class Swimmer {
     public float regen;
     public int energyTime;
     public int abilityTime;
-    public Ability ability;
+    public boolean hiding;
+    public float health;
+    public float maxHealth;
+    public float energy;
+    public Ability ability1;
+    public Ability ability2;
+    public Ability ability3;
 
     protected PImage img;
     protected Animal type;
-    protected float health;
-    protected float maxHealth;
     protected float length;
     protected float weight;
     protected float maxTurn;
     protected float passiveAbilityPower;
     protected float maxEnergy;
-    protected float energy;
     protected float energyIncrease;
     protected int boostTime;
-    protected boolean hiding;
     protected int blind;
 
     private double xChange;
@@ -151,4 +153,8 @@ public abstract class Swimmer {
     public void setBlind(int blind) {
         this.blind = blind;
     }
+
+    public void attacked() {
+    }
+;
 }

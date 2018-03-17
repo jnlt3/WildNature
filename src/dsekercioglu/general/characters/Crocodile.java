@@ -1,7 +1,9 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.HOLD;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Animal.CROCODILE;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
@@ -26,7 +28,9 @@ public class Crocodile extends Swimmer {
         this.damage = CROCODILE_DAMAGE;
         this.abilityTime = CROCODILE_ABILITY_TIME;
         this.boostTime = CROCODILE_BOOST_TIME;
-        this.ability = HOLD;
+        this.ability1 = HOLD;
+        this.ability2 = GRAB;
+        this.ability3 = REGEN_BOOST;
 
         this.type = CROCODILE;
     }

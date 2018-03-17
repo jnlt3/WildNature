@@ -91,7 +91,9 @@ public class Visualizer {
         ControlInfo c = new ControlInfo();
         c.mouseX = this.pa.mouseX;
         c.mouseY = this.pa.mouseY;
-        c.mousePressed = this.pa.mousePressed;
+        c.one = this.pa.key == '1' && this.pa.keyPressed;
+        c.two = this.pa.key == '2' && this.pa.keyPressed;
+        c.three = this.pa.key == '3' && this.pa.keyPressed;
         c.name = this.name;
         WildNature.client.sendUDP(c);
         drawGrids();

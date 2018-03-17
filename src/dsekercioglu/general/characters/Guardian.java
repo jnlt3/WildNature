@@ -6,9 +6,11 @@ import static dsekercioglu.general.characters.Animal.GUARDIAN;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.PRISON;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
+import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 
 public class Guardian extends Swimmer {
-    
+
     public float mouseX;
     public float mouseY;
 
@@ -30,7 +32,9 @@ public class Guardian extends Swimmer {
         this.damage = GUARDIAN_DAMAGE;
         this.abilityTime = GUARDIAN_ABILITY_TIME;
         this.boostTime = GUARDIAN_BOOST_TIME;
-        this.ability = PRISON;
+        this.ability1 = PRISON;
+        this.ability2 = SLOW_DOWN;
+        this.ability3 = REGEN_BOOST;
 
         this.type = GUARDIAN;
     }
@@ -46,12 +50,12 @@ public class Guardian extends Swimmer {
                 velocity = 0;
             }
         } else {
-            this.regen();
-            this.regen();
-            this.regen();
+            for (int i = 0; i < 10; i++) {
+                this.regen();
+            }
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-         if (mousePressed && energy >= 1 && energyTime <= 0) {
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

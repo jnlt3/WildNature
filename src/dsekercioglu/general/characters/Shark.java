@@ -1,6 +1,8 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.GRAB;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
@@ -26,7 +28,9 @@ public class Shark extends Swimmer {
         this.damage = SHARK_DAMAGE;
         this.abilityTime = SHARK_ABILITY_TIME;
         this.boostTime = SHARK_BOOST_TIME;
-        this.ability = KNOCKBACK;
+        this.ability1 = KNOCKBACK;
+        this.ability2 = GRAB;
+        this.ability3 = BLEED;
 
         this.type = SHARK;
     }

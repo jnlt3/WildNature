@@ -2,6 +2,8 @@ package dsekercioglu.general.characters;
 
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.GRAB;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Ability.SUPERBITE;
 import static dsekercioglu.general.characters.Animal.HIPPO;
 import dsekercioglu.server.Environment;
@@ -35,7 +37,9 @@ public class HippoAI extends Swimmer {
         this.damage = HIPPO_DAMAGE;
         this.abilityTime = HIPPO_ABILITY_TIME;
         this.boostTime = HIPPO_BOOST_TIME;
-        this.ability = SUPERBITE;
+        this.ability1 = SUPERBITE;
+        this.ability2 = GRAB;
+        this.ability3 = REGEN_BOOST;
 
         this.type = HIPPO;
 

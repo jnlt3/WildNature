@@ -2,9 +2,11 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Animal.BLACK_MARLIN;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class BlackMarlin extends Swimmer {
 
@@ -26,7 +28,9 @@ public class BlackMarlin extends Swimmer {
         this.damage = BLACK_MARLIN_DAMAGE;
         this.abilityTime = BLACK_MARLIN_ABILITY_TIME;
         this.boostTime = BLACK_MARLIN_BOOST_TIME;
-        this.ability = BLEED;
+        this.ability1 = BLEED;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = HORN;
 
         this.type = BLACK_MARLIN;
     }

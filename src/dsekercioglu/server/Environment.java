@@ -26,20 +26,23 @@ import processing.core.PApplet;
 public class Environment {
 
     public ArrayList<Swimmer> characters = new ArrayList();
-    private final int WIDTH = 2000;
-    private final int HEIGHT = 2000;
+    public final int WIDTH = 2000;
+    public final int HEIGHT = 2000;
     private final float BLEED_DAMAGE = 5;
     private final float SHOCK_DAMAGE = 15;
     private final float HOLD_DAMAGE = 3.5F;
     private final float STICK_DAMAGE = 1;
     private final float GRAB_DAMAGE = 2.5F;
-    private final float REGEN = 2;
-    private final float KNOCKBACK_MULTIPLIER = 1;
+    private final float KNOCKBACK_MULTIPLIER = 1.5F;
     private final float SUPERBITE_MULTIPLIER = 3;
     private final int BLINDNESS = 300;
     private final int POISON_DAMAGE = 3;
+    private final float HORN_DAMAGE = 3;
+    private final int REGEN_AMOUNT = 1200;
 
     private final float KNOCKBACK = 300;
+
+    HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -52,6 +55,12 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
+        for (int i = 0; i < 1; i++) {
+            Swimmer s = new OrcaAI("" + i, 0, 0, null, this);
+            s.team = GREEN;
+            addCharacter(s);
+        }
+
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -64,7 +73,14 @@ public class Environment {
                 swimmer.updateMove();
                 if (hashMap.containsKey(swimmer.getName())) {
                     ControlInfo c = (ControlInfo) hashMap.get(swimmer.getName());
-                    swimmer.update(c.mouseX, c.mouseY, c.mousePressed);
+                    swimmer.update(c.mouseX, c.mouseY, c.one || c.two || c.three);
+                    if (c.one) {
+                        charAbilities.put(swimmer, swimmer.ability1);
+                    } else if (c.two) {
+                        charAbilities.put(swimmer, swimmer.ability2);
+                    } else if (c.three) {
+                        charAbilities.put(swimmer, swimmer.ability3);
+                    }
                 } else {
                     swimmer.update(0, 0, true);
                 }
@@ -102,6 +118,7 @@ public class Environment {
     public void addCharacter(Swimmer s) {
         s.respawn(WIDTH, HEIGHT);
         this.characters.add(s);
+        charAbilities.put(s, s.ability1);
         scores.put(s.getName(), 0);
     }
 
@@ -116,7 +133,7 @@ public class Environment {
                     p2.hit(p1.damage);
                     if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
-                        abilities.add(p1.ability);
+                        abilities.add(charAbilities.get(p1));
                         attackers.add(p1);
                         victims.add(p2);
                         time.add(p1.abilityTime);
@@ -160,15 +177,14 @@ public class Environment {
                 if (newTime <= 0) {
                     attacker.move(-KNOCKBACK, attacker.angle);
                 }
-            } else if (a.equals(REGEN_TIME)) {
+            } else if (a.equals(DRAIN_GRAB)) {
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
                 if (newTime <= 0) {
                     victim.setMoveInAngle(KNOCKBACK * 2, attacker.angle);
                 }
-                attacker.hit(-REGEN);
-                victim.hit(0.5F);
+                victim.energy = 0;
             } else if (a.equals(Ability.KNOCKBACK)) {
                 victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
                 victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * KNOCKBACK, attacker.angle);
@@ -198,12 +214,31 @@ public class Environment {
                 victim.y = ((Guardian) attacker).mouseY;
                 victim.velocity = 0;
                 victim.angle += Math.PI / 9;
+            } else if (a.equals(REGEN_BOOST)) {
+                attacker.health += REGEN_AMOUNT;
+                newTime = 0;
+            } else if (a.equals(DRAIN_HIT)) {
+                victim.energy = Math.max(victim.energy - 0.5F, 0);
+                newTime = 0;
+            } else if (a.equals(DAMAGE_BOOST)) {
+                victim.hit(victim.damage * 3);
+                newTime = 0;
+            } else if (a.equals(SLOW_DOWN)) {
+                victim.velocity = 1;
+            } else if (a.equals(HORN)) {
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
+                victim.hit(HORN_DAMAGE);
+                if (newTime <= 0) {
+                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                }
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
                 newTime = 0;
             }
-            if (!attacker.isAlive() || victim instanceof Guardian) {
+            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
                 newTime = 0;
             }
             time.set(i, newTime);

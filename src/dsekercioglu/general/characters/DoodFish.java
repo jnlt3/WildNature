@@ -2,7 +2,9 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
 import static dsekercioglu.general.characters.Ability.POISON;
+import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 import static dsekercioglu.general.characters.Animal.DOOD_FISH;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
@@ -27,7 +29,9 @@ public class DoodFish extends Swimmer {
         this.damage = DOOD_FISH_DAMAGE;
         this.abilityTime = DOOD_FISH_ABILITY_TIME;
         this.boostTime = DOOD_FISH_BOOST_TIME;
-        this.ability = POISON;
+        this.ability1 = POISON;
+        this.ability2 = SLOW_DOWN;
+        this.ability3 = DAMAGE_BOOST;
 
         this.type = DOOD_FISH;
     }
@@ -48,7 +52,7 @@ public class DoodFish extends Swimmer {
             hiding = true;
         }
         this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-         if (mousePressed && energy >= 1 && energyTime <= 0) {
+        if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

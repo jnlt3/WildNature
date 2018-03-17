@@ -1,10 +1,13 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
+import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
+import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Ability.SHOCK;
 import static dsekercioglu.general.characters.Animal.ELECTRIC_EEL;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
+import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 
 public class ElectricEel extends Swimmer {
 
@@ -26,7 +29,9 @@ public class ElectricEel extends Swimmer {
         this.damage = ELECTRIC_EEL_DAMAGE;
         this.abilityTime = ELECTRIC_EEL_ABILITY_TIME;
         this.boostTime = ELECTRIC_EEL_BOOST_TIME;
-        this.ability = SHOCK;
+        this.ability1 = SHOCK;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = DAMAGE_BOOST;
 
         this.type = ELECTRIC_EEL;
     }
