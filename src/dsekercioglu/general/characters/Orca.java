@@ -30,7 +30,7 @@ public class Orca extends Swimmer {
         this.abilityTime = ORCA_ABILITY_TIME;
         this.boostTime = ORCA_BOOST_TIME;
         this.ability1 = GRAB;
-        this.ability2 = REGEN_BOOST;
+        this.ability2 = KNOCKBACK;
         this.ability3 = DRAIN_HIT;
 
         this.type = ORCA;

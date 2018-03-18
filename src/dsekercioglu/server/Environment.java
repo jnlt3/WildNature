@@ -9,6 +9,7 @@ import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.OrcaAI;
 import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
+import static dsekercioglu.general.characters.Team.BLUE;
 import static dsekercioglu.general.characters.Team.GREEN;
 import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
@@ -55,9 +56,20 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
-        for (int i = 0; i < 1; i++) {
-            Swimmer s = new OrcaAI("" + i, 0, 0, null, this);
+        for (int i = 0; i < 5; i++) {
+            Swimmer s = new SharkAI("Shark" + i, 0, 0, null, this);
+            s.team = RED;
+            addCharacter(s);
+        }
+        for (int i = 0; i < 4; i++) {
+            Swimmer s = new OrcaAI("Orca" + i, 0, 0, null, this);
             s.team = GREEN;
+            addCharacter(s);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            Swimmer s = new HippoAI("Hippo" + i, 0, 0, null, this);
+            s.team = BLUE;
             addCharacter(s);
         }
 
@@ -98,7 +110,7 @@ public class Environment {
                             Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         swimmer.respawn(WIDTH, HEIGHT);
-                        characters.add(swimmer);
+                        //characters.add(swimmer);
                     }
                 };
                 Thread t = new Thread(r);
