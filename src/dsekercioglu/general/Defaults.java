@@ -11,9 +11,9 @@ public class Defaults {
     public static final float MARLIN_ENERGY_INCREASE = 0.0025F;
     public static final float MARLIN_MAX_HEALTH = 3500.0F;
     public static final float MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float MARLIN_DAMAGE = 140F;
+    public static final float MARLIN_DAMAGE = 180F;
     public static final int MARLIN_BOOST_TIME = 100;
-    public static final int MARLIN_ABILITY_TIME = 50;
+    public static final int MARLIN_ABILITY_TIME = 150;
 
     public static final float BLACK_MARLIN_TURN = 0.08726646F;
     public static final float BLACK_MARLIN_LENGTH = 140.0F;
@@ -24,9 +24,9 @@ public class Defaults {
     public static final float BLACK_MARLIN_ENERGY_INCREASE = 0.0025F;
     public static final float BLACK_MARLIN_MAX_HEALTH = 3000.0F;
     public static final float BLACK_MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float BLACK_MARLIN_DAMAGE = 140F;
+    public static final float BLACK_MARLIN_DAMAGE = 180F;
     public static final int BLACK_MARLIN_BOOST_TIME = 100;
-    public static final int BLACK_MARLIN_ABILITY_TIME = 50;
+    public static final int BLACK_MARLIN_ABILITY_TIME = 150;
 
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
@@ -154,9 +154,9 @@ public class Defaults {
     public static final float ELECTRIC_MARLIN_ENERGY_INCREASE = 0.0025F;
     public static final float ELECTRIC_MARLIN_MAX_HEALTH = 2500.0F;
     public static final float ELECTRIC_MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float ELECTRIC_MARLIN_DAMAGE = 140F;
+    public static final float ELECTRIC_MARLIN_DAMAGE = 180F;
     public static final int ELECTRIC_MARLIN_BOOST_TIME = 100;
-    public static final int ELECTRIC_MARLIN_ABILITY_TIME = 10;
+    public static final int ELECTRIC_MARLIN_ABILITY_TIME = 30;
 
     public static final float GUARDIAN_TURN = 0.03F;
     public static final float GUARDIAN_LENGTH = 90.0F;

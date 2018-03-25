@@ -1,7 +1,6 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Ability.SHOCK;
 import static dsekercioglu.general.characters.Animal.ELECTRIC_MARLIN;
@@ -30,8 +29,8 @@ public class ElectricMarlin extends Swimmer {
         this.abilityTime = ELECTRIC_MARLIN_ABILITY_TIME;
         this.boostTime = ELECTRIC_MARLIN_BOOST_TIME;
         this.ability1 = SHOCK;
-        this.ability2 = HORN;
-        this.ability3 = DRAIN_HIT;
+        this.ability2 = DRAIN_HIT;
+        this.ability3 = HORN;
 
         this.type = ELECTRIC_MARLIN;
     }

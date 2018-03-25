@@ -2,7 +2,6 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
-import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Ability.SHOCK;
 import static dsekercioglu.general.characters.Animal.ELECTRIC_EEL;
 import java.awt.geom.Point2D;

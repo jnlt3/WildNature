@@ -1,6 +1,5 @@
 package dsekercioglu.general.characters;
 
-import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.REGEN_BOOST;

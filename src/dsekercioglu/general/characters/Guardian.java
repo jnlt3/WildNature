@@ -1,7 +1,6 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.POISON;
 import static dsekercioglu.general.characters.Animal.GUARDIAN;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;

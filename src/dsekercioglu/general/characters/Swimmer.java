@@ -1,6 +1,5 @@
 package dsekercioglu.general.characters;
 
-import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import processing.core.PImage;
 

@@ -3,7 +3,6 @@ package dsekercioglu.general.characters;
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
-import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Animal.ORCA;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;

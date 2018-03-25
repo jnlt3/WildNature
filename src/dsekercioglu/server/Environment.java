@@ -38,7 +38,7 @@ public class Environment {
     private final float SUPERBITE_MULTIPLIER = 3;
     private final int BLINDNESS = 300;
     private final int POISON_DAMAGE = 3;
-    private final float HORN_DAMAGE = 3;
+    private final float HORN_MULTIPLIER = 2;
     private final int REGEN_AMOUNT = 1200;
 
     private final float KNOCKBACK = 300;
@@ -56,23 +56,6 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
-        for (int i = 0; i < 5; i++) {
-            Swimmer s = new SharkAI("Shark" + i, 0, 0, null, this);
-            s.team = RED;
-            addCharacter(s);
-        }
-        for (int i = 0; i < 4; i++) {
-            Swimmer s = new OrcaAI("Orca" + i, 0, 0, null, this);
-            s.team = GREEN;
-            addCharacter(s);
-        }
-
-        for (int i = 0; i < 5; i++) {
-            Swimmer s = new HippoAI("Hippo" + i, 0, 0, null, this);
-            s.team = BLUE;
-            addCharacter(s);
-        }
-
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -110,7 +93,7 @@ public class Environment {
                             Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         swimmer.respawn(WIDTH, HEIGHT);
-                        //characters.add(swimmer);
+                        characters.add(swimmer);
                     }
                 };
                 Thread t = new Thread(r);
@@ -190,6 +173,7 @@ public class Environment {
                     attacker.move(-KNOCKBACK, attacker.angle);
                 }
             } else if (a.equals(DRAIN_GRAB)) {
+                victim.energy -= 0.5;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
@@ -230,7 +214,7 @@ public class Environment {
                 attacker.health += REGEN_AMOUNT;
                 newTime = 0;
             } else if (a.equals(DRAIN_HIT)) {
-                victim.energy = Math.max(victim.energy - 0.5F, 0);
+                victim.energy = Math.max(victim.energy - 1, 0);
                 newTime = 0;
             } else if (a.equals(DAMAGE_BOOST)) {
                 victim.hit(victim.damage * 3);
@@ -238,13 +222,13 @@ public class Environment {
             } else if (a.equals(SLOW_DOWN)) {
                 victim.velocity = 1;
             } else if (a.equals(HORN)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(HORN_DAMAGE);
-                if (newTime <= 0) {
-                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
-                }
+                victim.hit(attacker.damage * HORN_MULTIPLIER);
+                newTime = 0;
+                victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                abilities.add(BLEED);
+                attackers.add(attacker);
+                victims.add(victim);
+                time.add(attacker.abilityTime / 3);
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);

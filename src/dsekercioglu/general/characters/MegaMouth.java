@@ -7,7 +7,6 @@ import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.DRAIN_GRAB;
 import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.HOLD;
-import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 
 public class MegaMouth extends Swimmer {
 

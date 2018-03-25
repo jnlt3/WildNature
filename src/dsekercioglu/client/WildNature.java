@@ -23,14 +23,30 @@ public class WildNature extends PApplet {
 
     private static ArrayList<DrawInfo> characters = new ArrayList();
     private static Animal animal;
-    private static String name;
+    private static String name = null;
 
     public static Client client;
 
+    TextBox ipBox;
+    TextBox nameBox;
+    CharacterChooser cc;
+
+    String IP = null;
+    Animal character = null;
+    Team t = null;
+
     @Override
     public void setup() {
-        v = new Visualizer(name, animal, this);
-        v.setImages();
+//        name = "";
+//        for (int i = 0; i < 10; i++) {
+//            name += (int) (Math.random() * 10);
+//        }
+        Team[] teams = Team.values();
+        t = teams[(int) (Math.random() * teams.length)];
+        cc = new CharacterChooser(this);
+        ipBox = new TextBox(600, 100, true, this);
+        nameBox = new TextBox(600, 100, true, this);
+        surface.setResizable(true);
     }
 
     @Override
@@ -41,12 +57,49 @@ public class WildNature extends PApplet {
     @Override
     public void draw() {
         clear();
-        v.update(characters);
+        if (IP == null) {
+            fill(255);
+            textSize(20);
+            text("Enter server IP:", 0, 100);
+            ipBox.draw(0, 200);
+            if (keyPressed && key == ENTER && ipBox.getText().length() > 1) {
+                IP = ipBox.getText();
+            }
+        } else {
+            if (name == null) {
+                fill(255);
+                textSize(20);
+                text("Enter your name:", 0, 100);
+                nameBox.draw(0, 200);
+                if (keyPressed && key == ENTER && nameBox.getText().length() > 1) {
+                    name = nameBox.getText();
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(WildNature.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else {
+                if (animal == null) {
+                    if (cc.update()) {
+                        animal = cc.chosenCharacter;
+                        v = new Visualizer(name, animal, this);
+                        v.setImages();
+                        connect();
+                    }
+                } else {
+                    v.update(characters);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
-        try {
+        PApplet.main(new String[]{WildNature.class.getName()});
+    }
 
+    public void setCharacter() {
+        try {
             Scanner scn = new Scanner(System.in);
             System.out.println("Enter username:");
             name = scn.nextLine();
@@ -66,7 +119,6 @@ public class WildNature extends PApplet {
                     break;
                 }
             }
-
             Team team;
             while (true) {
                 System.out.println("Choose your favorite color...");
@@ -113,7 +165,35 @@ public class WildNature extends PApplet {
         } catch (IOException ex) {
             Logger.getLogger(WildNature.class.getName()).log(Level.SEVERE, null, ex);
         }
-        PApplet.main(new String[]{WildNature.class.getName()});
     }
 
+    public void connect() {
+        try {
+            client = new Client();
+            Kryo kryo = client.getKryo();
+            kryo.register(ControlInfo.class);
+            kryo.register(CharacterInfo.class);
+            kryo.register(PlayerInfo.class);
+            kryo.register(ArrayList.class);
+            kryo.register(DrawInfo.class);
+            kryo.register(Team.class);
+            new Thread(client).start();
+            client.connect(5000, IP, 54551, 54772);
+
+            PlayerInfo pi = new PlayerInfo();
+            pi.character = name + "/" + animal.name();
+            pi.team = t;
+            client.sendTCP(pi);
+            client.addListener(new Listener() {
+                @Override
+                public void received(Connection connection, Object object) {
+                    if ((object instanceof CharacterInfo)) {
+                        WildNature.characters = ((CharacterInfo) object).characters;
+                    }
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(WildNature.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

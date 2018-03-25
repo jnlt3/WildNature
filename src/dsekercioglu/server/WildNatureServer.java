@@ -59,7 +59,7 @@ public class WildNatureServer {
         kryo.register(DrawInfo.class);
         kryo.register(Team.class);
         server.start();
-        server.bind(54555, 54777);
+        server.bind(54551, 54772);
 
         System.out.println(InetAddress.getLocalHost().getHostAddress());
 

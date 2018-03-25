@@ -1,7 +1,6 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
 import static dsekercioglu.general.characters.Ability.POISON;
 import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
