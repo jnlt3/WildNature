@@ -10,6 +10,7 @@ import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -98,8 +99,11 @@ public class Visualizer {
         WildNature.client.sendUDP(c);
         drawGrids();
         boolean blind = false;
+
+        ArrayList<Pair<Integer, String>> scores = new ArrayList<>();
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
+            scores.add(new Pair(d.score, d.name));
             if (d.name.equals(this.name)) {
                 team = d.team;
                 drawVision(animal.name(), characters);
@@ -115,10 +119,26 @@ public class Visualizer {
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo di = (DrawInfo) characters.get(i);
                 if (!di.hiding) {
+                    float cx = di.x - Swimmer.cx + 600;
+                    float cy = di.y - Swimmer.cy + 300;
+                    pa.fill(255);
+                    pa.textSize(20);
+                    pa.text(di.name, cx, cy - 110);
                     Swimmer.drawCostume(images.get(di.img), di.x, di.y, di.angle);
-                    drawHealthBar(di.health / di.maxHealth, di.x - Swimmer.cx + 600, di.y - Swimmer.cy + 300);
+                    drawHealthBar(di.health / di.maxHealth, cx, cy);
                 }
             }
+        }
+
+        Collections.sort(scores);
+        for (int i = 0; i < scores.size(); i++) {
+            Pair<Integer, String> p = scores.get(i);
+            String name = p.value;
+            int score = p.comparable;
+            pa.fill(0, 0, 0, 50);
+            pa.rect(1000, i * 50, 200, 50, 10);
+            pa.fill(255);
+            pa.text(name + ": " + score, 1000, i * 50 + 50);
         }
     }
 
@@ -231,5 +251,22 @@ public class Visualizer {
                 this.pa.ellipse(x, y, 10, 10);
             }
         }
+    }
+
+    private class Pair<T extends Comparable, U> implements Comparable {
+
+        T comparable;
+        U value;
+
+        public Pair(T comparable, U value) {
+            this.comparable = comparable;
+            this.value = value;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return comparable.compareTo(((Pair) o).comparable);
+        }
+
     }
 }

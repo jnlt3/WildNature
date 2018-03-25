@@ -3,6 +3,7 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.HippoAI;
@@ -105,7 +106,9 @@ public class Environment {
         CharacterInfo ci = new CharacterInfo();
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
-            ci.characters.add(((Swimmer) this.characters.get(i)).getDrawInfo());
+            DrawInfo di = ((Swimmer) this.characters.get(i)).getDrawInfo();
+            di.score = scores.get(di.name);
+            ci.characters.add(di);
         }
         WildNatureServer.server.sendToAllUDP(ci);
     }

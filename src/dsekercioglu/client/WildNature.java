@@ -31,7 +31,6 @@ public class WildNature extends PApplet {
     public void setup() {
         v = new Visualizer(name, animal, this);
         v.setImages();
-        surface.setResizable(true);
     }
 
     @Override

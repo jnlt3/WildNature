@@ -14,5 +14,6 @@ public class DrawInfo {
     public boolean hiding;
     public boolean blind;
     public Team team;
+    public int score;
 
 }
