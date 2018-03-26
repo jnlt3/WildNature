@@ -171,4 +171,17 @@ public class Defaults {
     public static final int GUARDIAN_BOOST_TIME = 100;
     public static final int GUARDIAN_ABILITY_TIME = 100;
 
+    public static final float CROCOSAURUS_TURN = 0.03F;
+    public static final float CROCOSAURUS_LENGTH = 200.0F;
+    public static final float CROCOSAURUS_WEIGHT = 4000.0F;
+    public static final float CROCOSAURUS_SPEED = 5.2F;
+    public static final float CROCOSAURUS_PASSIVE_ABILITY = 3.0F;
+    public static final float CROCOSAURUS_MAX_ENERGY = 5.0F;
+    public static final float CROCOSAURUS_ENERGY_INCREASE = 0.005F;
+    public static final float CROCOSAURUS_MAX_HEALTH = 6000.0F;
+    public static final float CROCOSAURUS_HEALTH_REGEN = 2F;
+    public static final float CROCOSAURUS_DAMAGE = 170F;
+    public static final int CROCOSAURUS_BOOST_TIME = 100;
+    public static final int CROCOSAURUS_ABILITY_TIME = 100;
+
 }

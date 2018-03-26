@@ -86,6 +86,10 @@ public class Visualizer {
         PImage guardian = pa.loadImage("img/Guardian.png");
         guardian.resize((int) GUARDIAN_LENGTH, 0);
         images.put("GUARDIAN", guardian);
+
+        PImage crocosaurus = pa.loadImage("img/Crocosaurus.png");
+        crocosaurus.resize((int) CROCOSAURUS_LENGTH, 0);
+        images.put("CROCOSAURUS", crocosaurus);
     }
 
     public void update(ArrayList<DrawInfo> characters) {

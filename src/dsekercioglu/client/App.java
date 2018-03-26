@@ -36,7 +36,7 @@ public class App extends Application {
         TextField name_textField = SimplifiedGUI.newTextField("", 150, true);
 
         Label team_label = SimplifiedGUI.newLabel("Select Team:");
-        ChoiceBox team_choiceBox = SimplifiedGUI.newChoiceBox(0, "RED", "GREEN", "BLUE", "YELLOW");
+        ChoiceBox team_choiceBox = SimplifiedGUI.newChoiceBox(0, "RED", "GREEN", "BLUE", "YELLOW", "INDEPENDENT");
 
         Node[][] gridNodes = {{ip_label, name_label, team_label},
         {ip_textField, name_textField, team_choiceBox}};

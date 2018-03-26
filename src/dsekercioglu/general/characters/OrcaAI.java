@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
+import static dsekercioglu.general.characters.Team.INDEPENDENT;
 
 public class OrcaAI extends Swimmer {
 
@@ -66,7 +67,7 @@ public class OrcaAI extends Swimmer {
                 Double danger = 0.0;
                 for (int k = 0; k < e.characters.size(); k++) {
                     Swimmer s = e.characters.get(k);
-                    if (!(s.team.equals(team))) {
+                    if (!(s.team.equals(team)) && !s.team.equals(INDEPENDENT)) {
                         if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
                             if (Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI < Math.PI / 9) {
                                 mousePressed = true;

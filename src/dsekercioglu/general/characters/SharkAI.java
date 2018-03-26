@@ -5,6 +5,7 @@ import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Animal.SHARK;
+import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.server.Environment;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class SharkAI extends Swimmer {
                 Double danger = 0.0;
                 for (int k = 0; k < e.characters.size(); k++) {
                     Swimmer s = e.characters.get(k);
-                    if (!(s.team.equals(team))) {
+                    if (!(s.team.equals(team)) && !s.team.equals(INDEPENDENT)) {
                         if (blind <= 0 && ((Point2D.distance(x, y, s.x, s.y) < 1500 && !s.hiding) || (Point2D.distance(x, y, s.x, s.y) < 6000 && s.health != s.maxHealth))) {
                             if (Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI < Math.PI / 9) {
                                 mousePressed = true;

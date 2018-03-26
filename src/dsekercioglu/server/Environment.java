@@ -3,16 +3,12 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
+import dsekercioglu.general.characters.Crocosaurus;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Guardian;
-import dsekercioglu.general.characters.Hippo;
-import dsekercioglu.general.characters.HippoAI;
-import dsekercioglu.general.characters.OrcaAI;
-import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
-import static dsekercioglu.general.characters.Team.BLUE;
-import static dsekercioglu.general.characters.Team.GREEN;
-import static dsekercioglu.general.characters.Team.RED;
+import dsekercioglu.general.characters.Team;
+import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Line2D;
@@ -20,10 +16,8 @@ import java.awt.geom.Rectangle2D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import processing.core.PApplet;
 
 public class Environment {
 
@@ -44,7 +38,7 @@ public class Environment {
 
     private final float KNOCKBACK = 300;
 
-    HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
+    public HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
 
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
@@ -57,6 +51,11 @@ public class Environment {
 
     public Environment() {
         this.characters = new ArrayList();
+        Swimmer crocosaurus = new Crocosaurus("Crocosaurus", 0, 0, null, this);
+        crocosaurus.team = INDEPENDENT;
+        characters.add(crocosaurus);
+        scores.put("Crocosaurus", 0);
+        charAbilities.put(crocosaurus, crocosaurus.ability1);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -127,7 +126,7 @@ public class Environment {
             for (int j = 0; j < characters.size(); j++) {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
-                if (!p1.team.equals(p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
+                if (attackable(p1.team, p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
                     if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
@@ -254,6 +253,10 @@ public class Environment {
                 time.remove(index);
             }
         }
+    }
+
+    private boolean attackable(Team t1, Team t2) {
+        return !t1.equals(t2) || t1.equals(INDEPENDENT) || t1.equals(INDEPENDENT);
     }
 
     private Line2D getHitter(Swimmer s) {

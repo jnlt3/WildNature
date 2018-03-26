@@ -30,12 +30,7 @@ import dsekercioglu.general.multiPlayer.PlayerInfo;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,6 +71,9 @@ public class WildNatureServer {
                     PlayerInfo pi = (PlayerInfo) object;
                     String s = pi.character;
                     String name = s.substring(0, s.indexOf("/"));
+                    if(name.equals("Crocosaurus")) {
+                        return;
+                    }
                     s = s.replace(name + "/", "");
                     Swimmer p = null;
                     System.out.println(s);

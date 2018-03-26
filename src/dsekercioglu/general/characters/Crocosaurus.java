@@ -1,10 +1,10 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.GRAB;
-import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
-import static dsekercioglu.general.characters.Ability.SUPERBITE;
-import static dsekercioglu.general.characters.Animal.HIPPO;
+import static dsekercioglu.general.characters.Ability.BLEED;
+import static dsekercioglu.general.characters.Ability.HOLD;
+import static dsekercioglu.general.characters.Ability.KNOCKBACK;
+import static dsekercioglu.general.characters.Animal.CROCOSAURUS;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.server.Environment;
 import java.awt.geom.Point2D;
@@ -12,36 +12,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import processing.core.PApplet;
 
-public class HippoAI extends Swimmer {
+public class Crocosaurus extends Swimmer {
 
     Environment e;
     private final float MAX_DIST = 100;
     private final int ANGLE_NUM = 36;
     double targetAngle = 0;
 
-    public HippoAI(String name, float x, float y, PApplet p, Environment e) {
+    public Crocosaurus(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
         this.x = x;
         this.y = y;
-        this.length = HIPPO_LENGTH;
-        this.weight = HIPPO_WEIGHT;
-        this.velocity = HIPPO_SPEED;
-        this.passiveAbilityPower = HIPPO_PASSIVE_ABILITY;
-        this.maxEnergy = HIPPO_MAX_ENERGY;
+        this.length = CROCOSAURUS_LENGTH;
+        this.weight = CROCOSAURUS_WEIGHT;
+        this.velocity = CROCOSAURUS_SPEED;
+        this.passiveAbilityPower = CROCOSAURUS_PASSIVE_ABILITY;
+        this.maxEnergy = CROCOSAURUS_MAX_ENERGY;
         this.energy = this.maxEnergy;
-        this.regen = HIPPO_HEALTH_REGEN;
-        this.energyIncrease = HIPPO_ENERGY_INCREASE;
-        this.maxTurn = HIPPO_TURN;
-        this.health = HIPPO_MAX_HEALTH;
-        this.maxHealth = HIPPO_MAX_HEALTH;
-        this.damage = HIPPO_DAMAGE;
-        this.abilityTime = HIPPO_ABILITY_TIME;
-        this.boostTime = HIPPO_BOOST_TIME;
-        this.ability1 = SUPERBITE;
-        this.ability2 = GRAB;
-        this.ability3 = REGEN_BOOST;
+        this.regen = CROCOSAURUS_HEALTH_REGEN;
+        this.energyIncrease = CROCOSAURUS_ENERGY_INCREASE;
+        this.maxTurn = CROCOSAURUS_TURN;
+        this.health = CROCOSAURUS_MAX_HEALTH;
+        this.maxHealth = CROCOSAURUS_MAX_HEALTH;
+        this.damage = CROCOSAURUS_DAMAGE;
+        this.abilityTime = CROCOSAURUS_ABILITY_TIME;
+        this.boostTime = CROCOSAURUS_BOOST_TIME;
+        this.ability1 = KNOCKBACK;
+        this.ability2 = HOLD;
+        this.ability3 = BLEED;
 
-        this.type = HIPPO;
+        this.type = CROCOSAURUS;
 
         this.e = e;
         targetAngle = Math.random() * 2 * Math.PI;
@@ -49,8 +49,13 @@ public class HippoAI extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        mousePressed = false;
         energyTime--;
-        velocity = HIPPO_SPEED;
+        if (energyTime <= 0) {
+            velocity = CROCOSAURUS_SPEED;
+        } else {
+            velocity = CROCOSAURUS_SPEED * 5;
+        }
         ArrayList<Pair<Double, Point2D.Double>> targetPoints = new ArrayList<>();
         int seen = 0;
         for (int i = 0; i < ANGLE_NUM; i++) {
@@ -61,7 +66,12 @@ public class HippoAI extends Swimmer {
                 for (int k = 0; k < e.characters.size(); k++) {
                     Swimmer s = e.characters.get(k);
                     if (!(s.team.equals(team)) && !s.team.equals(INDEPENDENT)) {
-                        if (!s.hiding && blind <= 0 && Point2D.distance(x, y, s.x, s.y) < 1500) {
+                        double distance = Point2D.distance(x, y, s.x, s.y);
+                        if (blind <= 0 && ((distance < 1500 && !s.hiding) || (distance < 6000 && s.health != s.maxHealth))) {
+                            if (Math.abs(Math.atan2(s.y - y, s.x - x) - angle + Math.PI) % Math.PI < Math.PI / 9) {
+                                mousePressed = true;
+                                e.charAbilities.put(this, Math.random() < 0.5 ? ability1: ability2);
+                            }
                             danger += Math.max((this.health * this.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
                             seen++;
                         }
@@ -78,7 +88,6 @@ public class HippoAI extends Swimmer {
             Pair<Double, Point2D.Double> best = targetPoints.get((int) (Math.random() * 5));
             this.move(velocity, Math.atan2(best.value.y - y, best.value.x - x));
         }
-        mousePressed = true;
         if (mousePressed && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
@@ -88,12 +97,12 @@ public class HippoAI extends Swimmer {
 
     @Override
     public int getWidth() {
-        return (int) HIPPO_LENGTH;
+        return (int) CROCOSAURUS_LENGTH;
     }
 
     @Override
     public int getHeight() {
-        return 65;
+        return 67;
     }
 
     private class Pair<T extends Comparable, U> implements Comparable {
