@@ -5,13 +5,15 @@ import static dsekercioglu.general.characters.Ability.DAMAGE_BOOST;
 import static dsekercioglu.general.characters.Ability.POISON;
 import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 import static dsekercioglu.general.characters.Animal.DOOD_FISH;
+import dsekercioglu.server.Environment;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
 public class DoodFish extends Swimmer {
 
-    public DoodFish(String name, float x, float y, PApplet p) {
+    public DoodFish(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
+        this.e = e;
         this.x = x;
         this.y = y;
         this.length = DOOD_FISH_LENGTH;
@@ -37,10 +39,11 @@ public class DoodFish extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        control.riskControl(e.characters, 0, 15000,  mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = DOOD_FISH_SPEED;
-            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+            if (control.stop()) {
                 velocity = 0;
                 hiding = true;
             } else {
@@ -50,8 +53,8 @@ public class DoodFish extends Swimmer {
             velocity = DOOD_FISH_SPEED * 1.5F;
             hiding = true;
         }
-        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-        if (mousePressed && energy >= 1 && energyTime <= 0) {
+        this.move(velocity, control.moveAngle());
+        if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

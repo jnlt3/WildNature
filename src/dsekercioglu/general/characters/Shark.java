@@ -7,11 +7,13 @@ import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Animal.SHARK;
+import dsekercioglu.server.Environment;
 
 public class Shark extends Swimmer {
 
-    public Shark(String name, float x, float y, PApplet p) {
+    public Shark(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
+        this.e = e;
         this.x = x;
         this.y = y;
         this.length = SHARK_LENGTH;
@@ -37,17 +39,18 @@ public class Shark extends Swimmer {
     
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = SHARK_SPEED;
-            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+            if (control.stop()) {
                 velocity = 0;
             }
         } else {
             velocity = SHARK_SPEED * 5;
         }
-        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-        if (mousePressed && energy >= 1 && energyTime <= 0) {
+        this.move(velocity, control.moveAngle());
+        if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

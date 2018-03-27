@@ -5,13 +5,15 @@ import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.HOLD;
 import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Animal.CROCODILE;
+import dsekercioglu.server.Environment;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 
 public class Crocodile extends Swimmer {
 
-    public Crocodile(String name, float x, float y, PApplet p) {
+    public Crocodile(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
+        this.e = e;
         this.x = x;
         this.y = y;
         this.length = CROCODILE_LENGTH;
@@ -37,10 +39,11 @@ public class Crocodile extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = CROCODILE_SPEED;
-            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+            if (control.stop()) {
                 velocity = 0;
                 hiding = true;
             } else {
@@ -49,8 +52,8 @@ public class Crocodile extends Swimmer {
         } else {
             velocity = CROCODILE_SPEED * 10;
         }
-        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-        if (mousePressed && energy >= 1 && energyTime <= 0) {
+        this.move(velocity, control.moveAngle());
+        if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
             System.out.println(energy);

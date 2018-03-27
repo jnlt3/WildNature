@@ -7,14 +7,16 @@ import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.PRISON;
 import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
 import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
+import dsekercioglu.server.Environment;
 
 public class Guardian extends Swimmer {
 
     public float mouseX;
     public float mouseY;
 
-    public Guardian(String name, float x, float y, PApplet p) {
+    public Guardian(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
+        this.e = e;
         this.x = x;
         this.y = y;
         this.length = GUARDIAN_LENGTH;
@@ -40,12 +42,13 @@ public class Guardian extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
         this.mouseX = x + mouseX - 600;
         this.mouseY = y + mouseY - 300;
         energyTime--;
         if (energyTime <= 0) {
             velocity = GUARDIAN_SPEED;
-            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+            if (control.stop()) {
                 velocity = 0;
             }
         } else {
@@ -53,8 +56,8 @@ public class Guardian extends Swimmer {
                 this.regen();
             }
         }
-        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-        if (mousePressed && energy >= 1 && energyTime <= 0) {
+        this.move(velocity, control.moveAngle());
+        if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
         }

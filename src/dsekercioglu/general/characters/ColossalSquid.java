@@ -7,11 +7,13 @@ import static dsekercioglu.general.characters.Animal.COLOSSAL_SQUID;
 import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
+import dsekercioglu.server.Environment;
 
 public class ColossalSquid extends Swimmer {
 
-    public ColossalSquid(String name, float x, float y, PApplet p) {
+    public ColossalSquid(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
+        this.e = e;
         this.x = x;
         this.y = y;
         this.length = COLOSSAL_SQUID_LENGTH;
@@ -37,20 +39,20 @@ public class ColossalSquid extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
+        control.riskControl(e.characters, 0, 2000,  mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = COLOSSAL_SQUID_SPEED;
-            if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
+            if (control.stop()) {
                 velocity = 0;
             }
         } else {
             velocity = COLOSSAL_SQUID_SPEED * 5;
         }
-        this.move(velocity, Math.atan2(mouseY - 300, mouseX - 600));
-        if (mousePressed && energy >= 1 && energyTime <= 0) {
+        this.move(velocity, control.moveAngle());
+        if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
             energy -= 1;
             energyTime = boostTime;
-            System.out.println(energy);
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
     }

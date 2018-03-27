@@ -15,15 +15,13 @@ import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
-import dsekercioglu.general.characters.HippoAI;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
-import dsekercioglu.general.characters.OrcaAI;
 import dsekercioglu.general.characters.Shark;
-import dsekercioglu.general.characters.SharkAI;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
+import dsekercioglu.general.control.UserControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import dsekercioglu.general.multiPlayer.PlayerInfo;
@@ -39,8 +37,6 @@ public class WildNatureServer {
     private static final HashMap<String, ControlInfo> currentControls = new HashMap();
     private static final Environment env = new Environment();
     public static Server server;
-
-    static boolean loop = true;
 
     static int i = 0;
 
@@ -71,47 +67,38 @@ public class WildNatureServer {
                     PlayerInfo pi = (PlayerInfo) object;
                     String s = pi.character;
                     String name = s.substring(0, s.indexOf("/"));
-                    if(name.equals("Crocosaurus")) {
-                        return;
-                    }
                     s = s.replace(name + "/", "");
                     Swimmer p = null;
                     System.out.println(s);
                     if (Animal.MARLIN.name().equals(s)) {
-                        p = new Marlin(name, 0.0F, 0.0F, null);
+                        p = new Marlin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.BLACK_MARLIN.name().equals(s)) {
-                        p = new BlackMarlin(name, 0.0F, 0.0F, null);
+                        p = new BlackMarlin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.CROCODILE.name().equals(s)) {
-                        p = new Crocodile(name, 0.0F, 0.0F, null);
+                        p = new Crocodile(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.SHARK.name().equals(s)) {
-                        p = new Shark(name, 0.0F, 0.0F, null);
+                        p = new Shark(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.ELECTRIC_EEL.name().equals(s)) {
-                        p = new ElectricEel(name, 0.0F, 0.0F, null);
+                        p = new ElectricEel(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.BARRACUDA.name().equals(s)) {
-                        p = new Barracuda(name, 0.0F, 0.0F, null);
+                        p = new Barracuda(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.MEGA_MOUTH.name().equals(s)) {
-                        p = new MegaMouth(name, 0.0F, 0.0F, null);
+                        p = new MegaMouth(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.ORCA.name().equals(s)) {
-                        p = new Orca(name, 0.0F, 0.0F, null);
+                        p = new Orca(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.HIPPO.name().equals(s)) {
-                        p = new Hippo(name, 0.0F, 0.0F, null);
+                        p = new Hippo(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.COLOSSAL_SQUID.name().equals(s)) {
-                        p = new ColossalSquid(name, 0.0F, 0.0F, null);
+                        p = new ColossalSquid(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.DOOD_FISH.name().equals(s)) {
-                        p = new DoodFish(name, 0.0F, 0.0F, null);
+                        p = new DoodFish(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
-                        p = new ElectricMarlin(name, 0.0F, 0.0F, null);
-                    } else if (Animal.ORCA_AI.name().equals(s)) {
-                        p = new OrcaAI(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.SHARK_AI.name().equals(s)) {
-                        p = new SharkAI(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.HIPPO_AI.name().equals(s)) {
-                        p = new HippoAI(name, 0.0F, 0.0F, null, env);
+                        p = new ElectricMarlin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GUARDIAN.name().equals(s)) {
-                        p = new Guardian(name, 0.0F, 0.0F, null);
+                        p = new Guardian(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
-                        loop = false;
+                        p.control = new UserControl(p);
                         ControlInfo c = new ControlInfo();
                         c.mouseX = 0;
                         c.mouseY = 0;
@@ -120,7 +107,6 @@ public class WildNatureServer {
                         p.team = pi.team;
                         WildNatureServer.env.addCharacter(p);
                         WildNatureServer.currentControls.put(c.name, c);
-                        loop = true;
                     }
                 } else if ((object instanceof ControlInfo)) {
                     ControlInfo controlInfo = (ControlInfo) object;
@@ -144,7 +130,7 @@ public class WildNatureServer {
                     System.out.println(env.scores.keySet());
                     System.out.println(env.scores.values());
                 }
-                if (!env.characters.isEmpty() && loop) {
+                if (!env.characters.isEmpty()) {
                     env.update(currentControls);
                 }
                 try {

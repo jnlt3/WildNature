@@ -87,9 +87,20 @@ public class Visualizer {
         guardian.resize((int) GUARDIAN_LENGTH, 0);
         images.put("GUARDIAN", guardian);
 
-        PImage crocosaurus = pa.loadImage("img/Crocosaurus.png");
-        crocosaurus.resize((int) CROCOSAURUS_LENGTH, 0);
-        images.put("CROCOSAURUS", crocosaurus);
+        PImage sharkodile = pa.loadImage("img/Sharkodile.png");
+        sharkodile.resize((int) SHARKODILE_LENGTH, 0);
+        images.put("SHARKODILE", sharkodile);
+
+        PImage marlinium = pa.loadImage("img/Marlinium.png");
+        marlinium.resize((int) MARLINIUM_LENGTH, 0);
+        images.put("MARLINIUM", marlinium);
+
+        PImage miniMarlin = pa.loadImage("img/MiniMarlin.png");
+        miniMarlin.resize((int) MINI_MARLIN_LENGTH, 0);
+        images.put("MINI_MARLIN", miniMarlin);
+        
+        System.out.println(miniMarlin.height);
+
     }
 
     public void update(ArrayList<DrawInfo> characters) {

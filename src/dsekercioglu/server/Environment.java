@@ -3,12 +3,22 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Animal;
-import dsekercioglu.general.characters.Crocosaurus;
+import dsekercioglu.general.characters.BlackMarlin;
+import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
+import dsekercioglu.general.characters.Marlin;
+import dsekercioglu.general.characters.Marlinium;
+import dsekercioglu.general.characters.MiniMarlin;
+import dsekercioglu.general.characters.Orca;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
+import static dsekercioglu.general.characters.Team.GREEN;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
+import static dsekercioglu.general.characters.Team.PEACEFUL;
+import static dsekercioglu.general.characters.Team.RED;
+import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Line2D;
@@ -48,14 +58,11 @@ public class Environment {
     HashMap<Animal, Rectangle2D.Double[]> animalTypes = new HashMap<>();
 
     HashMap<String, Integer> scores = new HashMap<>();
+    
+    private int clone = 0;
 
     public Environment() {
-        this.characters = new ArrayList();
-        Swimmer crocosaurus = new Crocosaurus("Crocosaurus", 0, 0, null, this);
-        crocosaurus.team = INDEPENDENT;
-        characters.add(crocosaurus);
-        scores.put("Crocosaurus", 0);
-        charAbilities.put(crocosaurus, crocosaurus.ability1);
+
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -231,6 +238,14 @@ public class Environment {
                 attackers.add(attacker);
                 victims.add(victim);
                 time.add(attacker.abilityTime / 3);
+            } else if (a.equals(BIRTH)) {
+                clone++;
+                newTime = 0;
+                MiniMarlin mm = new MiniMarlin("MiniMarlin" + clone, attacker.x, attacker.y, null, this);
+                mm.team = attacker.team;
+                this.characters.add(mm);
+                charAbilities.put(mm, mm.ability1);
+                scores.put(mm.getName(), 0);
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
@@ -256,7 +271,7 @@ public class Environment {
     }
 
     private boolean attackable(Team t1, Team t2) {
-        return !t1.equals(t2) || t1.equals(INDEPENDENT) || t1.equals(INDEPENDENT);
+        return !t1.equals(t2) || t1.equals(INDEPENDENT) || t2.equals(INDEPENDENT);
     }
 
     private Line2D getHitter(Swimmer s) {

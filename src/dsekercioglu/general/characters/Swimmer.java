@@ -1,5 +1,7 @@
 package dsekercioglu.general.characters;
 
+import dsekercioglu.general.control.Control;
+import dsekercioglu.server.Environment;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -8,7 +10,9 @@ public abstract class Swimmer {
     private static final double MOMENTUM = 0.3;
     private final String name;
 
+    public Environment e;
     public Team team;
+    public Control control;
 
     public static PApplet pa;
     public static float cx;
@@ -38,15 +42,14 @@ public abstract class Swimmer {
     protected float maxEnergy;
     protected float energyIncrease;
     protected int boostTime;
-    protected int blind;
+    public int blind;
 
     private double xChange;
     private double yChange;
-
+    
     public Swimmer(String name, PApplet p) {
         this.name = name;
         pa = p;
-        this.team = team;
     }
 
     public abstract void update(int paramInt1, int paramInt2, boolean paramBoolean);
