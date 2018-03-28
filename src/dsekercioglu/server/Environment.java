@@ -2,23 +2,15 @@ package dsekercioglu.server;
 
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
-import dsekercioglu.general.characters.Animal;
-import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
-import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
-import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.Marlinium;
 import dsekercioglu.general.characters.MiniMarlin;
-import dsekercioglu.general.characters.Orca;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
-import static dsekercioglu.general.characters.Team.GREEN;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
-import static dsekercioglu.general.characters.Team.PEACEFUL;
-import static dsekercioglu.general.characters.Team.RED;
-import dsekercioglu.general.control.BackTrackControl;
+import static dsekercioglu.general.characters.Team.DOMINATOR;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Line2D;
@@ -55,14 +47,16 @@ public class Environment {
     ArrayList<Swimmer> victims = new ArrayList<>();
     ArrayList<Integer> time = new ArrayList<>();
 
-    HashMap<Animal, Rectangle2D.Double[]> animalTypes = new HashMap<>();
-
-    HashMap<String, Integer> scores = new HashMap<>();
-    
-    private int clone = 0;
+    public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-
+        Marlinium marlinium = new Marlinium("Marlinium", 0, 0, null, this);
+        marlinium.team = DOMINATOR;
+        addCharacter(marlinium);
+        
+        Swimmer sharkodile = new Sharkodile("Sharkodile", 0, 0, null, this);
+        sharkodile.team = DOMINATOR;
+        addCharacter(sharkodile);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -94,17 +88,20 @@ public class Environment {
                     @Override
                     public void run() {
                         characters.remove(swimmer);
-                        try {
-                            Thread.sleep(3000L);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
+                        if (!(swimmer instanceof MiniMarlin)) {
+                            try {
+                                Thread.sleep(3000L);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            swimmer.respawn(WIDTH, HEIGHT);
+                            characters.add(swimmer);
                         }
-                        swimmer.respawn(WIDTH, HEIGHT);
-                        characters.add(swimmer);
                     }
                 };
                 Thread t = new Thread(r);
                 t.start();
+                //toRemove.add(swimmer);
             }
         }
         characters.removeAll(toRemove);
@@ -113,7 +110,11 @@ public class Environment {
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
             DrawInfo di = ((Swimmer) this.characters.get(i)).getDrawInfo();
-            di.score = scores.get(di.name);
+            try {
+                di.score = scores.get(di.name);
+            } catch (NullPointerException e) {
+                System.out.println(di.name);
+            }
             ci.characters.add(di);
         }
         WildNatureServer.server.sendToAllUDP(ci);
@@ -238,14 +239,6 @@ public class Environment {
                 attackers.add(attacker);
                 victims.add(victim);
                 time.add(attacker.abilityTime / 3);
-            } else if (a.equals(BIRTH)) {
-                clone++;
-                newTime = 0;
-                MiniMarlin mm = new MiniMarlin("MiniMarlin" + clone, attacker.x, attacker.y, null, this);
-                mm.team = attacker.team;
-                this.characters.add(mm);
-                charAbilities.put(mm, mm.ability1);
-                scores.put(mm.getName(), 0);
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);

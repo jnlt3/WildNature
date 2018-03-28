@@ -1,7 +1,6 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.BIRTH;
 import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 import dsekercioglu.general.control.StraightAttackControl;
@@ -9,13 +8,20 @@ import static dsekercioglu.general.characters.Ability.HOLD;
 import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Animal.MARLINIUM;
+import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.server.Environment;
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class Marlinium extends Swimmer {
 
     Environment e;
+    int birthPeriod = 200;
+    int time = 0;
+    static int miniMarlinNo = 0;
+    int miniMarlinNum = 0;
+    ArrayList<MiniMarlin> marlins = new ArrayList<>();
 
     public Marlinium(String name, float x, float y, PApplet p, Environment e) {
         super(name, p);
@@ -38,7 +44,7 @@ public class Marlinium extends Swimmer {
         this.abilityTime = MARLINIUM_ABILITY_TIME;
         this.boostTime = MARLINIUM_BOOST_TIME;
         this.ability1 = BLEED;
-        this.ability2 = BIRTH;
+        this.ability2 = DRAIN_HIT;
         this.ability3 = HORN;
 
         this.type = MARLINIUM;
@@ -46,7 +52,29 @@ public class Marlinium extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 3000, 0, 0, false);
+        control.riskControl(e.characters, 0, 3000, mouseX, mouseY, mousePressed);
+        for (int i = 0; i < marlins.size(); i++) {
+            MiniMarlin mm = marlins.get(i);
+            if (!mm.isAlive()) {
+                miniMarlinNum--;
+                marlins.remove(i);
+                e.scores.remove(mm.getName());
+                e.charAbilities.remove(mm);
+                i--;
+            }
+        }
+        if (time == 0 && miniMarlinNum <= 5) {
+            MiniMarlin mm = new MiniMarlin(this.getName() + " " + miniMarlinNo, x, y, null, e);
+            mm.control = new BackTrackControl(mm, e);
+            mm.team = team;
+            e.characters.add(mm);
+            e.charAbilities.put(mm, mm.ability1);
+            e.scores.put(mm.getName(), 0);
+            marlins.add(mm);
+            miniMarlinNum++;
+            miniMarlinNo++;
+            miniMarlinNo %= 999;
+        }
         energyTime--;
         if (energyTime <= 0) {
             velocity = MARLINIUM_SPEED;
@@ -62,6 +90,8 @@ public class Marlinium extends Swimmer {
             energyTime = boostTime;
         }
         energy = Math.min(energy + energyIncrease, maxEnergy);
+        time++;
+        time %= birthPeriod;
     }
 
     @Override

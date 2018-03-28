@@ -1,2 +1,5 @@
 /build/
 /dist/
+/src/dsekercioglu/general/control/QControl.java
+/src/dsekercioglu/general/control/QLearning.java
+/src/dsekercioglu/general/control/SimControl.java

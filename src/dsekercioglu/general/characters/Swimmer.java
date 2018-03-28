@@ -156,7 +156,6 @@ public abstract class Swimmer {
         this.blind = blind;
     }
 
-    public void attacked() {
+    public void attacked() {     
     }
-;
 }

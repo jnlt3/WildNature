@@ -203,7 +203,7 @@ public class Defaults {
     public static final float MARLINIUM_SPEED = 7.0F;
     public static final float MARLINIUM_PASSIVE_ABILITY = 3.0F;
     public static final float MARLINIUM_MAX_ENERGY = 2.0F;
-    public static final float MARLINIUM_ENERGY_INCREASE = 0.005F;
+    public static final float MARLINIUM_ENERGY_INCREASE = 0.002F;
     public static final float MARLINIUM_MAX_HEALTH = 4500.0F;
     public static final float MARLINIUM_HEALTH_REGEN = 2F;
     public static final float MARLINIUM_DAMAGE = 200F;
@@ -217,10 +217,10 @@ public class Defaults {
     public static final float MINI_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MINI_MARLIN_MAX_ENERGY = 2.0F;
     public static final float MINI_MARLIN_ENERGY_INCREASE = 0.0025F;
-    public static final float MINI_MARLIN_MAX_HEALTH = 1500.0F;
+    public static final float MINI_MARLIN_MAX_HEALTH = 750.0F;
     public static final float MINI_MARLIN_HEALTH_REGEN = 0.5F;
     public static final float MINI_MARLIN_DAMAGE = 50F;
     public static final int MINI_MARLIN_BOOST_TIME = 100;
-    public static final int MINI_MARLIN_ABILITY_TIME = 150;
+    public static final int MINI_MARLIN_ABILITY_TIME = 50;
 
 }
