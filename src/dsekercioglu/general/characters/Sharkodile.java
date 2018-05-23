@@ -42,7 +42,7 @@ public class Sharkodile extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 6000, 1500, 0, 0, false);
+        control.riskControl(e.characters, 6000, 1500, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = SHARKODILE_SPEED;

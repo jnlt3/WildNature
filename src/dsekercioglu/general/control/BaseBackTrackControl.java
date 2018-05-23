@@ -8,16 +8,19 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class StraightAttackControl extends Control {
+public class BaseBackTrackControl extends Control {
 
     final int ANGLE_NUM = 36;
-    final float MAX_DIST = 20;
-    
+    final float MAX_DIST = 100;
+
     Environment env;
 
-    public StraightAttackControl(Swimmer owner, Environment e) {
+    Swimmer base;
+
+    public BaseBackTrackControl(Swimmer owner, Swimmer base, Environment e) {
         super(owner);
         this.env = e;
+        this.base = base;
     }
 
     @Override
@@ -35,10 +38,9 @@ public class StraightAttackControl extends Control {
                         double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
                         if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
                             if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
-                                mousePressed = true;
                                 env.charAbilities.put(owner, Math.random() < 0.5 ? owner.ability1 : owner.ability2);
                             }
-                            danger += Math.max((owner.health * owner.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
+                            danger += danger(point, s);
                             seen++;
                         }
                     }
@@ -48,20 +50,36 @@ public class StraightAttackControl extends Control {
         }
         if (seen == 0) {
             moveAngle = (float) (Math.random() * 2 * Math.PI);
+            this.mousePressed = false;
         } else {
             Collections.sort(targetPoints);
             Pair<Double, Point2D.Double> best = targetPoints.get(0);
             moveAngle = (float) Math.atan2(best.value.y - owner.y, best.value.x - owner.x);
+            this.mousePressed = true;
         }
-        this.mousePressed = mousePressed;
+    }
+
+    private double danger(Point2D.Double point, Swimmer s) {
+        double distToBase = Math.max(point.distance(base.x, base.y), 600) / 600;
+        double ta = s.angle + Math.PI;
+        double hwidth = s.getWidth() / 2;
+        double tx = s.x + Math.cos(ta) * hwidth;
+        double ty = s.y + Math.sin(ta) * hwidth;
+        double distToTarget = point.distanceSq(tx, ty);
+        tx = s.x - Math.cos(ta) * hwidth;
+        ty = s.y - Math.sin(ta) * hwidth;
+        double distToDanger = point.distance(tx, ty);
+        return (Math.max((owner.health * owner.damage - s.health * s.damage), 1)) * distToTarget * distToBase / distToDanger;
     }
 
     @Override
     public void ownerAttacked() {
+    
     }
 
     @Override
     public void ownerHit() {
+
     }
 
     private class Pair<T extends Comparable, U> implements Comparable {

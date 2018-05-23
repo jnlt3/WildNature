@@ -2,15 +2,20 @@ package dsekercioglu.server;
 
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
+import dsekercioglu.general.characters.Angleraptor;
+import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
-import dsekercioglu.general.characters.Marlinium;
 import dsekercioglu.general.characters.MiniMarlin;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import static dsekercioglu.general.characters.Team.DOMINATOR;
+import static dsekercioglu.general.characters.Team.RED;
+import dsekercioglu.general.control.BackTrackControl;
+import dsekercioglu.general.control.StraightAttackControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
 import java.awt.geom.Line2D;
@@ -50,13 +55,67 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-        Marlinium marlinium = new Marlinium("Marlinium", 0, 0, null, this);
+//        for (int i = 0; i < 5; i++) {
+//            ElectricMarlin electricMarlin = new ElectricMarlin("h" + i, 0, 0, null, this);
+//            electricMarlin.team = GREEN;
+//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//        for (int i = 0; i < 15; i++) {
+//            ElectricMarlin electricMarlin = new ElectricMarlin("qc" + i, 0, 0, null, this);
+//            electricMarlin.team = RED;
+//            electricMarlin.control = new QControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//        for (int i = 0; i < 15; i++) {
+//            ElectricMarlin electricMarlin = new ElectricMarlin("btc" + i, 0, 0, null, this);
+//            electricMarlin.team = INDEPENDENT;
+//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//        for (int i = 0; i < 5; i++) {
+//            Orca electricMarlin = new Orca("sac" + i, 0, 0, null, this);
+//            electricMarlin.team = INDEPENDENT;
+//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//
+//        for (int i = 0; i < 5; i++) {
+//            Shark electricMarlin = new Shark("sacs" + i, 0, 0, null, this);
+//            electricMarlin.team = INDEPENDENT;
+//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//        for (int i = 0; i < 5; i++) {
+//            Hippo electricMarlin = new Hippo("sach" + i, 0, 0, null, this);
+//            electricMarlin.team = RED;
+//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+//
+//        for (int i = 0; i < 4; i++) {
+//            ElectricMarlin electricMarlin = new ElectricMarlin("f" + i, 0, 0, null, this);
+//            electricMarlin.team = GREEN;
+//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
+//            addCharacter(electricMarlin);
+//        }
+        Angleraptor marlinium = new Angleraptor("Angleraptor", 0, 0, null, this);
         marlinium.team = DOMINATOR;
         addCharacter(marlinium);
-        
-        Swimmer sharkodile = new Sharkodile("Sharkodile", 0, 0, null, this);
-        sharkodile.team = DOMINATOR;
-        addCharacter(sharkodile);
+
+        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
+        colossalSquid.team = RED;
+        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
+        addCharacter(colossalSquid);
+
+        ElectricMarlin electricMarlin = new ElectricMarlin("Doodables", 0, 0, null, this);
+        electricMarlin.team = RED;
+        electricMarlin.control = new BackTrackControl(electricMarlin, this);
+        addCharacter(electricMarlin);
+//        addCharacter(colossalSquid);
+//        Swimmer sharkodile = new Sharkodile("Sharkodile", 0, 0, null, this);
+//        sharkodile.team = RED;
+//        addCharacter(sharkodile);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -136,6 +195,7 @@ public class Environment {
                 Line2D[] r2 = getHitBox(p2);
                 if (attackable(p1.team, p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
                     p2.hit(p1.damage);
+                    p1.attacked();
                     if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
                         abilities.add(charAbilities.get(p1));

@@ -139,6 +139,7 @@ public abstract class Swimmer {
     public void hit(double damage) {
         health -= damage;
         health = Math.max(health, 0);
+        control.ownerHit();
     }
 
     public abstract int getWidth();
@@ -156,6 +157,7 @@ public abstract class Swimmer {
         this.blind = blind;
     }
 
-    public void attacked() {     
+    public void attacked() { 
+        control.ownerAttacked();
     }
 }

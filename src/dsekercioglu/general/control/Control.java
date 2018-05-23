@@ -28,4 +28,8 @@ public abstract class Control {
     public float moveAngle() {
         return moveAngle;
     }
+    
+    public abstract void ownerAttacked();
+    
+    public abstract void ownerHit();
 }

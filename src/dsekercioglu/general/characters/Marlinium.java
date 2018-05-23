@@ -7,9 +7,11 @@ import dsekercioglu.general.control.StraightAttackControl;
 import static dsekercioglu.general.characters.Ability.HOLD;
 import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
+import static dsekercioglu.general.characters.Ability.SUPERBITE;
 import static dsekercioglu.general.characters.Animal.MARLINIUM;
 import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.control.BackTrackControl;
+import dsekercioglu.general.control.BaseBackTrackControl;
 import dsekercioglu.server.Environment;
 import java.util.ArrayList;
 import processing.core.PApplet;
@@ -17,7 +19,7 @@ import processing.core.PApplet;
 public class Marlinium extends Swimmer {
 
     Environment e;
-    int birthPeriod = 200;
+    int birthPeriod = 300;
     int time = 0;
     static int miniMarlinNo = 0;
     int miniMarlinNum = 0;
@@ -43,8 +45,8 @@ public class Marlinium extends Swimmer {
         this.damage = MARLINIUM_DAMAGE;
         this.abilityTime = MARLINIUM_ABILITY_TIME;
         this.boostTime = MARLINIUM_BOOST_TIME;
-        this.ability1 = BLEED;
-        this.ability2 = DRAIN_HIT;
+        this.ability1 = SUPERBITE;
+        this.ability2 = KNOCKBACK;
         this.ability3 = HORN;
 
         this.type = MARLINIUM;
@@ -63,9 +65,9 @@ public class Marlinium extends Swimmer {
                 i--;
             }
         }
-        if (time == 0 && miniMarlinNum <= 5) {
+        if (time == 0 && miniMarlinNum < 2) {
             MiniMarlin mm = new MiniMarlin(this.getName() + " " + miniMarlinNo, x, y, null, e);
-            mm.control = new BackTrackControl(mm, e);
+            mm.control = new BaseBackTrackControl(mm, this, e);
             mm.team = team;
             e.characters.add(mm);
             e.charAbilities.put(mm, mm.ability1);
@@ -103,4 +105,5 @@ public class Marlinium extends Swimmer {
     public int getHeight() {
         return 44;
     }
+
 }

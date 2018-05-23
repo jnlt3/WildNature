@@ -47,7 +47,7 @@ public class Shark extends Swimmer {
                 velocity = 0;
             }
         } else {
-            velocity = SHARK_SPEED * 5;
+            velocity = SHARK_SPEED * 3;
         }
         this.move(velocity, control.moveAngle());
         if (control.mousePressed() && energy >= 1 && energyTime <= 0) {

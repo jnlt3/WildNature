@@ -24,6 +24,7 @@ import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.control.BackTrackControl;
+import dsekercioglu.general.control.QControl;
 import dsekercioglu.general.control.UserControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -31,6 +32,7 @@ import dsekercioglu.general.multiPlayer.PlayerInfo;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -98,7 +100,7 @@ public class WildNatureServer {
                     } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
                         p = new ElectricMarlin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GUARDIAN.name().equals(s)) {
-                        p = new Guardian(name, 0.0F, 0.0F, null, env);
+                        p = new Marlinium(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);
@@ -125,25 +127,45 @@ public class WildNatureServer {
         });
         System.out.println("done: " + System.currentTimeMillis());
         Runnable r = () -> {
-            long time = System.currentTimeMillis();
+            //long time = System.currentTimeMillis();
             while (true) {
-                i++;
-                if (i >= 200) {
-                    i = 0;
-                    System.out.println(env.scores.keySet());
-                    System.out.println(env.scores.values());
-                }
-                if (!env.characters.isEmpty()) {
-                    env.update(currentControls);
-                }
+//                i++;
+//                if (i >= 200) {
+//                    i = 0;
+//                    System.out.println(env.scores.keySet());
+//                    System.out.println(env.scores.values());
+//                }
+//                if (!env.characters.isEmpty()) {
+                env.update(currentControls);
+//                }
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+//            get2DString(QControl.directionControl.actions);
+//            get2DString(QControl.boostControl.actions);
         };
 
         new Thread(r).start();
+    }
+
+    public static void get2DString(double[][] array) {
+        System.out.print("{");
+        for (int i = 0; i < array.length; i++) {
+            if (i != 0) {
+                System.out.print(",");
+            }
+            System.out.print("{");
+            for (int j = 0; j < array[i].length; j++) {
+                if (j != 0) {
+                    System.out.print(",");
+                }
+                System.out.print(array[i][j]);
+            }
+            System.out.print("}");
+        }
+        System.out.println("};");
     }
 }

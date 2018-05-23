@@ -98,8 +98,11 @@ public class Visualizer {
         PImage miniMarlin = pa.loadImage("img/MiniMarlin.png");
         miniMarlin.resize((int) MINI_MARLIN_LENGTH, 0);
         images.put("MINI_MARLIN", miniMarlin);
-        
-        System.out.println(miniMarlin.height);
+
+        PImage angleraptor = pa.loadImage("img/Angleraptor.png");
+        angleraptor.resize((int) ANGLERAPTOR_LENGTH, 0);
+        images.put("ANGLERAPTOR", angleraptor);
+        System.out.println(angleraptor.height);
 
     }
 
