@@ -7,7 +7,7 @@ import processing.core.PImage;
 
 public abstract class Swimmer {
 
-    private static final double MOMENTUM = 0.3;
+    private static final double MOMENTUM = 0.85;
     private final String name;
 
     public Environment e;

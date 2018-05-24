@@ -8,7 +8,9 @@ import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
+import dsekercioglu.general.characters.Marlinium;
 import dsekercioglu.general.characters.MiniMarlin;
+import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
@@ -43,7 +45,7 @@ public class Environment {
     private final float HORN_MULTIPLIER = 2;
     private final int REGEN_AMOUNT = 1200;
 
-    private final float KNOCKBACK = 300;
+    private final float KNOCKBACK = 25;
 
     public HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
 
@@ -55,67 +57,7 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-//        for (int i = 0; i < 5; i++) {
-//            ElectricMarlin electricMarlin = new ElectricMarlin("h" + i, 0, 0, null, this);
-//            electricMarlin.team = GREEN;
-//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//        for (int i = 0; i < 15; i++) {
-//            ElectricMarlin electricMarlin = new ElectricMarlin("qc" + i, 0, 0, null, this);
-//            electricMarlin.team = RED;
-//            electricMarlin.control = new QControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//        for (int i = 0; i < 15; i++) {
-//            ElectricMarlin electricMarlin = new ElectricMarlin("btc" + i, 0, 0, null, this);
-//            electricMarlin.team = INDEPENDENT;
-//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Orca electricMarlin = new Orca("sac" + i, 0, 0, null, this);
-//            electricMarlin.team = INDEPENDENT;
-//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//
-//        for (int i = 0; i < 5; i++) {
-//            Shark electricMarlin = new Shark("sacs" + i, 0, 0, null, this);
-//            electricMarlin.team = INDEPENDENT;
-//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//        for (int i = 0; i < 5; i++) {
-//            Hippo electricMarlin = new Hippo("sach" + i, 0, 0, null, this);
-//            electricMarlin.team = RED;
-//            electricMarlin.control = new StraightAttackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-//
-//        for (int i = 0; i < 4; i++) {
-//            ElectricMarlin electricMarlin = new ElectricMarlin("f" + i, 0, 0, null, this);
-//            electricMarlin.team = GREEN;
-//            electricMarlin.control = new BackTrackControl(electricMarlin, this);
-//            addCharacter(electricMarlin);
-//        }
-        Angleraptor marlinium = new Angleraptor("Angleraptor", 0, 0, null, this);
-        marlinium.team = DOMINATOR;
-        addCharacter(marlinium);
 
-        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
-        colossalSquid.team = RED;
-        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
-        addCharacter(colossalSquid);
-
-        ElectricMarlin electricMarlin = new ElectricMarlin("Doodables", 0, 0, null, this);
-        electricMarlin.team = RED;
-        electricMarlin.control = new BackTrackControl(electricMarlin, this);
-        addCharacter(electricMarlin);
-//        addCharacter(colossalSquid);
-//        Swimmer sharkodile = new Sharkodile("Sharkodile", 0, 0, null, this);
-//        sharkodile.team = RED;
-//        addCharacter(sharkodile);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {

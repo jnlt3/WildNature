@@ -127,25 +127,14 @@ public class WildNatureServer {
         });
         System.out.println("done: " + System.currentTimeMillis());
         Runnable r = () -> {
-            //long time = System.currentTimeMillis();
             while (true) {
-//                i++;
-//                if (i >= 200) {
-//                    i = 0;
-//                    System.out.println(env.scores.keySet());
-//                    System.out.println(env.scores.values());
-//                }
-//                if (!env.characters.isEmpty()) {
                 env.update(currentControls);
-//                }
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-//            get2DString(QControl.directionControl.actions);
-//            get2DString(QControl.boostControl.actions);
         };
 
         new Thread(r).start();

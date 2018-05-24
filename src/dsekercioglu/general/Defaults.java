@@ -5,7 +5,7 @@ public class Defaults {
     public static final float MARLIN_TURN = 0.08726646F;
     public static final float MARLIN_LENGTH = 140.0F;
     public static final float MARLIN_WEIGHT = 2000.0F;
-    public static final float MARLIN_SPEED = 7.0F;
+    public static final float MARLIN_SPEED = 0.1F * 7.0F;
     public static final float MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MARLIN_MAX_ENERGY = 3.0F;
     public static final float MARLIN_ENERGY_INCREASE = 0.0025F;
@@ -18,7 +18,7 @@ public class Defaults {
     public static final float BLACK_MARLIN_TURN = 0.08726646F;
     public static final float BLACK_MARLIN_LENGTH = 140.0F;
     public static final float BLACK_MARLIN_WEIGHT = 1650.0F;
-    public static final float BLACK_MARLIN_SPEED = 8.0F;
+    public static final float BLACK_MARLIN_SPEED = 0.1F * 8.0F;
     public static final float BLACK_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float BLACK_MARLIN_MAX_ENERGY = 2.0F;
     public static final float BLACK_MARLIN_ENERGY_INCREASE = 0.0025F;
@@ -31,7 +31,7 @@ public class Defaults {
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
     public static final float CROCODILE_WEIGHT = 2500.0F;
-    public static final float CROCODILE_SPEED = 5.1F;
+    public static final float CROCODILE_SPEED = 0.1F * 5.1F;
     public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.0025F;
@@ -44,7 +44,7 @@ public class Defaults {
     public static final float SHARK_TURN = 0.03F;
     public static final float SHARK_LENGTH = 170.0F;
     public static final float SHARK_WEIGHT = 3200.0F;
-    public static final float SHARK_SPEED = 5.3F;
+    public static final float SHARK_SPEED = 0.1F * 5.3F;
     public static final float SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float SHARK_MAX_ENERGY = 2.0F;
     public static final float SHARK_ENERGY_INCREASE = 0.0025F;
@@ -57,7 +57,7 @@ public class Defaults {
     public static final float ELECTRIC_EEL_TURN = 0.08726646F;
     public static final float ELECTRIC_EEL_LENGTH = 80.0F;
     public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
-    public static final float ELECTRIC_EEL_SPEED = 5.0F;
+    public static final float ELECTRIC_EEL_SPEED = 0.1F * 5.0F;
     public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
     public static final float ELECTRIC_EEL_MAX_ENERGY = 5.0F;
     public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.005F;
@@ -65,12 +65,12 @@ public class Defaults {
     public static final float ELECTRIC_EEL_HEALTH_REGEN = 1F;
     public static final float ELECTRIC_EEL_DAMAGE = 20;
     public static final int ELECTRIC_EEL_BOOST_TIME = 40;
-    public static final int ELECTRIC_EEL_ABILITY_TIME = 200;
+    public static final int ELECTRIC_EEL_ABILITY_TIME = 50;
 
     public static final float BARRACUDA_TURN = 0.08726646F;
     public static final float BARRACUDA_LENGTH = 70.0F;
     public static final float BARRACUDA_WEIGHT = 88.0F;
-    public static final float BARRACUDA_SPEED = 5.3F;
+    public static final float BARRACUDA_SPEED = 0.1F * 5.3F;
     public static final float BARRACUDA_PASSIVE_ABILITY = 3.0F;
     public static final float BARRACUDA_MAX_ENERGY = 5.0F;
     public static final float BARRACUDA_ENERGY_INCREASE = 0.0025F;
@@ -83,7 +83,7 @@ public class Defaults {
     public static final float MEGA_MOUTH_SHARK_TURN = 0.03F;
     public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
     public static final float MEGA_MOUTH_SHARK_WEIGHT = 1600.0F;
-    public static final float MEGA_MOUTH_SHARK_SPEED = 5.5F;
+    public static final float MEGA_MOUTH_SHARK_SPEED = 0.1F * 5.5F;
     public static final float MEGA_MOUTH_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float MEGA_MOUTH_SHARK_MAX_ENERGY = 2.0F;
     public static final float MEGA_MOUTH_SHARK_ENERGY_INCREASE = 0.0025F;
@@ -96,7 +96,7 @@ public class Defaults {
     public static final float ORCA_TURN = 0.03F;
     public static final float ORCA_LENGTH = 170.0F;
     public static final float ORCA_WEIGHT = 3200.0F;
-    public static final float ORCA_SPEED = 5.6F;
+    public static final float ORCA_SPEED = 0.1F * 5.6F;
     public static final float ORCA_PASSIVE_ABILITY = 1.0F;
     public static final float ORCA_MAX_ENERGY = 2.0F;
     public static final float ORCA_ENERGY_INCREASE = 0.0025F;
@@ -109,7 +109,7 @@ public class Defaults {
     public static final float HIPPO_TURN = 0.08726646F;
     public static final float HIPPO_LENGTH = 165.0F;
     public static final float HIPPO_WEIGHT = 7000.0F;
-    public static final float HIPPO_SPEED = 5.5F;
+    public static final float HIPPO_SPEED = 0.1F * 5.5F;
     public static final float HIPPO_PASSIVE_ABILITY = 2.0F;
     public static final float HIPPO_MAX_ENERGY = 2.0F;
     public static final float HIPPO_ENERGY_INCREASE = 0.0025F;
@@ -122,7 +122,7 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_TURN = 0.08726646F;
     public static final float COLOSSAL_SQUID_LENGTH = 175.0F;
     public static final float COLOSSAL_SQUID_WEIGHT = 1000.0F;
-    public static final float COLOSSAL_SQUID_SPEED = 4.8F;
+    public static final float COLOSSAL_SQUID_SPEED = 0.1F * 4.8F;
     public static final float COLOSSAL_SQUID_PASSIVE_ABILITY = 2.0F;
     public static final float COLOSSAL_SQUID_MAX_ENERGY = 3.0F;
     public static final float COLOSSAL_SQUID_ENERGY_INCREASE = 0.005F;
@@ -135,7 +135,7 @@ public class Defaults {
     public static final float DOOD_FISH_TURN = 0.12F;
     public static final float DOOD_FISH_LENGTH = 90.0F;
     public static final float DOOD_FISH_WEIGHT = 600.0F;
-    public static final float DOOD_FISH_SPEED = 6.2F;
+    public static final float DOOD_FISH_SPEED = 0.1F * 6.2F;
     public static final float DOOD_FISH_PASSIVE_ABILITY = 2.0F;
     public static final float DOOD_FISH_MAX_ENERGY = 2.0F;
     public static final float DOOD_FISH_ENERGY_INCREASE = 0.0025F;
@@ -148,7 +148,7 @@ public class Defaults {
     public static final float ELECTRIC_MARLIN_TURN = 0.08726646F;
     public static final float ELECTRIC_MARLIN_LENGTH = 140.0F;
     public static final float ELECTRIC_MARLIN_WEIGHT = 1350.0F;
-    public static final float ELECTRIC_MARLIN_SPEED = 9.0F;
+    public static final float ELECTRIC_MARLIN_SPEED = 0.1F * 9.0F;
     public static final float ELECTRIC_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float ELECTRIC_MARLIN_MAX_ENERGY = 3.0F;
     public static final float ELECTRIC_MARLIN_ENERGY_INCREASE = 0.0025F;
@@ -161,7 +161,7 @@ public class Defaults {
     public static final float GUARDIAN_TURN = 0.03F;
     public static final float GUARDIAN_LENGTH = 90.0F;
     public static final float GUARDIAN_WEIGHT = 3000.0F;
-    public static final float GUARDIAN_SPEED = 4.0F;
+    public static final float GUARDIAN_SPEED = 0.1F * 4.0F;
     public static final float GUARDIAN_PASSIVE_ABILITY = 3.0F;
     public static final float GUARDIAN_MAX_ENERGY = 2.0F;
     public static final float GUARDIAN_ENERGY_INCREASE = 0.0025F;
@@ -174,12 +174,12 @@ public class Defaults {
     public static final float SHARKODILE_TURN = 0.03F;
     public static final float SHARKODILE_LENGTH = 200.0F;
     public static final float SHARKODILE_WEIGHT = 4000.0F;
-    public static final float SHARKODILE_SPEED = 5.2F;
+    public static final float SHARKODILE_SPEED = 0.1F * 5.2F;
     public static final float SHARKODILE_PASSIVE_ABILITY = 3.0F;
     public static final float SHARKODILE_MAX_ENERGY = 5.0F;
     public static final float SHARKODILE_ENERGY_INCREASE = 0.005F;
     public static final float SHARKODILE_MAX_HEALTH = 6000.0F;
-    public static final float SHARKODILE_HEALTH_REGEN = 4F;
+    public static final float SHARKODILE_HEALTH_REGEN = 2F;
     public static final float SHARKODILE_DAMAGE = 170F;
     public static final int SHARKODILE_BOOST_TIME = 60;
     public static final int SHARKODILE_ABILITY_TIME = 100;
@@ -187,7 +187,7 @@ public class Defaults {
     public static final float MARLINIUM_TURN = 0.1F;
     public static final float MARLINIUM_LENGTH = 140.0F;
     public static final float MARLINIUM_WEIGHT = 4000.0F;
-    public static final float MARLINIUM_SPEED = 7.0F;
+    public static final float MARLINIUM_SPEED = 0.1F * 7.0F;
     public static final float MARLINIUM_PASSIVE_ABILITY = 3.0F;
     public static final float MARLINIUM_MAX_ENERGY = 2.0F;
     public static final float MARLINIUM_ENERGY_INCREASE = 0.002F;
@@ -200,7 +200,7 @@ public class Defaults {
     public static final float MINI_MARLIN_TURN = 0.08726646F;
     public static final float MINI_MARLIN_LENGTH = 100.0F;
     public static final float MINI_MARLIN_WEIGHT = 1000.0F;
-    public static final float MINI_MARLIN_SPEED = 8.0F;
+    public static final float MINI_MARLIN_SPEED = 0.1F * 8.0F;
     public static final float MINI_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MINI_MARLIN_MAX_ENERGY = 2.0F;
     public static final float MINI_MARLIN_ENERGY_INCREASE = 0.005F;
@@ -213,7 +213,7 @@ public class Defaults {
     public static final float ANGLERAPTOR_TURN = 0.12F;
     public static final float ANGLERAPTOR_LENGTH = 190.0F;
     public static final float ANGLERAPTOR_WEIGHT = 4000.0F;
-    public static final float ANGLERAPTOR_SPEED = 4F;
+    public static final float ANGLERAPTOR_SPEED = 0.1F * 4F;
     public static final float ANGLERAPTOR_PASSIVE_ABILITY = 3.0F;
     public static final float ANGLERAPTOR_MAX_ENERGY = 1.0F;
     public static final float ANGLERAPTOR_ENERGY_INCREASE = 0.005F;
