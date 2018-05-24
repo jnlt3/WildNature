@@ -51,7 +51,7 @@ public class Defaults {
     public static final float SHARK_MAX_HEALTH = 4000.0F;
     public static final float SHARK_HEALTH_REGEN = 0.5F;
     public static final float SHARK_DAMAGE = 160F;
-    public static final int SHARK_BOOST_TIME = 160;
+    public static final int SHARK_BOOST_TIME = 120;
     public static final int SHARK_ABILITY_TIME = 50;
 
     public static final float ELECTRIC_EEL_TURN = 0.08726646F;
