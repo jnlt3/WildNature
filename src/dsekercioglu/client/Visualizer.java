@@ -102,7 +102,15 @@ public class Visualizer {
         PImage angleraptor = pa.loadImage("img/Angleraptor.png");
         angleraptor.resize((int) ANGLERAPTOR_LENGTH, 0);
         images.put("ANGLERAPTOR", angleraptor);
-        System.out.println(angleraptor.height);
+
+        PImage tigerShark = pa.loadImage("img/TigerShark.png");
+        tigerShark.resize((int) TIGER_SHARK_LENGTH, 0);
+        images.put("TIGER_SHARK", tigerShark);
+
+        PImage dolphin = pa.loadImage("img/Dolphin.png");
+        dolphin.resize((int) DOLPHIN_LENGTH, 0);
+        images.put("DOLPHIN", dolphin);
+        System.out.println(dolphin.height);
 
     }
 
@@ -110,9 +118,7 @@ public class Visualizer {
         ControlInfo c = new ControlInfo();
         c.mouseX = this.pa.mouseX;
         c.mouseY = this.pa.mouseY;
-        c.one = this.pa.key == '1' && this.pa.keyPressed;
-        c.two = this.pa.key == '2' && this.pa.keyPressed;
-        c.three = this.pa.key == '3' && this.pa.keyPressed;
+        c.power = this.pa.mousePressed || (this.pa.keyPressed && this.pa.key == ' ');
         c.name = this.name;
         WildNature.client.sendUDP(c);
         drawGrids();
@@ -123,13 +129,15 @@ public class Visualizer {
             DrawInfo d = (DrawInfo) characters.get(i);
             scores.add(new Pair(d.score, d.name));
             if (d.name.equals(this.name)) {
+                blind = d.blind;
                 team = d.team;
-                drawVision(animal.name(), characters);
+                if (!d.blind) {
+                    drawVision(animal.name(), characters);
+                }
                 Swimmer.setCenter(d.x, d.y);
                 this.pa.fill(0, 0, 0, 0);
                 this.pa.stroke(255);
                 this.pa.ellipse(600, 300, 200, 200);
-                blind = d.blind;
                 drawEnergyBar(d.energy / d.maxEnergy);
             }
         }
@@ -247,7 +255,9 @@ public class Visualizer {
                 }
             }
         }
+
         this.pa.fill(0);
+
         this.pa.stroke(0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
@@ -258,7 +268,9 @@ public class Visualizer {
                 this.pa.ellipse(x, y, 10, 10);
             }
         }
+
         this.pa.fill(0, 255, 0);
+
         this.pa.stroke(0, 255, 0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);

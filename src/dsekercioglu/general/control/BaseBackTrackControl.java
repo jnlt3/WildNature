@@ -38,7 +38,7 @@ public class BaseBackTrackControl extends Control {
                         double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
                         if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
                             if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
-                                env.charAbilities.put(owner, Math.random() < 0.5 ? owner.ability1 : owner.ability2);
+                                env.charAbilities.put(owner, owner.ability1);
                             }
                             danger += danger(point, s);
                             seen++;

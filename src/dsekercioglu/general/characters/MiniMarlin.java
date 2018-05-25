@@ -2,11 +2,6 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.BLEED;
-import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
-import dsekercioglu.general.control.StraightAttackControl;
-import static dsekercioglu.general.characters.Ability.HOLD;
-import static dsekercioglu.general.characters.Ability.HORN;
-import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Animal.MINI_MARLIN;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.server.Environment;
@@ -37,8 +32,8 @@ public class MiniMarlin extends Swimmer {
         this.abilityTime = MINI_MARLIN_ABILITY_TIME;
         this.boostTime = MINI_MARLIN_BOOST_TIME;
         this.ability1 = BLEED;
-        this.ability2 = DRAIN_HIT;
-        this.ability3 = HORN;
+        // = DRAIN_HIT;
+        // = HORN;
 
 
         this.type = MINI_MARLIN;

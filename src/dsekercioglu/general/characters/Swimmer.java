@@ -30,8 +30,6 @@ public abstract class Swimmer {
     public float maxHealth;
     public float energy;
     public Ability ability1;
-    public Ability ability2;
-    public Ability ability3;
 
     protected PImage img;
     protected Animal type;

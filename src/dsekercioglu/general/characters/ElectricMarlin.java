@@ -1,12 +1,9 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.HORN;
 import static dsekercioglu.general.characters.Ability.SHOCK;
 import static dsekercioglu.general.characters.Animal.ELECTRIC_MARLIN;
-import java.awt.geom.Point2D;
 import processing.core.PApplet;
-import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
 import dsekercioglu.server.Environment;
 
 public class ElectricMarlin extends Swimmer {
@@ -31,8 +28,8 @@ public class ElectricMarlin extends Swimmer {
         this.abilityTime = ELECTRIC_MARLIN_ABILITY_TIME;
         this.boostTime = ELECTRIC_MARLIN_BOOST_TIME;
         this.ability1 = SHOCK;
-        this.ability2 = DRAIN_HIT;
-        this.ability3 = HORN;
+        // = DRAIN_HIT;
+        // = HORN;
 
         this.type = ELECTRIC_MARLIN;
     }

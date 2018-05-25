@@ -9,6 +9,7 @@ import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
+import dsekercioglu.general.characters.Dolphin;
 import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricEel;
@@ -23,6 +24,7 @@ import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
+import dsekercioglu.general.characters.TigerShark;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.QControl;
 import dsekercioglu.general.control.UserControl;
@@ -34,6 +36,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,14 +103,18 @@ public class WildNatureServer {
                     } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
                         p = new ElectricMarlin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GUARDIAN.name().equals(s)) {
-                        p = new Marlinium(name, 0.0F, 0.0F, null, env);
+                        p = new Guardian(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.TIGER_SHARK.name().equals(s)) {
+                        p = new TigerShark(name, 0.0F, 0.0F, null, env);
+                    }else if (Animal.DOLPHIN.name().equals(s)) {
+                        p = new Dolphin(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);
                         ControlInfo c = new ControlInfo();
                         c.mouseX = 0;
                         c.mouseY = 0;
-                        c.one = false;
+                        c.power = false;
                         c.name = name;
                         p.team = pi.team;
                         WildNatureServer.env.addCharacter(p);

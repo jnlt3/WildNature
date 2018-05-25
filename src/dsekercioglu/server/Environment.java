@@ -3,19 +3,24 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Angleraptor;
+import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
-import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
+import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.Marlinium;
+import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.MiniMarlin;
+import dsekercioglu.general.characters.Orca;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
+import static dsekercioglu.general.characters.Team.BLUE;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import static dsekercioglu.general.characters.Team.DOMINATOR;
 import static dsekercioglu.general.characters.Team.RED;
+import dsekercioglu.general.characters.TigerShark;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.StraightAttackControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
@@ -39,11 +44,11 @@ public class Environment {
     private final float STICK_DAMAGE = 1;
     private final float GRAB_DAMAGE = 2.5F;
     private final float KNOCKBACK_MULTIPLIER = 1.5F;
-    private final float SUPERBITE_MULTIPLIER = 3;
+    private final float SUPERBITE_MULTIPLIER = 3.5F;
     private final int BLINDNESS = 300;
     private final int POISON_DAMAGE = 3;
     private final float HORN_MULTIPLIER = 2;
-    private final int REGEN_AMOUNT = 1200;
+    private final int REGEN_AMOUNT = 800;
 
     private final float KNOCKBACK = 25;
 
@@ -57,7 +62,31 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
+        Angleraptor marlinium = new Angleraptor("Boss", 0, 0, null, this);
+        marlinium.team = DOMINATOR;
+        addCharacter(marlinium);
+//
+//        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
+//        colossalSquid.team = RED;
+//        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
+//        addCharacter(colossalSquid);
 
+//        Shark shark = new Shark("Dood Pet", 0, 0, null, this);
+//        shark.team = RED;
+//        shark.control = new StraightAttackControl(shark, this);
+//        addCharacter(shark);
+////
+        Swimmer electricMarlin = new TigerShark("Doodables", 0, 0, null, this);
+        electricMarlin.team = RED;
+        electricMarlin.control = new BackTrackControl(electricMarlin, this);
+        addCharacter(electricMarlin);
+//        addCharacter(colossalSquid);
+//        Swimmer b1 = new Marlinium("Boss", 0, 0, null, this);
+//        b1.team = DOMINATOR;
+//        addCharacter(b1);
+//        Swimmer b2 = new Sharkodile("Bosss", 0, 0, null, this);
+//        b2.team = DOMINATOR;
+//        addCharacter(b2);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -70,13 +99,9 @@ public class Environment {
                 swimmer.updateMove();
                 if (hashMap.containsKey(swimmer.getName())) {
                     ControlInfo c = (ControlInfo) hashMap.get(swimmer.getName());
-                    swimmer.update(c.mouseX, c.mouseY, c.one || c.two || c.three);
-                    if (c.one) {
+                    swimmer.update(c.mouseX, c.mouseY, c.power);
+                    if (c.power) {
                         charAbilities.put(swimmer, swimmer.ability1);
-                    } else if (c.two) {
-                        charAbilities.put(swimmer, swimmer.ability2);
-                    } else if (c.three) {
-                        charAbilities.put(swimmer, swimmer.ability3);
                     }
                 } else {
                     swimmer.update(0, 0, true);
@@ -85,13 +110,14 @@ public class Environment {
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
                 swimmer.regen();
             } else {
+                long sleepTime = swimmer.team.equals(DOMINATOR) ? 3000L : 3000L;
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
                         characters.remove(swimmer);
                         if (!(swimmer instanceof MiniMarlin)) {
                             try {
-                                Thread.sleep(3000L);
+                                Thread.sleep(sleepTime);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -184,7 +210,7 @@ public class Environment {
                 if (newTime <= 0) {
                     attacker.move(-KNOCKBACK, attacker.angle);
                 }
-            } else if (a.equals(DRAIN_GRAB)) {
+            } else if (a.equals(DRAIN)) {
                 victim.energy -= 0.5;
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -222,15 +248,14 @@ public class Environment {
                 victim.y = ((Guardian) attacker).mouseY;
                 victim.velocity = 0;
                 victim.angle += Math.PI / 9;
-            } else if (a.equals(REGEN_BOOST)) {
+            } else if (a.equals(REGEN)) {
                 attacker.health += REGEN_AMOUNT;
                 newTime = 0;
-            } else if (a.equals(DRAIN_HIT)) {
-                victim.energy = Math.max(victim.energy - 1, 0);
-                newTime = 0;
-            } else if (a.equals(DAMAGE_BOOST)) {
-                victim.hit(victim.damage * 3);
-                newTime = 0;
+            } else if (a.equals(REGEN_GRAB)) {
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
+                attacker.health += 1;
             } else if (a.equals(SLOW_DOWN)) {
                 victim.velocity = 1;
             } else if (a.equals(HORN)) {
@@ -240,7 +265,15 @@ public class Environment {
                 abilities.add(BLEED);
                 attackers.add(attacker);
                 victims.add(victim);
-                time.add(attacker.abilityTime / 3);
+                time.add(attacker.abilityTime / 2);
+            } else if (a.equals(SHORT_GRAB)) {
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
+                victim.hit(attacker.damage / 3);
+                if (newTime <= 0) {
+                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                }
             }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);

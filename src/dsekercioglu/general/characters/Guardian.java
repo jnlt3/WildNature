@@ -2,11 +2,8 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Animal.GUARDIAN;
-import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import static dsekercioglu.general.characters.Ability.PRISON;
-import static dsekercioglu.general.characters.Ability.REGEN_BOOST;
-import static dsekercioglu.general.characters.Ability.SLOW_DOWN;
 import dsekercioglu.server.Environment;
 
 public class Guardian extends Swimmer {
@@ -34,8 +31,8 @@ public class Guardian extends Swimmer {
         this.abilityTime = GUARDIAN_ABILITY_TIME;
         this.boostTime = GUARDIAN_BOOST_TIME;
         this.ability1 = PRISON;
-        this.ability2 = SLOW_DOWN;
-        this.ability3 = REGEN_BOOST;
+        // = SLOW_DOWN;
+        // = REGEN_BOOST;
 
         this.type = GUARDIAN;
     }

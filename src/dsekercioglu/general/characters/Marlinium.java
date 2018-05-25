@@ -1,15 +1,8 @@
 package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
-import static dsekercioglu.general.characters.Ability.BLEED;
-import static dsekercioglu.general.characters.Ability.DRAIN_HIT;
-import dsekercioglu.general.control.StraightAttackControl;
-import static dsekercioglu.general.characters.Ability.HOLD;
-import static dsekercioglu.general.characters.Ability.HORN;
-import static dsekercioglu.general.characters.Ability.KNOCKBACK;
 import static dsekercioglu.general.characters.Ability.SUPERBITE;
 import static dsekercioglu.general.characters.Animal.MARLINIUM;
-import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.BaseBackTrackControl;
 import dsekercioglu.server.Environment;
@@ -19,7 +12,7 @@ import processing.core.PApplet;
 public class Marlinium extends Swimmer {
 
     Environment e;
-    int birthPeriod = 300;
+    int birthPeriod = 200;
     int time = 0;
     static int miniMarlinNo = 0;
     int miniMarlinNum = 0;
@@ -46,8 +39,8 @@ public class Marlinium extends Swimmer {
         this.abilityTime = MARLINIUM_ABILITY_TIME;
         this.boostTime = MARLINIUM_BOOST_TIME;
         this.ability1 = SUPERBITE;
-        this.ability2 = KNOCKBACK;
-        this.ability3 = HORN;
+        // = KNOCKBACK;
+        // = HORN;
 
         this.type = MARLINIUM;
     }

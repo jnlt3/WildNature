@@ -36,7 +36,7 @@ public class StraightAttackControl extends Control {
                         if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
                             if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
                                 mousePressed = true;
-                                env.charAbilities.put(owner, Math.random() < 0.5 ? owner.ability1 : owner.ability2);
+                                env.charAbilities.put(owner, owner.ability1);
                             }
                             danger += Math.max((owner.health * owner.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
                             seen++;

@@ -37,8 +37,8 @@ public class Angleraptor extends Swimmer {
         this.abilityTime = ANGLERAPTOR_ABILITY_TIME;
         this.boostTime = ANGLERAPTOR_BOOST_TIME;
         this.ability1 = GRAB;
-        this.ability2 = HOLD;
-        this.ability3 = STICK;
+        // = HOLD;
+        // = STICK;
 
         this.type = ANGLERAPTOR;
     }
