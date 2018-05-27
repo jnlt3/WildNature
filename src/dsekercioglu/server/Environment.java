@@ -5,6 +5,7 @@ import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Angleraptor;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
+import dsekercioglu.general.characters.Dolphin;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Guardian;
@@ -41,7 +42,7 @@ public class Environment {
     private final float BLEED_DAMAGE = 5;
     private final float SHOCK_DAMAGE = 15;
     private final float HOLD_DAMAGE = 3.5F;
-    private final float STICK_DAMAGE = 1;
+    private final float STICK_DAMAGE = 6;
     private final float GRAB_DAMAGE = 2.5F;
     private final float KNOCKBACK_MULTIPLIER = 1.5F;
     private final float SUPERBITE_MULTIPLIER = 3.5F;
@@ -62,31 +63,7 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-        Angleraptor marlinium = new Angleraptor("Boss", 0, 0, null, this);
-        marlinium.team = DOMINATOR;
-        addCharacter(marlinium);
-//
-//        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
-//        colossalSquid.team = RED;
-//        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
-//        addCharacter(colossalSquid);
 
-//        Shark shark = new Shark("Dood Pet", 0, 0, null, this);
-//        shark.team = RED;
-//        shark.control = new StraightAttackControl(shark, this);
-//        addCharacter(shark);
-////
-        Swimmer electricMarlin = new TigerShark("Doodables", 0, 0, null, this);
-        electricMarlin.team = RED;
-        electricMarlin.control = new BackTrackControl(electricMarlin, this);
-        addCharacter(electricMarlin);
-//        addCharacter(colossalSquid);
-//        Swimmer b1 = new Marlinium("Boss", 0, 0, null, this);
-//        b1.team = DOMINATOR;
-//        addCharacter(b1);
-//        Swimmer b2 = new Sharkodile("Bosss", 0, 0, null, this);
-//        b2.team = DOMINATOR;
-//        addCharacter(b2);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -250,7 +227,7 @@ public class Environment {
                 victim.angle += Math.PI / 9;
             } else if (a.equals(REGEN)) {
                 attacker.health += REGEN_AMOUNT;
-                newTime = 0;
+                victim.move(KNOCKBACK * 3, attacker.angle);
             } else if (a.equals(REGEN_GRAB)) {
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));

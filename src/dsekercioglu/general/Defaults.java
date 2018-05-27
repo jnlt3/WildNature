@@ -12,7 +12,7 @@ public class Defaults {
     public static final float MARLIN_MAX_HEALTH = 3500.0F;
     public static final float MARLIN_HEALTH_REGEN = 0.5F;
     public static final float MARLIN_DAMAGE = 180F;
-    public static final int MARLIN_BOOST_TIME = 40;
+    public static final int MARLIN_BOOST_TIME = 50;
     public static final int MARLIN_ABILITY_TIME = 150;
 
     public static final float BLACK_MARLIN_TURN = 0.08726646F;
@@ -25,7 +25,7 @@ public class Defaults {
     public static final float BLACK_MARLIN_MAX_HEALTH = 3000.0F;
     public static final float BLACK_MARLIN_HEALTH_REGEN = 0.5F;
     public static final float BLACK_MARLIN_DAMAGE = 180F;
-    public static final int BLACK_MARLIN_BOOST_TIME = 40;
+    public static final int BLACK_MARLIN_BOOST_TIME = 50;
     public static final int BLACK_MARLIN_ABILITY_TIME = 150;
 
     public static final float CROCODILE_TURN = 0.08726646F;
@@ -59,20 +59,20 @@ public class Defaults {
     public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
     public static final float ELECTRIC_EEL_SPEED = 0.1F * 5.0F;
     public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
-    public static final float ELECTRIC_EEL_MAX_ENERGY = 5.0F;
+    public static final float ELECTRIC_EEL_MAX_ENERGY = 3.0F;
     public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.005F;
     public static final float ELECTRIC_EEL_MAX_HEALTH = 2000.0F;
     public static final float ELECTRIC_EEL_HEALTH_REGEN = 1F;
     public static final float ELECTRIC_EEL_DAMAGE = 20;
     public static final int ELECTRIC_EEL_BOOST_TIME = 40;
-    public static final int ELECTRIC_EEL_ABILITY_TIME = 50;
+    public static final int ELECTRIC_EEL_ABILITY_TIME = 100;
 
     public static final float BARRACUDA_TURN = 0.08726646F;
     public static final float BARRACUDA_LENGTH = 70.0F;
     public static final float BARRACUDA_WEIGHT = 88.0F;
     public static final float BARRACUDA_SPEED = 0.1F * 5.3F;
     public static final float BARRACUDA_PASSIVE_ABILITY = 3.0F;
-    public static final float BARRACUDA_MAX_ENERGY = 5.0F;
+    public static final float BARRACUDA_MAX_ENERGY = 3.0F;
     public static final float BARRACUDA_ENERGY_INCREASE = 0.0025F;
     public static final float BARRACUDA_MAX_HEALTH = 2250.0F;
     public static final float BARRACUDA_HEALTH_REGEN = 0.75F;
@@ -87,7 +87,7 @@ public class Defaults {
     public static final float MEGA_MOUTH_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float MEGA_MOUTH_SHARK_MAX_ENERGY = 2.0F;
     public static final float MEGA_MOUTH_SHARK_ENERGY_INCREASE = 0.0025F;
-    public static final float MEGA_MOUTH_SHARK_MAX_HEALTH = 3000.0F;
+    public static final float MEGA_MOUTH_SHARK_MAX_HEALTH = 3750.0F;
     public static final float MEGA_MOUTH_SHARK_HEALTH_REGEN = 0.5F;
     public static final float MEGA_MOUTH_SHARK_DAMAGE = 200F;
     public static final int MEGA_MOUTH_SHARK_BOOST_TIME = 40;
@@ -155,7 +155,7 @@ public class Defaults {
     public static final float ELECTRIC_MARLIN_MAX_HEALTH = 2500.0F;
     public static final float ELECTRIC_MARLIN_HEALTH_REGEN = 0.5F;
     public static final float ELECTRIC_MARLIN_DAMAGE = 180F;
-    public static final int ELECTRIC_MARLIN_BOOST_TIME = 40;
+    public static final int ELECTRIC_MARLIN_BOOST_TIME = 50;
     public static final int ELECTRIC_MARLIN_ABILITY_TIME = 65;
 
     public static final float GUARDIAN_TURN = 0.045F;
@@ -232,7 +232,7 @@ public class Defaults {
     public static final float TIGER_SHARK_ENERGY_INCREASE = 0.0025F;
     public static final float TIGER_SHARK_MAX_HEALTH = 3500.0F;
     public static final float TIGER_SHARK_HEALTH_REGEN = 0.5F;
-    public static final float TIGER_SHARK_DAMAGE = 155F;
+    public static final float TIGER_SHARK_DAMAGE = 165F;
     public static final int TIGER_SHARK_BOOST_TIME = 60;
     public static final int TIGER_SHARK_ABILITY_TIME = 5;
 

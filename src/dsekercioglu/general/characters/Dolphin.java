@@ -44,7 +44,7 @@ public class Dolphin extends Swimmer {
                 velocity = 0;
             }
         } else {
-            velocity = DOLPHIN_SPEED * 2;
+            velocity = DOLPHIN_SPEED * 3;
         }
         this.move(velocity, control.moveAngle());
         if (control.mousePressed() && energy >= 1 && energyTime <= 0) {
