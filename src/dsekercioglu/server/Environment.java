@@ -63,7 +63,36 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
+//        Angleraptor marlinium = new Angleraptor("Boss", 0, 0, null, this);
+//        marlinium.team = DOMINATOR;
+//        addCharacter(marlinium);
+////
+//        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
+//        colossalSquid.team = RED;
+//        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
+//        addCharacter(colossalSquid);
 
+//        Shark shark = new Shark("Dood Pet", 0, 0, null, this);
+//        shark.team = RED;
+//        shark.control = new StraightAttackControl(shark, this);
+//        addCharacter(shark);
+////
+//        Swimmer dolphin = new Dolphin("Doodables", 0, 0, null, this);
+//        dolphin.team = INDEPENDENT;
+//        dolphin.control = new StraightAttackControl(dolphin, this);
+//        addCharacter(dolphin);
+//
+//        Swimmer electricMarlin = new Marlin("Doodablez", 0, 0, null, this);
+//        electricMarlin.team = INDEPENDENT;
+//        electricMarlin.control = new BackTrackControl(electricMarlin, this);
+//        addCharacter(electricMarlin);
+//        addCharacter(colossalSquid);
+//        Swimmer b1 = new Marlinium("Boss", 0, 0, null, this);
+//        b1.team = DOMINATOR;
+//        addCharacter(b1);
+//        Swimmer b2 = new Sharkodile("Bosss", 0, 0, null, this);
+//        b2.team = DOMINATOR;
+//        addCharacter(b2);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
