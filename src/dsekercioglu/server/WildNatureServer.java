@@ -16,6 +16,7 @@ import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
+import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
@@ -100,8 +101,10 @@ public class WildNatureServer {
                         p = new Guardian(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.TIGER_SHARK.name().equals(s)) {
                         p = new TigerShark(name, 0.0F, 0.0F, null, env);
-                    }else if (Animal.DOLPHIN.name().equals(s)) {
+                    } else if (Animal.DOLPHIN.name().equals(s)) {
                         p = new Dolphin(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.MAKO_SHARK.name().equals(s)) {
+                        p = new MakoShark(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);

@@ -2,6 +2,7 @@ package dsekercioglu.general.characters;
 
 import dsekercioglu.general.control.Control;
 import dsekercioglu.server.Environment;
+import gifAnimation.Gif;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -99,7 +100,7 @@ public abstract class Swimmer {
         cy = y;
     }
 
-    public static void drawCostume(PImage costume, float centerX, float centerY, float radians) {
+    public static void drawCostume(Gif costume, float centerX, float centerY, float radians) {
         radians = (float) (radians + 3.141592653589793D);
         pa.imageMode(3);
         pa.translate(centerX - cx + 600.0F, centerY - cy + 300.0F);

@@ -8,10 +8,13 @@ import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.multiPlayer.ControlInfo;
+import gifAnimation.Gif;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -19,13 +22,13 @@ public class Visualizer {
 
     private final int WIDTH = 2000;
     private final int HEIGHT = 2000;
-    private final HashMap<String, PImage> images = new HashMap<>();
+    private final Map<String, Gif> images = new HashMap<>();
     private final PApplet pa;
     private final String name;
     private final Animal animal;
     private Team team;
 
-    PImage img;
+    Gif img;
 
     public Visualizer(String name, Animal animal, PApplet pa) {
         this.pa = pa;
@@ -35,82 +38,71 @@ public class Visualizer {
     }
 
     public void setImages() {
-        PImage marlin = pa.loadImage("img/Marlin.png");
-        marlin.resize((int) MARLIN_LENGTH, 0);
+        Gif marlin = new Gif(pa, "img/Marlin.gif");
         images.put("MARLIN", marlin);
 
-        PImage blackMarlin = pa.loadImage("img/BlackMarlin.png");
-        blackMarlin.resize((int) BLACK_MARLIN_LENGTH, 0);
+        Gif blackMarlin = new Gif(pa, "img/BlackMarlin.gif");
         images.put("BLACK_MARLIN", blackMarlin);
 
-        PImage crocodile = pa.loadImage("img/Crocodile.png");
-        crocodile.resize((int) CROCODILE_LENGTH, 0);
+        Gif crocodile = new Gif(pa, "img/Crocodile.gif");
         images.put("CROCODILE", crocodile);
 
-        PImage shark = pa.loadImage("img/Shark.png");
-        shark.resize((int) SHARK_LENGTH, 0);
+        Gif shark = new Gif(pa, "img/Shark.gif");
         images.put("SHARK", shark);
 
-        PImage electricEel = pa.loadImage("img/ElectricEel.png");
-        electricEel.resize((int) ELECTRIC_EEL_LENGTH, 0);
+        Gif electricEel = new Gif(pa, "img/ElectricEel.gif");
         images.put("ELECTRIC_EEL", electricEel);
 
-        PImage barracuda = pa.loadImage("img/Barracuda.png");
-        barracuda.resize((int) BARRACUDA_LENGTH, 0);
+        Gif barracuda = new Gif(pa, "img/Barracuda.gif");
         images.put("BARRACUDA", barracuda);
 
-        PImage megaMouth = pa.loadImage("img/MegaMouth.png");
-        megaMouth.resize((int) MEGA_MOUTH_SHARK_LENGTH, 0);
+        Gif megaMouth = new Gif(pa, "img/MegaMouth.gif");
         images.put("MEGA_MOUTH", megaMouth);
 
-        PImage orca = pa.loadImage("img/Orca.png");
-        orca.resize((int) ORCA_LENGTH, 0);
+        Gif orca = new Gif(pa, "img/Orca.gif");
         images.put("ORCA", orca);
 
-        PImage hippo = pa.loadImage("img/Hippo.png");
-        hippo.resize((int) HIPPO_LENGTH, 0);
+        Gif hippo = new Gif(pa, "img/Hippo.gif");
         images.put("HIPPO", hippo);
 
-        PImage colossalSquid = pa.loadImage("img/ColossalSquid.png");
-        colossalSquid.resize((int) COLOSSAL_SQUID_LENGTH, 0);
+        Gif colossalSquid = new Gif(pa, "img/ColossalSquid.gif");
         images.put("COLOSSAL_SQUID", colossalSquid);
 
-        PImage doodFish = pa.loadImage("img/Doodfish.png");
-        doodFish.resize((int) DOOD_FISH_LENGTH, 0);
+        Gif doodFish = new Gif(pa, "img/DoodFish.gif");
         images.put("DOOD_FISH", doodFish);
 
-        PImage electricMarlin = pa.loadImage("img/ElectricMarlin.png");
-        electricMarlin.resize((int) ELECTRIC_MARLIN_LENGTH, 0);
+        Gif electricMarlin = new Gif(pa, "img/ElectricMarlin.gif");
         images.put("ELECTRIC_MARLIN", electricMarlin);
 
-        PImage guardian = pa.loadImage("img/Guardian.png");
-        guardian.resize((int) GUARDIAN_LENGTH, 0);
+        Gif guardian = new Gif(pa, "img/Guardian.gif");
         images.put("GUARDIAN", guardian);
 
-        PImage sharkodile = pa.loadImage("img/Sharkodile.png");
-        sharkodile.resize((int) SHARKODILE_LENGTH, 0);
+        Gif sharkodile = new Gif(pa, "img/Sharkodile.gif");
         images.put("SHARKODILE", sharkodile);
 
-        PImage marlinium = pa.loadImage("img/Marlinium.png");
-        marlinium.resize((int) MARLINIUM_LENGTH, 0);
+        Gif marlinium = new Gif(pa, "img/Marlinium.gif");
         images.put("MARLINIUM", marlinium);
 
-        PImage miniMarlin = pa.loadImage("img/MiniMarlin.png");
-        miniMarlin.resize((int) MINI_MARLIN_LENGTH, 0);
+        Gif miniMarlin = new Gif(pa, "img/MiniMarlin.gif");
         images.put("MINI_MARLIN", miniMarlin);
 
-        PImage angleraptor = pa.loadImage("img/Angleraptor.png");
-        angleraptor.resize((int) ANGLERAPTOR_LENGTH, 0);
+        Gif angleraptor = new Gif(pa, "img/Angleraptor.gif");
         images.put("ANGLERAPTOR", angleraptor);
 
-        PImage tigerShark = pa.loadImage("img/TigerShark.png");
-        tigerShark.resize((int) TIGER_SHARK_LENGTH, 0);
+        Gif tigerShark = new Gif(pa, "img/TigerShark.gif");
         images.put("TIGER_SHARK", tigerShark);
 
-        PImage dolphin = pa.loadImage("img/Dolphin.png");
-        dolphin.resize((int) DOLPHIN_LENGTH, 0);
+        Gif dolphin = new Gif(pa, "img/Dolphin.gif");
         images.put("DOLPHIN", dolphin);
-        System.out.println(dolphin.height);
+
+        Gif makoShark = new Gif(pa, "img/MakoShark.gif");
+        images.put("MAKO_SHARK", makoShark);
+
+        Set<String> keySet = images.keySet();
+        for (String key : keySet) {
+            Gif value = images.get(key);
+            value.play();
+        }
 
     }
 

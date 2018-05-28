@@ -8,7 +8,9 @@ import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Dolphin;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
+import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.Marlinium;
 import dsekercioglu.general.characters.MegaMouth;
@@ -49,7 +51,7 @@ public class Environment {
     private final int BLINDNESS = 300;
     private final int POISON_DAMAGE = 3;
     private final float HORN_MULTIPLIER = 2;
-    private final int REGEN_AMOUNT = 800;
+    private final int REGEN_AMOUNT = 900;
 
     private final float KNOCKBACK = 25;
 
@@ -63,36 +65,14 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-//        Angleraptor marlinium = new Angleraptor("Boss", 0, 0, null, this);
-//        marlinium.team = DOMINATOR;
-//        addCharacter(marlinium);
-////
-//        ColossalSquid colossalSquid = new ColossalSquid("Doodablez", 0, 0, null, this);
-//        colossalSquid.team = RED;
-//        colossalSquid.control = new StraightAttackControl(colossalSquid, this);
-//        addCharacter(colossalSquid);
+        Swimmer m = new MakoShark("Marl", 0, 0, null, this);
+        m.team = RED;
+        m.control = new BackTrackControl(m, this);
+        addCharacter(m);
 
-//        Shark shark = new Shark("Dood Pet", 0, 0, null, this);
-//        shark.team = RED;
-//        shark.control = new StraightAttackControl(shark, this);
-//        addCharacter(shark);
-////
-//        Swimmer dolphin = new Dolphin("Doodables", 0, 0, null, this);
-//        dolphin.team = INDEPENDENT;
-//        dolphin.control = new StraightAttackControl(dolphin, this);
-//        addCharacter(dolphin);
-//
-//        Swimmer electricMarlin = new Marlin("Doodablez", 0, 0, null, this);
-//        electricMarlin.team = INDEPENDENT;
-//        electricMarlin.control = new BackTrackControl(electricMarlin, this);
-//        addCharacter(electricMarlin);
-//        addCharacter(colossalSquid);
-//        Swimmer b1 = new Marlinium("Boss", 0, 0, null, this);
-//        b1.team = DOMINATOR;
-//        addCharacter(b1);
-//        Swimmer b2 = new Sharkodile("Bosss", 0, 0, null, this);
-//        b2.team = DOMINATOR;
-//        addCharacter(b2);
+//        Swimmer mar = new Sharkodile("Sharky", 0, 0, null, this);
+//        mar.team = DOMINATOR;
+//        addCharacter(mar);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -195,6 +175,13 @@ public class Environment {
             int newTime = time.get(i) - 1;
             Swimmer victim = victims.get(i);
             Swimmer attacker = attackers.get(i);
+            if (!victim.isAlive()) {
+                scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
+                newTime = 0;
+            }
+            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
+                newTime = 0;
+            }
             if (a.equals(BLEED)) {
                 victims.get(i).hit(BLEED_DAMAGE);
             } else if (a.equals(HOLD)) {
@@ -256,7 +243,6 @@ public class Environment {
                 victim.angle += Math.PI / 9;
             } else if (a.equals(REGEN)) {
                 attacker.health += REGEN_AMOUNT;
-                victim.move(KNOCKBACK * 3, attacker.angle);
             } else if (a.equals(REGEN_GRAB)) {
                 victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
                 victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
@@ -280,13 +266,23 @@ public class Environment {
                 if (newTime <= 0) {
                     victim.setMoveInAngle(KNOCKBACK, attacker.angle);
                 }
-            }
-            if (!victim.isAlive()) {
-                scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
+            } else if (a.equals(ELECTRIC_HORN)) {
+                victim.hit(SHOCK_DAMAGE);
+                victim.energy = Math.max(victim.energy - 0.1F, 0);
+                victim.control.freeze(true);
+                if (newTime <= 5) {
+                    victim.control.freeze(false);
+                }
+
+            } else if (a.equals(BLEEDING_KNOCKBACK)) {
+                victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
+                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
+                attacker.move(-KNOCKBACK, attacker.angle);
                 newTime = 0;
-            }
-            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
-                newTime = 0;
+                abilities.add(BLEED);
+                attackers.add(attacker);
+                victims.add(victim);
+                time.add(attacker.abilityTime);
             }
             time.set(i, newTime);
             if (newTime <= 0) {

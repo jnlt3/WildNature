@@ -14,9 +14,10 @@ public class UserControl extends Control {
 
     @Override
     public void riskControl(ArrayList<Swimmer> chars, float bloodRange, float sightRange, int mouseX, int mouseY, boolean mousePressed) {
-        stop = false;
         if (Point2D.distance(600, 300, mouseX, mouseY) < 100) {
             stop = true;
+        } else {
+            stop = false;
         }
         moveAngle = (float) Math.atan2(mouseY - 300, mouseX - 600);
         this.mousePressed = mousePressed; 

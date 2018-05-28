@@ -9,7 +9,8 @@ public abstract class Control {
     Swimmer owner;
     boolean mousePressed;
     boolean stop;
-    float moveAngle;
+    float moveAngle;  
+    boolean freeze;
 
     public Control(Swimmer s) {
         this.owner = s;
@@ -22,14 +23,18 @@ public abstract class Control {
     }
 
     public boolean stop() {
-        return stop;
+        return stop || freeze;
     }
 
     public float moveAngle() {
         return moveAngle;
     }
-    
+
     public abstract void ownerAttacked();
-    
+
     public abstract void ownerHit();
+    
+    public void freeze(boolean freeze) {
+        this.freeze = freeze;
+    }
 }
