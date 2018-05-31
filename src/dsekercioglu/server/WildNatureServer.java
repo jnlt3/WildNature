@@ -20,10 +20,12 @@ import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
+import dsekercioglu.general.characters.TwoRulers;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.characters.TigerShark;
+import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.UserControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -105,6 +107,8 @@ public class WildNatureServer {
                         p = new Dolphin(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.MAKO_SHARK.name().equals(s)) {
                         p = new MakoShark(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.TWO_RULERS.name().equals(s)) {
+                        p = new TwoRulers(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);

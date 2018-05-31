@@ -43,7 +43,7 @@ public class WildNature extends PApplet {
         clear();
         v.update(characters);
     }
-    
+
     public static void connect(String ip, String name, Animal animal, Team team) {
         try {
             WildNature.name = name;

@@ -98,6 +98,9 @@ public class Visualizer {
         Gif makoShark = new Gif(pa, "img/MakoShark.gif");
         images.put("MAKO_SHARK", makoShark);
 
+        Gif twoRulers = new Gif(pa, "img/TwoRulers.gif");
+        images.put("TWO_RULERS", twoRulers);
+
         Set<String> keySet = images.keySet();
         for (String key : keySet) {
             Gif value = images.get(key);

@@ -78,7 +78,7 @@ public class Defaults {
     public static final float BARRACUDA_HEALTH_REGEN = 0.75F;
     public static final float BARRACUDA_DAMAGE = 30F;
     public static final int BARRACUDA_BOOST_TIME = 40;
-    public static final int BARRACUDA_ABILITY_TIME = 300;
+    public static final int BARRACUDA_ABILITY_TIME = 200;
 
     public static final float MEGA_MOUTH_SHARK_TURN = 0.045F;
     public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
@@ -106,7 +106,7 @@ public class Defaults {
     public static final int ORCA_BOOST_TIME = 40;
     public static final int ORCA_ABILITY_TIME = 75;
 
-    public static final float HIPPO_TURN = 0.08726646F;
+    public static final float HIPPO_TURN = 0.06F;
     public static final float HIPPO_LENGTH = 165.0F;
     public static final float HIPPO_WEIGHT = 7000.0F;
     public static final float HIPPO_SPEED = 0.1F * 5.5F;
@@ -245,7 +245,7 @@ public class Defaults {
     public static final float DOLPHIN_ENERGY_INCREASE = 0.0025F;
     public static final float DOLPHIN_MAX_HEALTH = 3200.0F;
     public static final float DOLPHIN_HEALTH_REGEN = 0.5F;
-    public static final float DOLPHIN_DAMAGE = 120F;
+    public static final float DOLPHIN_DAMAGE = 135F;
     public static final int DOLPHIN_BOOST_TIME = 140;
     public static final int DOLPHIN_ABILITY_TIME = 0;
 
@@ -261,5 +261,18 @@ public class Defaults {
     public static final float MAKO_SHARK_DAMAGE = 150F;
     public static final int MAKO_SHARK_BOOST_TIME = 50;
     public static final int MAKO_SHARK_ABILITY_TIME = 100;
+
+    public static final float TWO_RULERS_TURN = 0.1F;
+    public static final float TWO_RULERS_LENGTH = 100.0F;
+    public static final float TWO_RULERS_WEIGHT = 1500.0F;
+    public static final float TWO_RULERS_SPEED = 0.1F * 5.5F;
+    public static final float TWO_RULERS_PASSIVE_ABILITY = 1.0F;
+    public static final float TWO_RULERS_MAX_ENERGY = 3.0F;
+    public static final float TWO_RULERS_ENERGY_INCREASE = 0.0025F;
+    public static final float TWO_RULERS_MAX_HEALTH = 1500.0F;
+    public static final float TWO_RULERS_HEALTH_REGEN = 1F;
+    public static final float TWO_RULERS_DAMAGE = 100;
+    public static final int TWO_RULERS_BOOST_TIME = 50;
+    public static final int TWO_RULERS_ABILITY_TIME = 150;
 
 }

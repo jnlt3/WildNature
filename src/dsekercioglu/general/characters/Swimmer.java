@@ -46,6 +46,8 @@ public abstract class Swimmer {
     private double xChange;
     private double yChange;
     
+    public boolean clone;
+    
     public Swimmer(String name, PApplet p) {
         this.name = name;
         pa = p;

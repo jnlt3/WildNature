@@ -64,7 +64,7 @@ public class App extends Application {
         String[] fileNames = {"Barracuda", "ElectricEel",
             "Marlin", "BlackMarlin", "Crocodile", "Shark", "Hippo",
             "MegaMouth", "Orca", "ColossalSquid", "Guardian",
-            "TigerShark", "Dolphin", "MakoShark", "ElectricMarlin", "DoodFish"};
+            "TigerShark", "Dolphin", "MakoShark", "ElectricMarlin", "TwoRulers", "DoodFish"};
         RadioButton[] chars = new RadioButton[fileNames.length];
         for (int i = 0; i < fileNames.length; i++) {
             chars[i] = SimplifiedGUI.newRadioButton("", true, toggleGroup);

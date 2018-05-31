@@ -61,6 +61,7 @@ public class Marlinium extends Swimmer {
         if (time == 0 && miniMarlinNum < 2) {
             MiniMarlin mm = new MiniMarlin(this.getName() + " " + miniMarlinNo, x, y, null, e);
             mm.control = new BaseBackTrackControl(mm, this, e);
+            mm.clone = true;
             mm.team = team;
             e.characters.add(mm);
             e.charAbilities.put(mm, mm.ability1);

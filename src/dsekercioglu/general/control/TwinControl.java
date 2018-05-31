@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BaseBackTrackControl extends Control {
+public class TwinControl extends Control {
 
     final int ANGLE_NUM = 36;
     final float MAX_DIST = 100;
@@ -17,7 +17,7 @@ public class BaseBackTrackControl extends Control {
 
     Swimmer base;
 
-    public BaseBackTrackControl(Swimmer owner, Swimmer base, Environment e) {
+    public TwinControl(Swimmer owner, Swimmer base, Environment e) {
         super(owner);
         this.env = e;
         this.base = base;
@@ -60,7 +60,7 @@ public class BaseBackTrackControl extends Control {
     }
 
     private double danger(Point2D.Double point, Swimmer s) {
-        double distToBase = Math.max(point.distance(base.x, base.y), 600) / 600;
+        double distToBase = Math.max(point.distance(base.x, base.y), 300) / 600;
         double ta = s.angle + Math.PI;
         double hwidth = s.getWidth() / 2;
         double tx = s.x + Math.cos(ta) * hwidth;
@@ -69,7 +69,7 @@ public class BaseBackTrackControl extends Control {
         tx = s.x - Math.cos(ta) * hwidth;
         ty = s.y - Math.sin(ta) * hwidth;
         double distToDanger = point.distance(tx, ty);
-        return (Math.max((owner.health * owner.damage - s.health * s.damage), 1)) * distToTarget * Math.pow(distToBase, 2) / distToDanger;
+        return distToTarget * Math.pow(distToBase, 2) / distToDanger;
     }
 
     @Override

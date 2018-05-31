@@ -3,13 +3,18 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Angleraptor;
+import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
+import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.Dolphin;
+import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
+import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
+import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.Marlinium;
@@ -24,6 +29,8 @@ import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import static dsekercioglu.general.characters.Team.DOMINATOR;
 import static dsekercioglu.general.characters.Team.RED;
 import dsekercioglu.general.characters.TigerShark;
+import dsekercioglu.general.characters.TwoRulers;
+import dsekercioglu.general.control.AmbushControl;
 import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.StraightAttackControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
@@ -65,14 +72,12 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-        Swimmer m = new MakoShark("Marl", 0, 0, null, this);
-        m.team = RED;
-        m.control = new BackTrackControl(m, this);
-        addCharacter(m);
-
-//        Swimmer mar = new Sharkodile("Sharky", 0, 0, null, this);
-//        mar.team = DOMINATOR;
-//        addCharacter(mar);
+        for (int i = 0; i < 1; i++) {
+            Swimmer m = new MakoShark("7", 0, 0, null, this);
+            m.team = BLUE;
+            m.control = new StraightAttackControl(m, this);
+            addCharacter(m);
+        }
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -96,12 +101,12 @@ public class Environment {
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
                 swimmer.regen();
             } else {
-                long sleepTime = swimmer.team.equals(DOMINATOR) ? 3000L : 3000L;
+                long sleepTime = swimmer.team.equals(DOMINATOR) ? 180000L : 3000L;
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
                         characters.remove(swimmer);
-                        if (!(swimmer instanceof MiniMarlin)) {
+                        if (!swimmer.clone) {
                             try {
                                 Thread.sleep(sleepTime);
                             } catch (InterruptedException ex) {
@@ -114,7 +119,6 @@ public class Environment {
                 };
                 Thread t = new Thread(r);
                 t.start();
-                //toRemove.add(swimmer);
             }
         }
         characters.removeAll(toRemove);
@@ -283,6 +287,11 @@ public class Environment {
                 attackers.add(attacker);
                 victims.add(victim);
                 time.add(attacker.abilityTime);
+            } else if (a.equals(STUN)) {
+                victim.control.freeze(true);
+                if (newTime <= 0) {
+                    victim.control.freeze(false);
+                }
             }
             time.set(i, newTime);
             if (newTime <= 0) {
