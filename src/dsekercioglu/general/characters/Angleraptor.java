@@ -6,7 +6,6 @@ import static dsekercioglu.general.characters.Ability.BLEED;
 import static dsekercioglu.general.characters.Ability.GRAB;
 import static dsekercioglu.general.characters.Ability.HOLD;
 import static dsekercioglu.general.characters.Ability.KNOCKBACK;
-import static dsekercioglu.general.characters.Ability.STICK;
 import static dsekercioglu.general.characters.Animal.ANGLERAPTOR;
 import dsekercioglu.general.control.AmbushControl;
 import dsekercioglu.server.Environment;

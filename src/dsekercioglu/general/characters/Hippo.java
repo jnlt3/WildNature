@@ -13,6 +13,7 @@ public class Hippo extends Swimmer {
         this.e = e;
         this.x = x;
         this.y = y;
+        knockbackResistence = 2;
         this.length = HIPPO_LENGTH;
         this.weight = HIPPO_WEIGHT;
         this.velocity = HIPPO_SPEED;
@@ -36,7 +37,7 @@ public class Hippo extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 1500, mouseX, mouseY, mousePressed);
         energyTime--;
         velocity = HIPPO_SPEED;
         if (control.stop()) {

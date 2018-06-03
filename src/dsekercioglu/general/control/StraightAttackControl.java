@@ -1,5 +1,6 @@
 package dsekercioglu.general.control;
 
+import dsekercioglu.general.characters.Ghost;
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -12,7 +13,7 @@ public class StraightAttackControl extends Control {
 
     final int ANGLE_NUM = 36;
     final float MAX_DIST = 20;
-    
+
     Environment env;
 
     public StraightAttackControl(Swimmer owner, Environment e) {
@@ -31,15 +32,17 @@ public class StraightAttackControl extends Control {
                 Double danger = 0.0;
                 for (int k = 0; k < characters.size(); k++) {
                     Swimmer s = characters.get(k);
-                    if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
-                        double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
-                        if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
-                            if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
-                                mousePressed = true;
-                                env.charAbilities.put(owner, owner.ability1);
+                    if (!(s instanceof Ghost)) {
+                        if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
+                            double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
+                            if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
+                                if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
+                                    mousePressed = true;
+                                    env.charAbilities.put(owner, owner.ability1);
+                                }
+                                danger += Math.max((owner.health * owner.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
+                                seen++;
                             }
-                            danger += Math.max((owner.health * owner.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
-                            seen++;
                         }
                     }
                 }

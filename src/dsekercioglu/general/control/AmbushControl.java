@@ -1,5 +1,6 @@
 package dsekercioglu.general.control;
 
+import dsekercioglu.general.characters.Ghost;
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.server.Environment;
@@ -11,7 +12,7 @@ public class AmbushControl extends Control {
 
     final int ANGLE_NUM = 36;
     final float MAX_DIST = 100;
-    
+
     int timeSinceHit;
 
     Environment env;
@@ -33,17 +34,19 @@ public class AmbushControl extends Control {
                 Double danger = 0.0;
                 for (int k = 0; k < characters.size(); k++) {
                     Swimmer s = characters.get(k);
-                    if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
-                        double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
-                        if (distance < minDistance) {
-                            minDistance = distance;
-                        }
-                        if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
-                            if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
-                                env.charAbilities.put(owner, owner.ability1);
+                    if (!(s instanceof Ghost)) {
+                        if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
+                            double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
+                            if (distance < minDistance) {
+                                minDistance = distance;
                             }
-                            danger += danger(point, s);
-                            seen++;
+                            if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
+                                if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
+                                    env.charAbilities.put(owner, owner.ability1);
+                                }
+                                danger += danger(point, s);
+                                seen++;
+                            }
                         }
                     }
                 }
@@ -79,7 +82,7 @@ public class AmbushControl extends Control {
     @Override
     public void ownerHit() {
         timeSinceHit = 300;
-    }   
+    }
 
     private class Pair<T extends Comparable, U> implements Comparable {
 

@@ -9,11 +9,11 @@ public class Defaults {
     public static final float MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MARLIN_MAX_ENERGY = 3.0F;
     public static final float MARLIN_ENERGY_INCREASE = 0.0025F;
-    public static final float MARLIN_MAX_HEALTH = 3500.0F;
+    public static final float MARLIN_MAX_HEALTH = 700;
     public static final float MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float MARLIN_DAMAGE = 180F;
+    public static final float MARLIN_DAMAGE = 180F; // 300
     public static final int MARLIN_BOOST_TIME = 50;
-    public static final int MARLIN_ABILITY_TIME = 150;
+    public static final int MARLIN_ABILITY_TIME = 60;
 
     public static final float BLACK_MARLIN_TURN = 0.08726646F;
     public static final float BLACK_MARLIN_LENGTH = 140.0F;
@@ -22,11 +22,11 @@ public class Defaults {
     public static final float BLACK_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float BLACK_MARLIN_MAX_ENERGY = 2.0F;
     public static final float BLACK_MARLIN_ENERGY_INCREASE = 0.0025F;
-    public static final float BLACK_MARLIN_MAX_HEALTH = 3000.0F;
+    public static final float BLACK_MARLIN_MAX_HEALTH = 600;
     public static final float BLACK_MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float BLACK_MARLIN_DAMAGE = 180F;
-    public static final int BLACK_MARLIN_BOOST_TIME = 50;
-    public static final int BLACK_MARLIN_ABILITY_TIME = 150;
+    public static final float BLACK_MARLIN_DAMAGE = 180F; // 320
+    public static final int BLACK_MARLIN_BOOST_TIME = 28;
+    public static final int BLACK_MARLIN_ABILITY_TIME = 75;
 
     public static final float CROCODILE_TURN = 0.08726646F;
     public static final float CROCODILE_LENGTH = 170.0F;
@@ -35,11 +35,11 @@ public class Defaults {
     public static final float CROCODILE_PASSIVE_ABILITY = 2.0F;
     public static final float CROCODILE_MAX_ENERGY = 2.0F;
     public static final float CROCODILE_ENERGY_INCREASE = 0.0025F;
-    public static final float CROCODILE_MAX_HEALTH = 5000F;
+    public static final float CROCODILE_MAX_HEALTH = 1000;
     public static final float CROCODILE_HEALTH_REGEN = 0.5F;
-    public static final float CROCODILE_DAMAGE = 120F;
+    public static final float CROCODILE_DAMAGE = 120F; // 270
     public static final int CROCODILE_BOOST_TIME = 40;
-    public static final int CROCODILE_ABILITY_TIME = 100;
+    public static final int CROCODILE_ABILITY_TIME = 90;
 
     public static final float SHARK_TURN = 0.045F;
     public static final float SHARK_LENGTH = 170.0F;
@@ -48,37 +48,11 @@ public class Defaults {
     public static final float SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float SHARK_MAX_ENERGY = 2.0F;
     public static final float SHARK_ENERGY_INCREASE = 0.0025F;
-    public static final float SHARK_MAX_HEALTH = 4000.0F;
+    public static final float SHARK_MAX_HEALTH = 800;
     public static final float SHARK_HEALTH_REGEN = 0.5F;
-    public static final float SHARK_DAMAGE = 160F;
+    public static final float SHARK_DAMAGE = 160F; // 240
     public static final int SHARK_BOOST_TIME = 120;
     public static final int SHARK_ABILITY_TIME = 0;
-
-    public static final float ELECTRIC_EEL_TURN = 0.08726646F;
-    public static final float ELECTRIC_EEL_LENGTH = 80.0F;
-    public static final float ELECTRIC_EEL_WEIGHT = 44.0F;
-    public static final float ELECTRIC_EEL_SPEED = 0.1F * 5.0F;
-    public static final float ELECTRIC_EEL_PASSIVE_ABILITY = 1.0F;
-    public static final float ELECTRIC_EEL_MAX_ENERGY = 3.0F;
-    public static final float ELECTRIC_EEL_ENERGY_INCREASE = 0.005F;
-    public static final float ELECTRIC_EEL_MAX_HEALTH = 2000.0F;
-    public static final float ELECTRIC_EEL_HEALTH_REGEN = 1F;
-    public static final float ELECTRIC_EEL_DAMAGE = 20;
-    public static final int ELECTRIC_EEL_BOOST_TIME = 40;
-    public static final int ELECTRIC_EEL_ABILITY_TIME = 100;
-
-    public static final float BARRACUDA_TURN = 0.08726646F;
-    public static final float BARRACUDA_LENGTH = 70.0F;
-    public static final float BARRACUDA_WEIGHT = 88.0F;
-    public static final float BARRACUDA_SPEED = 0.1F * 5.3F;
-    public static final float BARRACUDA_PASSIVE_ABILITY = 3.0F;
-    public static final float BARRACUDA_MAX_ENERGY = 3.0F;
-    public static final float BARRACUDA_ENERGY_INCREASE = 0.0025F;
-    public static final float BARRACUDA_MAX_HEALTH = 2250.0F;
-    public static final float BARRACUDA_HEALTH_REGEN = 0.75F;
-    public static final float BARRACUDA_DAMAGE = 30F;
-    public static final int BARRACUDA_BOOST_TIME = 40;
-    public static final int BARRACUDA_ABILITY_TIME = 200;
 
     public static final float MEGA_MOUTH_SHARK_TURN = 0.045F;
     public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
@@ -87,11 +61,11 @@ public class Defaults {
     public static final float MEGA_MOUTH_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float MEGA_MOUTH_SHARK_MAX_ENERGY = 2.0F;
     public static final float MEGA_MOUTH_SHARK_ENERGY_INCREASE = 0.0025F;
-    public static final float MEGA_MOUTH_SHARK_MAX_HEALTH = 3750.0F;
+    public static final float MEGA_MOUTH_SHARK_MAX_HEALTH = 700;
     public static final float MEGA_MOUTH_SHARK_HEALTH_REGEN = 0.5F;
-    public static final float MEGA_MOUTH_SHARK_DAMAGE = 200F;
+    public static final float MEGA_MOUTH_SHARK_DAMAGE = 200F; //200
     public static final int MEGA_MOUTH_SHARK_BOOST_TIME = 40;
-    public static final int MEGA_MOUTH_SHARK_ABILITY_TIME = 60;
+    public static final int MEGA_MOUTH_SHARK_ABILITY_TIME = 100;
 
     public static final float ORCA_TURN = 0.045F;
     public static final float ORCA_LENGTH = 170.0F;
@@ -100,9 +74,9 @@ public class Defaults {
     public static final float ORCA_PASSIVE_ABILITY = 1.0F;
     public static final float ORCA_MAX_ENERGY = 2.0F;
     public static final float ORCA_ENERGY_INCREASE = 0.0025F;
-    public static final float ORCA_MAX_HEALTH = 4500.0F;
+    public static final float ORCA_MAX_HEALTH = 900;
     public static final float ORCA_HEALTH_REGEN = 0.5F;
-    public static final float ORCA_DAMAGE = 155F;
+    public static final float ORCA_DAMAGE = 150F; // 240
     public static final int ORCA_BOOST_TIME = 40;
     public static final int ORCA_ABILITY_TIME = 75;
 
@@ -113,9 +87,9 @@ public class Defaults {
     public static final float HIPPO_PASSIVE_ABILITY = 2.0F;
     public static final float HIPPO_MAX_ENERGY = 2.0F;
     public static final float HIPPO_ENERGY_INCREASE = 0.0025F;
-    public static final float HIPPO_MAX_HEALTH = 5000;
+    public static final float HIPPO_MAX_HEALTH = 1000;
     public static final float HIPPO_HEALTH_REGEN = 0.5F;
-    public static final float HIPPO_DAMAGE = 100F;
+    public static final float HIPPO_DAMAGE = 100F; // 400
     public static final int HIPPO_BOOST_TIME = 1000;
     public static final int HIPPO_ABILITY_TIME = 30;
 
@@ -126,11 +100,11 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_PASSIVE_ABILITY = 2.0F;
     public static final float COLOSSAL_SQUID_MAX_ENERGY = 3.0F;
     public static final float COLOSSAL_SQUID_ENERGY_INCREASE = 0.0025F;
-    public static final float COLOSSAL_SQUID_MAX_HEALTH = 3250;
+    public static final float COLOSSAL_SQUID_MAX_HEALTH = 550;
     public static final float COLOSSAL_SQUID_HEALTH_REGEN = 0.5F;
-    public static final float COLOSSAL_SQUID_DAMAGE = 150F;
+    public static final float COLOSSAL_SQUID_DAMAGE = 120F; // 120
     public static final int COLOSSAL_SQUID_BOOST_TIME = 75;
-    public static final int COLOSSAL_SQUID_ABILITY_TIME = 30;
+    public static final int COLOSSAL_SQUID_ABILITY_TIME = 24;
 
     public static final float DOOD_FISH_TURN = 0.12F;
     public static final float DOOD_FISH_LENGTH = 90.0F;
@@ -139,11 +113,11 @@ public class Defaults {
     public static final float DOOD_FISH_PASSIVE_ABILITY = 2.0F;
     public static final float DOOD_FISH_MAX_ENERGY = 2.0F;
     public static final float DOOD_FISH_ENERGY_INCREASE = 0.0025F;
-    public static final float DOOD_FISH_MAX_HEALTH = 2000;
+    public static final float DOOD_FISH_MAX_HEALTH = 400;
     public static final float DOOD_FISH_HEALTH_REGEN = 0.5F;
-    public static final float DOOD_FISH_DAMAGE = 160;
+    public static final float DOOD_FISH_DAMAGE = 100; //150
     public static final int DOOD_FISH_BOOST_TIME = 600;
-    public static final int DOOD_FISH_ABILITY_TIME = 150;
+    public static final int DOOD_FISH_ABILITY_TIME = 50;
 
     public static final float ELECTRIC_MARLIN_TURN = 0.16F;
     public static final float ELECTRIC_MARLIN_LENGTH = 140.0F;
@@ -152,24 +126,24 @@ public class Defaults {
     public static final float ELECTRIC_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float ELECTRIC_MARLIN_MAX_ENERGY = 3.0F;
     public static final float ELECTRIC_MARLIN_ENERGY_INCREASE = 0.0025F;
-    public static final float ELECTRIC_MARLIN_MAX_HEALTH = 2500.0F;
+    public static final float ELECTRIC_MARLIN_MAX_HEALTH = 500;
     public static final float ELECTRIC_MARLIN_HEALTH_REGEN = 0.5F;
-    public static final float ELECTRIC_MARLIN_DAMAGE = 180F;
+    public static final float ELECTRIC_MARLIN_DAMAGE = 180F; // 320
     public static final int ELECTRIC_MARLIN_BOOST_TIME = 50;
-    public static final int ELECTRIC_MARLIN_ABILITY_TIME = 65;
+    public static final int ELECTRIC_MARLIN_ABILITY_TIME = 40;
 
-    public static final float GUARDIAN_TURN = 0.045F;
-    public static final float GUARDIAN_LENGTH = 90.0F;
-    public static final float GUARDIAN_WEIGHT = 3000.0F;
-    public static final float GUARDIAN_SPEED = 0.1F * 4.0F;
-    public static final float GUARDIAN_PASSIVE_ABILITY = 3.0F;
-    public static final float GUARDIAN_MAX_ENERGY = 2.0F;
-    public static final float GUARDIAN_ENERGY_INCREASE = 0.0025F;
-    public static final float GUARDIAN_MAX_HEALTH = 6000.0F;
-    public static final float GUARDIAN_HEALTH_REGEN = 1.5F;
-    public static final float GUARDIAN_DAMAGE = 60F;
-    public static final int GUARDIAN_BOOST_TIME = 1000;
-    public static final int GUARDIAN_ABILITY_TIME = 100;
+    public static final float SEA_DRAGON_TURN = 0.06F;
+    public static final float SEA_DRAGON_LENGTH = 200.0F;
+    public static final float SEA_DRAGON_WEIGHT = 10000.0F;
+    public static final float SEA_DRAGON_SPEED = 0.1F * 4.1F;
+    public static final float SEA_DRAGON_PASSIVE_ABILITY = 3.0F;
+    public static final float SEA_DRAGON_MAX_ENERGY = 1.0F;
+    public static final float SEA_DRAGON_ENERGY_INCREASE = 0.001F;
+    public static final float SEA_DRAGON_MAX_HEALTH = 1600;
+    public static final float SEA_DRAGON_HEALTH_REGEN = 1.5F;
+    public static final float SEA_DRAGON_DAMAGE = 5F; // 400
+    public static final int SEA_DRAGON_BOOST_TIME = 1000;
+    public static final int SEA_DRAGON_ABILITY_TIME = 80;
 
     public static final float SHARKODILE_TURN = 0.045F;
     public static final float SHARKODILE_LENGTH = 200.0F;
@@ -178,7 +152,7 @@ public class Defaults {
     public static final float SHARKODILE_PASSIVE_ABILITY = 3.0F;
     public static final float SHARKODILE_MAX_ENERGY = 5.0F;
     public static final float SHARKODILE_ENERGY_INCREASE = 0.005F;
-    public static final float SHARKODILE_MAX_HEALTH = 6000.0F;
+    public static final float SHARKODILE_MAX_HEALTH = 1200;
     public static final float SHARKODILE_HEALTH_REGEN = 2F;
     public static final float SHARKODILE_DAMAGE = 170F;
     public static final int SHARKODILE_BOOST_TIME = 60;
@@ -191,7 +165,7 @@ public class Defaults {
     public static final float MARLINIUM_PASSIVE_ABILITY = 3.0F;
     public static final float MARLINIUM_MAX_ENERGY = 2.0F;
     public static final float MARLINIUM_ENERGY_INCREASE = 0.002F;
-    public static final float MARLINIUM_MAX_HEALTH = 4500.0F;
+    public static final float MARLINIUM_MAX_HEALTH = 900;
     public static final float MARLINIUM_HEALTH_REGEN = 1F;
     public static final float MARLINIUM_DAMAGE = 200F;
     public static final int MARLINIUM_BOOST_TIME = 60;
@@ -204,7 +178,7 @@ public class Defaults {
     public static final float MINI_MARLIN_PASSIVE_ABILITY = 3.0F;
     public static final float MINI_MARLIN_MAX_ENERGY = 2.0F;
     public static final float MINI_MARLIN_ENERGY_INCREASE = 0.005F;
-    public static final float MINI_MARLIN_MAX_HEALTH = 500.0F;
+    public static final float MINI_MARLIN_MAX_HEALTH = 100;
     public static final float MINI_MARLIN_HEALTH_REGEN = 0.5F;
     public static final float MINI_MARLIN_DAMAGE = 90F;
     public static final int MINI_MARLIN_BOOST_TIME = 40;
@@ -217,7 +191,7 @@ public class Defaults {
     public static final float ANGLERAPTOR_PASSIVE_ABILITY = 3.0F;
     public static final float ANGLERAPTOR_MAX_ENERGY = 1.0F;
     public static final float ANGLERAPTOR_ENERGY_INCREASE = 0.005F;
-    public static final float ANGLERAPTOR_MAX_HEALTH = 12000.0F;
+    public static final float ANGLERAPTOR_MAX_HEALTH = 2400;
     public static final float ANGLERAPTOR_HEALTH_REGEN = 2F;
     public static final float ANGLERAPTOR_DAMAGE = 100F;
     public static final int ANGLERAPTOR_BOOST_TIME = 10;
@@ -230,11 +204,11 @@ public class Defaults {
     public static final float TIGER_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float TIGER_SHARK_MAX_ENERGY = 3.0F;
     public static final float TIGER_SHARK_ENERGY_INCREASE = 0.0025F;
-    public static final float TIGER_SHARK_MAX_HEALTH = 3500.0F;
+    public static final float TIGER_SHARK_MAX_HEALTH = 750;
     public static final float TIGER_SHARK_HEALTH_REGEN = 0.5F;
-    public static final float TIGER_SHARK_DAMAGE = 165F;
+    public static final float TIGER_SHARK_DAMAGE = 160F; // 300
     public static final int TIGER_SHARK_BOOST_TIME = 60;
-    public static final int TIGER_SHARK_ABILITY_TIME = 5;
+    public static final int TIGER_SHARK_ABILITY_TIME = 4;
 
     public static final float DOLPHIN_TURN = 0.1F;
     public static final float DOLPHIN_LENGTH = 140.0F;
@@ -243,9 +217,9 @@ public class Defaults {
     public static final float DOLPHIN_PASSIVE_ABILITY = 1.0F;
     public static final float DOLPHIN_MAX_ENERGY = 3.0F;
     public static final float DOLPHIN_ENERGY_INCREASE = 0.0025F;
-    public static final float DOLPHIN_MAX_HEALTH = 3200.0F;
+    public static final float DOLPHIN_MAX_HEALTH = 640;
     public static final float DOLPHIN_HEALTH_REGEN = 0.5F;
-    public static final float DOLPHIN_DAMAGE = 135F;
+    public static final float DOLPHIN_DAMAGE = 135F; // 135
     public static final int DOLPHIN_BOOST_TIME = 140;
     public static final int DOLPHIN_ABILITY_TIME = 0;
 
@@ -256,11 +230,11 @@ public class Defaults {
     public static final float MAKO_SHARK_PASSIVE_ABILITY = 1.0F;
     public static final float MAKO_SHARK_MAX_ENERGY = 3.0F;
     public static final float MAKO_SHARK_ENERGY_INCREASE = 0.0025F;
-    public static final float MAKO_SHARK_MAX_HEALTH = 3250.0F;
+    public static final float MAKO_SHARK_MAX_HEALTH = 650;
     public static final float MAKO_SHARK_HEALTH_REGEN = 1F;
-    public static final float MAKO_SHARK_DAMAGE = 150F;
+    public static final float MAKO_SHARK_DAMAGE = 160F; // 320
     public static final int MAKO_SHARK_BOOST_TIME = 50;
-    public static final int MAKO_SHARK_ABILITY_TIME = 100;
+    public static final int MAKO_SHARK_ABILITY_TIME = 32;
 
     public static final float TWO_RULERS_TURN = 0.1F;
     public static final float TWO_RULERS_LENGTH = 100.0F;
@@ -269,10 +243,36 @@ public class Defaults {
     public static final float TWO_RULERS_PASSIVE_ABILITY = 1.0F;
     public static final float TWO_RULERS_MAX_ENERGY = 3.0F;
     public static final float TWO_RULERS_ENERGY_INCREASE = 0.0025F;
-    public static final float TWO_RULERS_MAX_HEALTH = 1500.0F;
+    public static final float TWO_RULERS_MAX_HEALTH = 400;
     public static final float TWO_RULERS_HEALTH_REGEN = 1F;
-    public static final float TWO_RULERS_DAMAGE = 100;
+    public static final float TWO_RULERS_DAMAGE = 80; //120
     public static final int TWO_RULERS_BOOST_TIME = 50;
     public static final int TWO_RULERS_ABILITY_TIME = 150;
+
+    public static final float GUARDIAN_TURN = 0.045F;
+    public static final float GUARDIAN_LENGTH = 90.0F;
+    public static final float GUARDIAN_WEIGHT = 3000.0F;
+    public static final float GUARDIAN_SPEED = 0.1F * 4.0F;
+    public static final float GUARDIAN_PASSIVE_ABILITY = 3.0F;
+    public static final float GUARDIAN_MAX_ENERGY = 1.0F;
+    public static final float GUARDIAN_ENERGY_INCREASE = 0.0025F;
+    public static final float GUARDIAN_MAX_HEALTH = 1200;
+    public static final float GUARDIAN_HEALTH_REGEN = 1.5F;
+    public static final float GUARDIAN_DAMAGE = 30F;
+    public static final int GUARDIAN_BOOST_TIME = 1000;
+    public static final int GUARDIAN_ABILITY_TIME = 30;
+
+    public static final float GHOST_TURN = 1.58F;
+    public static final float GHOST_LENGTH = 140.0F;
+    public static final float GHOST_WEIGHT = 1350.0F;
+    public static final float GHOST_SPEED = 0.1F * 9.0F;
+    public static final float GHOST_PASSIVE_ABILITY = 3.0F;
+    public static final float GHOST_MAX_ENERGY = 3.0F;
+    public static final float GHOST_ENERGY_INCREASE = GHOST_MAX_ENERGY;
+    public static final float GHOST_MAX_HEALTH = 1;
+    public static final float GHOST_HEALTH_REGEN = 0;
+    public static final float GHOST_DAMAGE = 0;
+    public static final int GHOST_BOOST_TIME = 3;
+    public static final int GHOST_ABILITY_TIME = 0;
 
 }

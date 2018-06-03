@@ -36,7 +36,7 @@ public class BlackMarlin extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 2500,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 2500, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = BLACK_MARLIN_SPEED;

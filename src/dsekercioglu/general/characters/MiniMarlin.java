@@ -35,7 +35,6 @@ public class MiniMarlin extends Swimmer {
         // = DRAIN_HIT;
         // = HORN;
 
-
         this.type = MINI_MARLIN;
     }
 

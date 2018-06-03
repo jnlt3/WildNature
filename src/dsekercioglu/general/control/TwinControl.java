@@ -1,5 +1,6 @@
 package dsekercioglu.general.control;
 
+import dsekercioglu.general.characters.Ghost;
 import dsekercioglu.general.characters.Swimmer;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -34,14 +35,16 @@ public class TwinControl extends Control {
                 Double danger = 0.0;
                 for (int k = 0; k < characters.size(); k++) {
                     Swimmer s = characters.get(k);
-                    if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
-                        double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
-                        if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
-                            if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
-                                env.charAbilities.put(owner, owner.ability1);
+                    if (!(s instanceof Ghost)) {
+                        if (!(s.team.equals(owner.team)) || s.team.equals(INDEPENDENT)) {
+                            double distance = Point2D.distance(owner.x, owner.y, s.x, s.y);
+                            if (owner.blind <= 0 && ((distance < sightRange && !s.hiding) || (distance < bloodRange && s.health != s.maxHealth))) {
+                                if (Math.abs(Math.atan2(s.y - owner.y, s.x - owner.x) - owner.angle + Math.PI) % Math.PI < Math.PI / 9) {
+                                    env.charAbilities.put(owner, owner.ability1);
+                                }
+                                danger += danger(point, s);
+                                seen++;
                             }
-                            danger += danger(point, s);
-                            seen++;
                         }
                     }
                 }
@@ -69,12 +72,12 @@ public class TwinControl extends Control {
         tx = s.x - Math.cos(ta) * hwidth;
         ty = s.y - Math.sin(ta) * hwidth;
         double distToDanger = point.distance(tx, ty);
-        return distToTarget * Math.pow(distToBase, 2) / distToDanger;
+        return distToTarget * Math.pow(distToBase, 4) / distToDanger;
     }
 
     @Override
     public void ownerAttacked() {
-    
+
     }
 
     @Override

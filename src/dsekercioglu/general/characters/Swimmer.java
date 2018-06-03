@@ -32,6 +32,9 @@ public abstract class Swimmer {
     public float energy;
     public Ability ability1;
 
+    public float knockbackPower = 25;
+    public float knockbackResistence = 1;
+
     protected PImage img;
     protected Animal type;
     protected float length;
@@ -45,9 +48,11 @@ public abstract class Swimmer {
 
     private double xChange;
     private double yChange;
-    
+
     public boolean clone;
-    
+
+    int invulnerabiltyTime = 0;
+
     public Swimmer(String name, PApplet p) {
         this.name = name;
         pa = p;
@@ -60,6 +65,7 @@ public abstract class Swimmer {
         y += yChange;
         blind--;
         blind = Math.max(blind, 0);
+        invulnerabiltyTime--;
     }
 
     public void regen() {
@@ -75,7 +81,16 @@ public abstract class Swimmer {
     }
 
     public void setMoveInAngle(double velocity, double angle) {
+        velocity /= knockbackResistence;
         this.angle = (float) angle;
+        xChange += (float) (Math.cos(angle) * velocity);
+        yChange += (float) (Math.sin(angle) * velocity);
+        xChange *= MOMENTUM;
+        yChange *= MOMENTUM;
+    }
+
+    public void setMove(double velocity, double angle) {
+        velocity /= knockbackResistence;
         xChange += (float) (Math.cos(angle) * velocity);
         yChange += (float) (Math.sin(angle) * velocity);
         xChange *= MOMENTUM;
@@ -138,9 +153,11 @@ public abstract class Swimmer {
     }
 
     public void hit(double damage) {
-        health -= damage;
-        health = Math.max(health, 0);
-        control.ownerHit();
+        if (invulnerabiltyTime <= 0) {
+            health -= damage;
+            health = Math.max(health, 0);
+            control.ownerHit();
+        }
     }
 
     public abstract int getWidth();
@@ -158,7 +175,11 @@ public abstract class Swimmer {
         this.blind = blind;
     }
 
-    public void attacked() { 
+    public void setInvulnerability(int time) {
+        this.invulnerabiltyTime = time;
+    }
+
+    public void attacked() {
         control.ownerAttacked();
     }
 }

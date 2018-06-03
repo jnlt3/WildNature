@@ -3,7 +3,6 @@ package dsekercioglu.server;
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
 import dsekercioglu.general.characters.Angleraptor;
-import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
@@ -11,7 +10,6 @@ import dsekercioglu.general.characters.Dolphin;
 import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
-import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
@@ -21,6 +19,7 @@ import dsekercioglu.general.characters.Marlinium;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.MiniMarlin;
 import dsekercioglu.general.characters.Orca;
+import dsekercioglu.general.characters.SeaDragon;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
@@ -28,6 +27,7 @@ import static dsekercioglu.general.characters.Team.BLUE;
 import static dsekercioglu.general.characters.Team.INDEPENDENT;
 import static dsekercioglu.general.characters.Team.DOMINATOR;
 import static dsekercioglu.general.characters.Team.RED;
+import static dsekercioglu.general.characters.Team.YELLOW;
 import dsekercioglu.general.characters.TigerShark;
 import dsekercioglu.general.characters.TwoRulers;
 import dsekercioglu.general.control.AmbushControl;
@@ -48,19 +48,16 @@ public class Environment {
     public ArrayList<Swimmer> characters = new ArrayList();
     public final int WIDTH = 2000;
     public final int HEIGHT = 2000;
-    private final float BLEED_DAMAGE = 5;
-    private final float SHOCK_DAMAGE = 15;
-    private final float HOLD_DAMAGE = 3.5F;
-    private final float STICK_DAMAGE = 6;
-    private final float GRAB_DAMAGE = 2.5F;
+    private final float BLEED_DAMAGE = 5F;
+    private final float SHOCK_DAMAGE = 8F;
+    private final float HOLD_DAMAGE = 3F;
+    private final float GRAB_DAMAGE = 2F;
     private final float KNOCKBACK_MULTIPLIER = 1.5F;
-    private final float SUPERBITE_MULTIPLIER = 3.5F;
+    private final float SUPERBITE_MULTIPLIER = 4F;
     private final int BLINDNESS = 300;
     private final int POISON_DAMAGE = 3;
-    private final float HORN_MULTIPLIER = 2;
-    private final int REGEN_AMOUNT = 900;
-
-    private final float KNOCKBACK = 25;
+    private final float HORN_MULTIPLIER = 1;
+    private final int REGEN_AMOUNT = 150;
 
     public HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
 
@@ -72,8 +69,14 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new ElectricMarlin("7", 0, 0, null, this);
+//            m.team = BLUE;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
         for (int i = 0; i < 1; i++) {
-            Swimmer m = new MakoShark("7", 0, 0, null, this);
+            Swimmer m = new Orca("7", 0, 0, null, this);
             m.team = BLUE;
             m.control = new StraightAttackControl(m, this);
             addCharacter(m);
@@ -82,7 +85,6 @@ public class Environment {
 
     public void update(HashMap<String, ControlInfo> hashMap) {
         handleIntersections();
-        handleAbilities();
         ArrayList<Swimmer> toRemove = new ArrayList<>();
         for (int i = 0; i < this.characters.size(); i++) {
             Swimmer swimmer = (Swimmer) this.characters.get(i);
@@ -95,7 +97,7 @@ public class Environment {
                         charAbilities.put(swimmer, swimmer.ability1);
                     }
                 } else {
-                    swimmer.update(0, 0, true);
+                    swimmer.update(600, 300, true);
                 }
                 swimmer.x = Math.max(-WIDTH, Math.min(swimmer.x, WIDTH));
                 swimmer.y = Math.max(-HEIGHT, Math.min(swimmer.y, HEIGHT));
@@ -123,6 +125,9 @@ public class Environment {
         }
         characters.removeAll(toRemove);
         toRemove.clear();
+
+        handleAbilities();
+
         CharacterInfo ci = new CharacterInfo();
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
@@ -152,7 +157,6 @@ public class Environment {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
                 if (attackable(p1.team, p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
-                    p2.hit(p1.damage);
                     p1.attacked();
                     if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
@@ -161,11 +165,12 @@ public class Environment {
                         victims.add(p2);
                         time.add(p1.abilityTime);
                     } else {
+                        p2.hit(p1.damage);
                         if (!p2.isAlive()) {
                             scores.put(p1.getName(), scores.get(p1.getName()) + 1);
                         }
-                        p1.move(-KNOCKBACK, p1.angle);
                     }
+                    p1.setMove(-p2.knockbackPower, p1.angle);
                     p1.energyTime = 0;
                 }
             }
@@ -189,53 +194,37 @@ public class Environment {
             if (a.equals(BLEED)) {
                 victims.get(i).hit(BLEED_DAMAGE);
             } else if (a.equals(HOLD)) {
-                attacker.move(0, attacker.angle);
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                attacker.control.freeze(true);
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(HOLD_DAMAGE);
+                victim.hit(HOLD_DAMAGE + victim.regen);
                 if (newTime <= 0) {
-                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                    attacker.control.freeze(false);
+                    victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
                 }
             } else if (a.equals(SHOCK)) {
                 victim.hit(SHOCK_DAMAGE);
-            } else if (a.equals(STICK)) {
-                attacker.x = (float) (victim.x - (Math.cos(victim.angle) * (victim.getWidth() / 2 + 1)));
-                attacker.y = (float) (victim.y - (Math.sin(victim.angle) * (victim.getWidth() / 2 + 1)));
-                attacker.angle = (float) victim.angle;
-                victim.hit(STICK_DAMAGE);
-                if (newTime <= 0) {
-                    attacker.move(-KNOCKBACK, attacker.angle);
-                }
-            } else if (a.equals(DRAIN)) {
-                victim.energy -= 0.5;
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                if (newTime <= 0) {
-                    victim.setMoveInAngle(KNOCKBACK * 2, attacker.angle);
-                }
-                victim.energy = 0;
             } else if (a.equals(Ability.KNOCKBACK)) {
                 victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
-                victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * KNOCKBACK, attacker.angle);
-                attacker.move(-KNOCKBACK, attacker.angle);
+                victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * attacker.knockbackPower, attacker.angle);
                 newTime = 0;
             } else if (a.equals(GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(GRAB_DAMAGE);
+                victim.hit(GRAB_DAMAGE + victim.regen);
                 if (newTime <= 0) {
-                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                    victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
                 }
             } else if (a.equals(SUPERBITE)) {
                 victim.hit(attacker.damage * SUPERBITE_MULTIPLIER);
-                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
+                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
                 newTime = 0;
             } else if (a.equals(INKSPILL)) {
-                victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.hit(BLEED_DAMAGE);
+                victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() + 1)));
+                victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() + 1)));
                 victim.angle = (float) (attacker.angle + Math.PI);
                 victim.setBlind(BLINDNESS);
             } else if (a.equals(POISON)) {
@@ -246,42 +235,43 @@ public class Environment {
                 victim.velocity = 0;
                 victim.angle += Math.PI / 9;
             } else if (a.equals(REGEN)) {
+                victim.hit(attacker.damage);
                 attacker.health += REGEN_AMOUNT;
             } else if (a.equals(REGEN_GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                attacker.health += 1;
+                attacker.health += 2;
             } else if (a.equals(SLOW_DOWN)) {
                 victim.velocity = 1;
             } else if (a.equals(HORN)) {
                 victim.hit(attacker.damage * HORN_MULTIPLIER);
                 newTime = 0;
-                victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
                 abilities.add(BLEED);
                 attackers.add(attacker);
                 victims.add(victim);
-                time.add(attacker.abilityTime / 2);
+                time.add(attacker.abilityTime);
             } else if (a.equals(SHORT_GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
                 victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(attacker.damage / 3);
+                victim.hit(attacker.damage / 4);
                 if (newTime <= 0) {
-                    victim.setMoveInAngle(KNOCKBACK, attacker.angle);
+                    victim.setMoveInAngle(attacker.knockbackPower * KNOCKBACK_MULTIPLIER, attacker.angle);
                 }
             } else if (a.equals(ELECTRIC_HORN)) {
                 victim.hit(SHOCK_DAMAGE);
-                victim.energy = Math.max(victim.energy - 0.1F, 0);
                 victim.control.freeze(true);
-                if (newTime <= 5) {
+                if (newTime <= 4) {
+                    victim.energy = Math.max(victim.energy - 0.1F, 0);
                     victim.control.freeze(false);
                 }
 
             } else if (a.equals(BLEEDING_KNOCKBACK)) {
-                victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
-                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * KNOCKBACK, attacker.angle);
-                attacker.move(-KNOCKBACK, attacker.angle);
+                victim.hit(attacker.damage);
+                System.out.println(victim.health);
+                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
                 newTime = 0;
                 abilities.add(BLEED);
                 attackers.add(attacker);
@@ -292,6 +282,13 @@ public class Environment {
                 if (newTime <= 0) {
                     victim.control.freeze(false);
                 }
+            } else if (a.equals(BANG)) {
+                victim.hit(attacker.damage);
+                attacker.move(5, attacker.angle);
+                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                victim.setMove(attacker.knockbackPower * SUPERBITE_MULTIPLIER, attacker.angle);
+                victim.angle = (float) (attacker.angle + Math.PI / 2);
             }
             time.set(i, newTime);
             if (newTime <= 0) {
@@ -301,6 +298,7 @@ public class Environment {
         for (int i = 0; i < indices.size(); i++) {
             int index = indices.get(i) - i;
             if (index >= 0) {
+                victims.get(index).setInvulnerability(2);
                 abilities.remove(index);
                 victims.remove(index);
                 attackers.remove(index);

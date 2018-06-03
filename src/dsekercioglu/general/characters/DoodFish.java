@@ -13,6 +13,7 @@ public class DoodFish extends Swimmer {
         this.e = e;
         this.x = x;
         this.y = y;
+        knockbackResistence = 0.4F;
         this.length = DOOD_FISH_LENGTH;
         this.weight = DOOD_FISH_WEIGHT;
         this.velocity = DOOD_FISH_SPEED;
@@ -36,7 +37,7 @@ public class DoodFish extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 15000,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 15000, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = DOOD_FISH_SPEED;

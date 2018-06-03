@@ -36,7 +36,7 @@ public class ColossalSquid extends Swimmer {
 
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 2000,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 2000, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = COLOSSAL_SQUID_SPEED;

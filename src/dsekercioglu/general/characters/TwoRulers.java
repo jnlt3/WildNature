@@ -25,6 +25,7 @@ public class TwoRulers extends Swimmer {
         this.e = e;
         this.x = x;
         this.y = y;
+        knockbackResistence = 0.5F;
         this.length = TWO_RULERS_LENGTH;
         this.weight = TWO_RULERS_WEIGHT;
         this.velocity = TWO_RULERS_SPEED;
@@ -75,7 +76,7 @@ public class TwoRulers extends Swimmer {
             if (rulers.get(0).health > health) {
                 health += 0.5;
                 rulers.get(0).health -= 0.5;
-            } 
+            }
         }
         energyTime--;
         if (energyTime <= 0) {
@@ -126,7 +127,7 @@ public class TwoRulers extends Swimmer {
             y = ruler.y;
             energy = ruler.energy;
             angle = ruler.angle;
-            
+
             ruler.health = Float.NEGATIVE_INFINITY;
             cloneNum--;
             rulers.remove(i);

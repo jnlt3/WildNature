@@ -5,27 +5,26 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import dsekercioglu.general.characters.Animal;
-import dsekercioglu.general.characters.Barracuda;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
 import dsekercioglu.general.characters.Dolphin;
 import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
-import dsekercioglu.general.characters.ElectricEel;
 import dsekercioglu.general.characters.ElectricMarlin;
+import dsekercioglu.general.characters.Ghost;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
+import dsekercioglu.general.characters.SeaDragon;
 import dsekercioglu.general.characters.TwoRulers;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.characters.TigerShark;
-import dsekercioglu.general.control.BackTrackControl;
 import dsekercioglu.general.control.UserControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -83,10 +82,6 @@ public class WildNatureServer {
                         p = new Crocodile(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.SHARK.name().equals(s)) {
                         p = new Shark(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.ELECTRIC_EEL.name().equals(s)) {
-                        p = new ElectricEel(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.BARRACUDA.name().equals(s)) {
-                        p = new Barracuda(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.MEGA_MOUTH.name().equals(s)) {
                         p = new MegaMouth(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.ORCA.name().equals(s)) {
@@ -109,6 +104,10 @@ public class WildNatureServer {
                         p = new MakoShark(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.TWO_RULERS.name().equals(s)) {
                         p = new TwoRulers(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.GHOST.name().equals(s)) {
+                        p = new Ghost(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.SEA_DRAGON.name().equals(s)) {
+                        p = new SeaDragon(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);
@@ -146,23 +145,5 @@ public class WildNatureServer {
         };
 
         new Thread(r).start();
-    }
-
-    public static void get2DString(double[][] array) {
-        System.out.print("{");
-        for (int i = 0; i < array.length; i++) {
-            if (i != 0) {
-                System.out.print(",");
-            }
-            System.out.print("{");
-            for (int j = 0; j < array[i].length; j++) {
-                if (j != 0) {
-                    System.out.print(",");
-                }
-                System.out.print(array[i][j]);
-            }
-            System.out.print("}");
-        }
-        System.out.println("};");
     }
 }

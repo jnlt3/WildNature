@@ -23,7 +23,7 @@ public class Marlinium extends Swimmer {
         this.e = e;
         control = new BackTrackControl(this, e);
         this.x = x;
-        this.y = y;
+        this.y = y;    
         this.length = MARLINIUM_LENGTH;
         this.weight = MARLINIUM_WEIGHT;
         this.velocity = MARLINIUM_SPEED;

@@ -33,10 +33,10 @@ public class Dolphin extends Swimmer {
 
         this.type = DOLPHIN;
     }
-    
+
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 1500, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = DOLPHIN_SPEED;

@@ -14,6 +14,7 @@ public class MakoShark extends Swimmer {
         this.e = e;
         this.x = x;
         this.y = y;
+        knockbackPower = 37F;
         this.length = MAKO_SHARK_LENGTH;
         this.weight = MAKO_SHARK_WEIGHT;
         this.velocity = MAKO_SHARK_SPEED;
@@ -34,10 +35,10 @@ public class MakoShark extends Swimmer {
 
         this.type = MAKO_SHARK;
     }
-    
+
     @Override
     public void update(int mouseX, int mouseY, boolean mousePressed) {
-        control.riskControl(e.characters, 0, 1500,  mouseX, mouseY, mousePressed);
+        control.riskControl(e.characters, 0, 1500, mouseX, mouseY, mousePressed);
         energyTime--;
         if (energyTime <= 0) {
             velocity = MAKO_SHARK_SPEED;

@@ -101,6 +101,12 @@ public class Visualizer {
         Gif twoRulers = new Gif(pa, "img/TwoRulers.gif");
         images.put("TWO_RULERS", twoRulers);
 
+        Gif seaDragon = new Gif(pa, "img/SeaDragon.gif");
+        images.put("SEA_DRAGON", seaDragon);
+
+        Gif ghost = new Gif(pa, "img/Ghost.gif");
+        images.put("GHOST", ghost);
+
         Set<String> keySet = images.keySet();
         for (String key : keySet) {
             Gif value = images.get(key);
@@ -152,14 +158,15 @@ public class Visualizer {
         }
 
         Collections.sort(scores);
-        for (int i = 0; i < scores.size(); i++) {
+        for (int i = scores.size() - 1; i >= 0; i--) {
             Pair<Integer, String> p = scores.get(i);
+            int pos = scores.size() - i - 1;
             String name = p.value;
             int score = p.comparable;
             pa.fill(0, 0, 0, 50);
-            pa.rect(1000, i * 50, 200, 50, 10);
+            pa.rect(1000, pos * 50, 200, 50, 10);
             pa.fill(255);
-            pa.text(name + ": " + score, 1000, i * 50 + 50);
+            pa.text(name + ": " + score, 1000, pos * 50 + 50);
         }
     }
 
@@ -182,11 +189,17 @@ public class Visualizer {
         this.pa.rect(-WIDTH - Swimmer.cx + 600.0F, -HEIGHT - Swimmer.cy + 300.0F, WIDTH * 2, HEIGHT * 2);
     }
 
-    private void drawHealthBar(double rate, float x, float y) {
-        this.pa.fill(0, 0, 0, 50);
-        this.pa.stroke(0, 0, 0, 50);
-        float radius = (float) (rate * 50);
-        this.pa.ellipse(x, y - 150, radius, radius);
+    private void drawHealthBar(float rate, float x, float y) {
+        float healthBarLength = 50;
+        this.pa.fill(0);
+        this.pa.stroke(0);
+        this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength, 5);
+        //rate > 0.5 green 255;
+        int red = (int) Math.min(510 - (rate * 510), 255);
+        int green = (int) Math.min(rate * 510, 255);
+        this.pa.fill(red, green, 0);
+        this.pa.stroke(red, green, 0);
+        this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength * rate, 5);
     }
 
     private void drawEnergyBar(double rate) {
@@ -235,7 +248,7 @@ public class Visualizer {
                     this.pa.ellipse(x, y, 20, 20);
                 }
             }
-        } else if (type.equals(DOOD_FISH.name())) {
+        } else if (type.equals(DOOD_FISH.name()) || type.equals(GHOST.name())) {
             this.pa.fill(0);
             this.pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
