@@ -61,7 +61,7 @@ public class TigerShark extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 62;
+        return 45;
     }
 
 }

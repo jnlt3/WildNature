@@ -61,7 +61,7 @@ public class ColossalSquid extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 56;
+        return 71;
     }
 
 }

@@ -65,7 +65,7 @@ public class Crocodile extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 59;
+        return 39;
     }
 
 }

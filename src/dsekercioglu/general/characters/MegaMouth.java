@@ -62,7 +62,7 @@ public class MegaMouth extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 72;
+        return 56;
     }
 
 }

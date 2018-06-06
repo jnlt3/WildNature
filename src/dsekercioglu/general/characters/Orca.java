@@ -61,7 +61,7 @@ public class Orca extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 62;
+        return 42;
     }
 
 }

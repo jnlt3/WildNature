@@ -63,7 +63,7 @@ public class MakoShark extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 54;
+        return 34;
     }
 
 }

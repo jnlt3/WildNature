@@ -65,6 +65,6 @@ public class MiniMarlin extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 35;
+        return 21;
     }
 }

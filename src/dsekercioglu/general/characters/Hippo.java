@@ -58,7 +58,7 @@ public class Hippo extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 65;
+        return 63;
     }
 
 }

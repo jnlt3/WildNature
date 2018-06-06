@@ -69,6 +69,6 @@ public class Guardian extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 86;
+        return 75;
     }
 }

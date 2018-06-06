@@ -62,7 +62,7 @@ public class ElectricMarlin extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 49;
+        return 29;
     }
 
 }

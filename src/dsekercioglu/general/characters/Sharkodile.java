@@ -65,6 +65,6 @@ public class Sharkodile extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 67;
+        return 42;
     }
 }

@@ -19,7 +19,6 @@ import dsekercioglu.general.characters.MakoShark;
 import dsekercioglu.general.characters.Marlin;
 import dsekercioglu.general.characters.MegaMouth;
 import dsekercioglu.general.characters.Orca;
-import dsekercioglu.general.characters.SeaDragon;
 import dsekercioglu.general.characters.TwoRulers;
 import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
@@ -106,8 +105,6 @@ public class WildNatureServer {
                         p = new TwoRulers(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GHOST.name().equals(s)) {
                         p = new Ghost(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.SEA_DRAGON.name().equals(s)) {
-                        p = new SeaDragon(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);

@@ -66,6 +66,6 @@ public class DoodFish extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 86;
+        return 75;
     }
 }

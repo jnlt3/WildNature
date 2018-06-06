@@ -50,12 +50,6 @@ public class Visualizer {
         Gif shark = new Gif(pa, "img/Shark.gif");
         images.put("SHARK", shark);
 
-        Gif electricEel = new Gif(pa, "img/ElectricEel.gif");
-        images.put("ELECTRIC_EEL", electricEel);
-
-        Gif barracuda = new Gif(pa, "img/Barracuda.gif");
-        images.put("BARRACUDA", barracuda);
-
         Gif megaMouth = new Gif(pa, "img/MegaMouth.gif");
         images.put("MEGA_MOUTH", megaMouth);
 
@@ -100,9 +94,6 @@ public class Visualizer {
 
         Gif twoRulers = new Gif(pa, "img/TwoRulers.gif");
         images.put("TWO_RULERS", twoRulers);
-
-        Gif seaDragon = new Gif(pa, "img/SeaDragon.gif");
-        images.put("SEA_DRAGON", seaDragon);
 
         Gif ghost = new Gif(pa, "img/Ghost.gif");
         images.put("GHOST", ghost);

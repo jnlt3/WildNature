@@ -97,7 +97,7 @@ public class Marlinium extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 44;
+        return 42;
     }
 
 }

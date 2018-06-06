@@ -7,11 +7,15 @@ import java.awt.geom.Rectangle2D;
 public class Geometry {
 
     public static Line2D[] getRectangleLines(Rectangle2D rect) {
-        Line2D[] lines = new Line2D[4];
+        Line2D[] lines = new Line2D[6];
         lines[0] = new Line2D.Double(rect.getMinX(), rect.getMinY(), rect.getMinX(), rect.getMaxY());
         lines[1] = new Line2D.Double(rect.getMaxX(), rect.getMinY(), rect.getMaxX(), rect.getMaxY());
         lines[2] = new Line2D.Double(rect.getMinX(), rect.getMinY(), rect.getMaxX(), rect.getMinY());
         lines[3] = new Line2D.Double(rect.getMinX(), rect.getMaxY(), rect.getMaxX(), rect.getMaxY());
+        double line4Y = (rect.getMinY() + rect.getMaxY() * 2) / 3;
+        double line5Y = (rect.getMinY() * 2 + rect.getMaxY()) / 3;
+        lines[4] = new Line2D.Double(rect.getMinX(), line4Y, rect.getMaxX(), line4Y);//For more precise intersection
+        lines[5] = new Line2D.Double(rect.getMinX(), line5Y, rect.getMaxX(), line5Y);//For more precise intersection
         return lines;
     }
 

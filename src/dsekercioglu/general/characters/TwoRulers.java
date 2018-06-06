@@ -104,7 +104,7 @@ public class TwoRulers extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 89;
+        return 61;
     }
 
     @Override
