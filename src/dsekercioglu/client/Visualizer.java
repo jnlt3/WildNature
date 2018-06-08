@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import processing.core.PApplet;
+import static processing.core.PConstants.ENTER;
 import processing.core.PImage;
 
 public class Visualizer {
@@ -95,6 +96,9 @@ public class Visualizer {
         Gif twoRulers = new Gif(pa, "img/TwoRulers.gif");
         images.put("TWO_RULERS", twoRulers);
 
+        Gif alien = new Gif(pa, "img/Alien.gif");
+        images.put("ALIEN", alien);
+
         Gif ghost = new Gif(pa, "img/Ghost.gif");
         images.put("GHOST", ghost);
 
@@ -111,16 +115,19 @@ public class Visualizer {
         c.mouseX = this.pa.mouseX;
         c.mouseY = this.pa.mouseY;
         c.power = this.pa.mousePressed || (this.pa.keyPressed && this.pa.key == ' ');
+        c.enter = this.pa.keyPressed;
         c.name = this.name;
         WildNature.client.sendUDP(c);
         drawGrids();
         boolean blind = false;
 
         ArrayList<Pair<Integer, String>> scores = new ArrayList<>();
+        boolean characterSpotted = false;
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = (DrawInfo) characters.get(i);
             scores.add(new Pair(d.score, d.name));
             if (d.name.equals(this.name)) {
+                characterSpotted = true;
                 blind = d.blind;
                 team = d.team;
                 if (!d.blind) {
@@ -133,12 +140,20 @@ public class Visualizer {
                 drawEnergyBar(d.energy / d.maxEnergy);
             }
         }
+        if (!characterSpotted) {
+            this.pa.fill(255);
+            this.pa.stroke(255);
+            this.pa.textSize(30);
+            String text = "Press Any Key to Respawn";
+            this.pa.text(text, 600 - pa.textWidth(text) / 2, 285);
+        }
         if (!blind) {
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo di = (DrawInfo) characters.get(i);
                 if (!di.hiding) {
                     float cx = di.x - Swimmer.cx + 600;
                     float cy = di.y - Swimmer.cy + 300;
+                    drawDamage(di.damageRecieved, cx, cy);
                     pa.fill(255);
                     pa.textSize(20);
                     pa.text(di.name, cx, cy - 110);
@@ -178,6 +193,7 @@ public class Visualizer {
         this.pa.stroke(255.0F, 0.0F, 0.0F);
         this.pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
         this.pa.rect(-WIDTH - Swimmer.cx + 600.0F, -HEIGHT - Swimmer.cy + 300.0F, WIDTH * 2, HEIGHT * 2);
+
     }
 
     private void drawHealthBar(float rate, float x, float y) {
@@ -185,12 +201,13 @@ public class Visualizer {
         this.pa.fill(0);
         this.pa.stroke(0);
         this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength, 5);
-        //rate > 0.5 green 255;
+
         int red = (int) Math.min(510 - (rate * 510), 255);
         int green = (int) Math.min(rate * 510, 255);
         this.pa.fill(red, green, 0);
         this.pa.stroke(red, green, 0);
         this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength * rate, 5);
+
     }
 
     private void drawEnergyBar(double rate) {
@@ -200,6 +217,22 @@ public class Visualizer {
         this.pa.rect(0, 600, 20, 600);
         this.pa.fill(0, 255, 255, 50);
         this.pa.rect(0, 600, 20, (float) -(600 * rate));
+    }
+
+    private void drawDamage(int damage, float x, float y) {
+        if (!(damage == 0)) {
+            Runnable r = () -> {
+                long time = System.currentTimeMillis();
+                while (System.currentTimeMillis() - time < 200) {
+                    pa.fill(255, 0, 0);
+                    pa.stroke(255, 0, 0);
+                    pa.textSize(20);
+                    pa.text(damage + "", x, y - 50);
+                }
+            };
+            Thread t = new Thread(r);
+            t.start();
+        }
     }
 
     private void drawVision(String type, ArrayList<DrawInfo> characters) {
@@ -256,7 +289,6 @@ public class Visualizer {
         }
 
         this.pa.fill(0);
-
         this.pa.stroke(0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
@@ -269,7 +301,6 @@ public class Visualizer {
         }
 
         this.pa.fill(0, 255, 0);
-
         this.pa.stroke(0, 255, 0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);

@@ -28,9 +28,9 @@ public class DoodFish extends Swimmer {
         this.damage = DOOD_FISH_DAMAGE;
         this.abilityTime = DOOD_FISH_ABILITY_TIME;
         this.boostTime = DOOD_FISH_BOOST_TIME;
+        this.armor = DOOD_FISH_ARMOR;
+        this.armorPiercing = DOOD_FISH_ARMOR_PIERCING;
         this.ability1 = POISON;
-        // = SLOW_DOWN;
-        // = DAMAGE_BOOST;
 
         this.type = DOOD_FISH;
     }

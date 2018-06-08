@@ -27,9 +27,9 @@ public class Shark extends Swimmer {
         this.damage = SHARK_DAMAGE;
         this.abilityTime = SHARK_ABILITY_TIME;
         this.boostTime = SHARK_BOOST_TIME;
+        this.armor = SHARK_ARMOR;
+        this.armorPiercing = SHARK_ARMOR_PIERCING;
         this.ability1 = KNOCKBACK;
-        // = GRAB;
-        // = BLEED;
 
         this.type = SHARK;
     }

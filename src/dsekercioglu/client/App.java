@@ -58,13 +58,10 @@ public class App extends Application {
 
         Label character_label = SimplifiedGUI.newLabel("Select Character:");
 
-//        String[] fileNames = {"Marlin", "BlackMarlin", "Crocodile", "Shark",
-//            "ElectricEel", "Barracuda", "MegaMouth", "Orca", "Hippo", "ColossalSquid",
-//            "DoodFish", "ElectricMarlin", "Guardian", "TigerShark", "Dolphin", "MakoShark"};
         String[] fileNames = {"Marlin", "BlackMarlin", "Crocodile", "Shark", "Hippo",
             "MegaMouth", "Orca", "ColossalSquid", "Guardian",
             "TigerShark", "Dolphin", "MakoShark", "ElectricMarlin", "TwoRulers", "DoodFish",
-            "Ghost"};
+            "Alien", "Ghost"};
         RadioButton[] chars = new RadioButton[fileNames.length];
         for (int i = 0; i < fileNames.length; i++) {
             chars[i] = SimplifiedGUI.newRadioButton("", true, toggleGroup);

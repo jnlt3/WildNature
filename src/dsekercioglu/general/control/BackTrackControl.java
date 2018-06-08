@@ -71,16 +71,6 @@ public class BackTrackControl extends Control {
         return (Math.max((owner.health * owner.damage - s.health * s.damage), 1)) * distToTarget / distToDanger;
     }
 
-    @Override
-    public void ownerAttacked() {
-
-    }
-
-    @Override
-    public void ownerHit() {
-
-    }
-
     private class Pair<T extends Comparable, U> implements Comparable {
 
         T comparable;

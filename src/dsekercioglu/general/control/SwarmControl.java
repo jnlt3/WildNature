@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TwinControl extends Control {
+public class SwarmControl extends Control {
 
     final int ANGLE_NUM = 36;
     final float MAX_DIST = 100;
@@ -18,7 +18,7 @@ public class TwinControl extends Control {
 
     Swimmer base;
 
-    public TwinControl(Swimmer owner, Swimmer base, Environment e) {
+    public SwarmControl(Swimmer owner, Swimmer base, Environment e) {
         super(owner);
         this.env = e;
         this.base = base;
@@ -73,16 +73,6 @@ public class TwinControl extends Control {
         ty = s.y - Math.sin(ta) * hwidth;
         double distToDanger = point.distance(tx, ty);
         return distToTarget * Math.pow(distToBase, 4) / distToDanger;
-    }
-
-    @Override
-    public void ownerAttacked() {
-
-    }
-
-    @Override
-    public void ownerHit() {
-
     }
 
     private class Pair<T extends Comparable, U> implements Comparable {

@@ -28,9 +28,8 @@ public class BlackMarlin extends Swimmer {
         this.abilityTime = BLACK_MARLIN_ABILITY_TIME;
         this.boostTime = BLACK_MARLIN_BOOST_TIME;
         this.ability1 = HORN;
-        // = DRAIN_HIT;
-        // = HORN;
-
+        this.armor = BLACK_MARLIN_ARMOR;
+        this.armorPiercing = BLACK_MARLIN_ARMOR_PIERCING;
         this.type = BLACK_MARLIN;
     }
 

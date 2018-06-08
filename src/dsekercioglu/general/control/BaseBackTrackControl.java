@@ -74,17 +74,6 @@ public class BaseBackTrackControl extends Control {
         double distToDanger = point.distance(tx, ty);
         return (Math.max((owner.health * owner.damage - s.health * s.damage), 1)) * distToTarget * Math.pow(distToBase, 2) / distToDanger;
     }
-
-    @Override
-    public void ownerAttacked() {
-
-    }
-
-    @Override
-    public void ownerHit() {
-
-    }
-
     private class Pair<T extends Comparable, U> implements Comparable {
 
         T comparable;

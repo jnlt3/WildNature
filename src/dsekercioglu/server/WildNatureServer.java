@@ -4,6 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import dsekercioglu.general.characters.Alien;
 import dsekercioglu.general.characters.Animal;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
@@ -24,6 +25,9 @@ import dsekercioglu.general.characters.Shark;
 import dsekercioglu.general.characters.Swimmer;
 import dsekercioglu.general.characters.Team;
 import dsekercioglu.general.characters.TigerShark;
+import dsekercioglu.general.control.AmbushControl;
+import dsekercioglu.general.control.BackTrackControl;
+import dsekercioglu.general.control.StraightAttackControl;
 import dsekercioglu.general.control.UserControl;
 import dsekercioglu.general.multiPlayer.CharacterInfo;
 import dsekercioglu.general.multiPlayer.ControlInfo;
@@ -103,6 +107,8 @@ public class WildNatureServer {
                         p = new MakoShark(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.TWO_RULERS.name().equals(s)) {
                         p = new TwoRulers(name, 0.0F, 0.0F, null, env);
+                    } else if (Animal.ALIEN.name().equals(s)) {
+                        p = new Alien(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GHOST.name().equals(s)) {
                         p = new Ghost(name, 0.0F, 0.0F, null, env);
                     }

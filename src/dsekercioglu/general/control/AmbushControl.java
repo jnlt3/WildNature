@@ -74,16 +74,6 @@ public class AmbushControl extends Control {
         return Math.max((owner.health * owner.damage - s.health * s.damage), 1) * point.distance(s.x, s.y);
     }
 
-    @Override
-    public void ownerAttacked() {
-        timeSinceHit = 300;
-    }
-
-    @Override
-    public void ownerHit() {
-        timeSinceHit = 300;
-    }
-
     private class Pair<T extends Comparable, U> implements Comparable {
 
         T comparable;

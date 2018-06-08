@@ -28,8 +28,8 @@ public class Crocodile extends Swimmer {
         this.abilityTime = CROCODILE_ABILITY_TIME;
         this.boostTime = CROCODILE_BOOST_TIME;
         this.ability1 = HOLD;
-        // = GRAB;
-        // = REGEN_BOOST;
+        this.armor = CROCODILE_ARMOR;
+        this.armorPiercing = CROCODILE_ARMOR_PIERCING;
 
         this.type = CROCODILE;
     }

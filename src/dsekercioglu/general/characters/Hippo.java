@@ -28,9 +28,9 @@ public class Hippo extends Swimmer {
         this.damage = HIPPO_DAMAGE;
         this.abilityTime = HIPPO_ABILITY_TIME;
         this.boostTime = HIPPO_BOOST_TIME;
+        this.armor = HIPPO_ARMOR;
+        this.armor = HIPPO_ARMOR_PIERCING;
         this.ability1 = SUPERBITE;
-        // = GRAB;
-        // = REGEN_BOOST;
 
         this.type = HIPPO;
     }

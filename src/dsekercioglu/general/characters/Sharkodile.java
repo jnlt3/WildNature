@@ -33,6 +33,8 @@ public class Sharkodile extends Swimmer {
         this.damage = SHARKODILE_DAMAGE;
         this.abilityTime = SHARKODILE_ABILITY_TIME;
         this.boostTime = SHARKODILE_BOOST_TIME;
+        this.armor = SHARKODILE_ARMOR;
+        this.armorPiercing = SHARKODILE_ARMOR_PIERCING;
         this.ability1 = HOLD;
 
         this.type = SHARKODILE;

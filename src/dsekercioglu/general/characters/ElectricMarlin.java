@@ -28,10 +28,10 @@ public class ElectricMarlin extends Swimmer {
         this.damage = ELECTRIC_MARLIN_DAMAGE;
         this.abilityTime = ELECTRIC_MARLIN_ABILITY_TIME;
         this.boostTime = ELECTRIC_MARLIN_BOOST_TIME;
+        this.armor = ELECTRIC_MARLIN_ARMOR;
+        this.armorPiercing = ELECTRIC_MARLIN_ARMOR_PIERCING;
         this.ability1 = ELECTRIC_HORN;
-        // = DRAIN_HIT;
-        // = HORN;
-
+        
         this.type = ELECTRIC_MARLIN;
     }
 

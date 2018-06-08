@@ -2,6 +2,7 @@ package dsekercioglu.server;
 
 import dsekercioglu.general.characters.Ability;
 import static dsekercioglu.general.characters.Ability.*;
+import dsekercioglu.general.characters.Alien;
 import dsekercioglu.general.characters.BlackMarlin;
 import dsekercioglu.general.characters.ColossalSquid;
 import dsekercioglu.general.characters.Crocodile;
@@ -60,6 +61,8 @@ public class Environment {
 
     public HashMap<Swimmer, Ability> charAbilities = new HashMap<>();
 
+    ArrayList<Integer> indices = new ArrayList<>();
+
     ArrayList<Ability> abilities = new ArrayList<>();
     ArrayList<Swimmer> attackers = new ArrayList<>();
     ArrayList<Swimmer> victims = new ArrayList<>();
@@ -74,28 +77,34 @@ public class Environment {
 //            m.control = new StraightAttackControl(m, this);
 //            addCharacter(m);
 //        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new TwoRulers("Porpoz", 0, 0, null, this);
-//            m.team = RED;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
         for (int i = 0; i < 1; i++) {
             Swimmer m = new Shark("Porpoz", 0, 0, null, this);
-            m.team = INDEPENDENT;
+            m.team = BLUE;
             m.control = new StraightAttackControl(m, this);
             addCharacter(m);
         }
 //        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Marlinium("Borb", 0, 0, null, this);
-//            m.team = DOMINATOR;
-//            m.control = new BackTrackControl(m, this);
+//            Swimmer m = new Pirahna("Porpoz", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
 //            addCharacter(m);
 //        }
 //        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Shark("Foof", 0, 0, null, this);
+//            Swimmer m = new Sharkodile("Borb", 0, 0, null, this);
 //            m.team = BLUE;
 //            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Sharkodile("Borbe", 0, 0, null, this);
+//            m.team = BLUE;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Marlinium("Foof", 0, 0, null, this);
+//            m.team = BLUE;
+//            m.control = new BackTrackControl(m, this);
 //            addCharacter(m);
 //        }
     }
@@ -131,8 +140,19 @@ public class Environment {
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            swimmer.respawn(WIDTH, HEIGHT);
-                            characters.add(swimmer);
+                            long time = System.currentTimeMillis();
+                            while (System.currentTimeMillis() - time < 60000) {
+                                ControlInfo c = (ControlInfo) hashMap.get(swimmer.getName());
+                                if (c == null) {
+                                    swimmer.respawn(WIDTH, HEIGHT);
+                                    characters.add(swimmer);
+                                    break;
+                                } else if (c.enter) {
+                                    swimmer.respawn(WIDTH, HEIGHT);
+                                    characters.add(swimmer);
+                                    break;
+                                }
+                            }
                         }
                     }
                 };
@@ -149,6 +169,7 @@ public class Environment {
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
             DrawInfo di = ((Swimmer) this.characters.get(i)).getDrawInfo();
+            this.characters.get(i).damageRecieved = 0;
             try {
                 di.score = scores.get(di.name);
             } catch (NullPointerException e) {
@@ -174,130 +195,159 @@ public class Environment {
                 Swimmer p2 = characters.get(j);
                 Line2D[] r2 = getHitBox(p2);
                 if (attackable(p1.team, p2.team) && !p1.equals(p2) && Geometry.intersects(new Line2D[]{r1}, r2)) {
-                    p1.attacked();
                     if (p1.energyTime > 0 && p2.isAlive()) {
                         p1.energyTime = 0;
-                        abilities.add(charAbilities.get(p1));
-                        attackers.add(p1);
-                        victims.add(p2);
-                        time.add(p1.abilityTime);
-                    } else {
-                        p2.hit(p1.damage);
+                        int index = attackers.indexOf(p1);
+                        if (index == -1 || (index != -1 && victims.get(index) != p2)) {
+                            abilities.add(charAbilities.get(p1));
+                            attackers.add(p1);
+                            victims.add(p2);
+                            time.add(p1.abilityTime);
+                        }
+                    } else if (p2.getInvulnerability() <= 0) {
+                        p1.energyTime = 0;
+                        p2.characterHit(p1.damage, p1.armorPiercing);
                         if (!p2.isAlive()) {
                             scores.put(p1.getName(), scores.get(p1.getName()) + 1);
                         }
                     }
                     p1.setMove(-p2.knockbackPower, p1.angle);
-                    p1.energyTime = 0;
                 }
             }
         }
     }
 
     private void handleAbilities() {
-        ArrayList<Integer> indices = new ArrayList<>();
+        indices.clear();
         for (int i = 0; i < abilities.size(); i++) {
             Ability a = abilities.get(i);
             int newTime = time.get(i) - 1;
             Swimmer victim = victims.get(i);
             Swimmer attacker = attackers.get(i);
+//            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
+//                newTime = 0;
+//            }
+            switch (a) {
+                case BLEED:
+                    victims.get(i).abilityHit(BLEED_DAMAGE);
+                    break;
+                case HOLD:
+                    attacker.control.freeze(true);
+                    victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.angle = (float) (attacker.angle + Math.PI / 2);
+                    victim.abilityHit(HOLD_DAMAGE + victim.regen);
+                    if (newTime <= 0) {
+                        attacker.control.freeze(false);
+                        victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
+                    }
+                    break;
+                case SHOCK:
+                    victim.abilityHit(SHOCK_DAMAGE);
+                    break;
+                case KNOCKBACK:
+                    victim.characterHit(attacker.damage * KNOCKBACK_MULTIPLIER, attacker.armorPiercing);
+                    victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * attacker.knockbackPower, attacker.angle);
+                    newTime = 0;
+                    break;
+                case GRAB:
+                    victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.angle = (float) (attacker.angle + Math.PI / 2);
+                    victim.abilityHit(GRAB_DAMAGE + victim.regen);
+                    if (newTime <= 0) {
+                        victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
+                    }
+                    break;
+                case SUPERBITE:
+                    victim.characterHit(attacker.damage * SUPERBITE_MULTIPLIER, attacker.armorPiercing);
+                    victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
+                    newTime = 0;
+                    break;
+                case INKSPILL:
+                    victim.abilityHit(BLEED_DAMAGE + victim.regen);
+                    victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                    victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() / 2 + 1)));
+                    victim.angle = (float) (attacker.angle + Math.PI);
+                    if (newTime <= 0) {
+                        victim.setMoveInAngle(attacker.knockbackPower, attacker.angle + Math.PI);
+                        victim.setBlind(BLINDNESS);
+                    }
+                    break;
+                case POISON:
+                    victim.abilityHit(POISON_DAMAGE + victim.regen);
+                    break;
+                case PRISON:
+                    victim.x = ((Guardian) attacker).mouseX;
+                    victim.y = ((Guardian) attacker).mouseY;
+                    victim.velocity = 0;
+                    victim.angle += Math.PI / 9;
+                    break;
+                case REGEN:
+                    victim.characterHit(attacker.damage, attacker.armorPiercing);
+                    attacker.health += REGEN_AMOUNT;
+                    break;
+                case REGEN_GRAB:
+                    victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.angle = (float) (attacker.angle + Math.PI / 2);
+                    attacker.health += 2;
+                    break;
+                case SLOW_DOWN:
+                    victim.velocity = 1;
+                    break;
+                case HORN:
+                    victim.characterHit(attacker.damage * HORN_MULTIPLIER, attacker.armorPiercing);
+                    newTime = 0;
+                    victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
+                    abilities.add(BLEED);
+                    attackers.add(attacker);
+                    victims.add(victim);
+                    time.add(attacker.abilityTime);
+                    break;
+                case SHORT_GRAB:
+                    victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.angle = (float) (attacker.angle + Math.PI / 2);
+                    victim.abilityHit(attacker.damage / 4);
+                    if (newTime <= 0) {
+                        victim.characterHit(100, attacker.armorPiercing);
+                        victim.setMoveInAngle(attacker.knockbackPower * KNOCKBACK_MULTIPLIER, attacker.angle);
+                    }
+                    break;
+                case ELECTRIC_HORN:
+                    victim.abilityHit(SHOCK_DAMAGE);
+                    victim.control.freeze(true);
+                    if (newTime <= 4) {
+                        victim.energy = Math.max(victim.energy - 0.1F, 0);
+                        victim.control.freeze(false);
+                    }
+                    break;
+                case BLEEDING_KNOCKBACK:
+                    victim.characterHit(attacker.damage, attacker.armorPiercing);
+                    victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
+                    newTime = 0;
+                    abilities.add(BLEED);
+                    attackers.add(attacker);
+                    victims.add(victim);
+                    time.add(attacker.abilityTime);
+                    break;
+                case STUN:
+                    victim.control.freeze(true);
+                    if (newTime <= 0) {
+                        victim.control.freeze(false);
+                    }
+                    break;
+                case SPEEDY:
+                    victim.characterHit(attacker.damage, attacker.armorPiercing);
+                    victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * attacker.knockbackPower, attacker.angle);
+                    attacker.energyTime = 120;
+                default:
+                    break;
+            }
             if (!victim.isAlive()) {
                 scores.put(attacker.getName(), scores.get(attacker.getName()) + 1);
                 newTime = 0;
-            }
-            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
-                newTime = 0;
-            }
-            if (a.equals(BLEED)) {
-                victims.get(i).hit(BLEED_DAMAGE);
-            } else if (a.equals(HOLD)) {
-                attacker.control.freeze(true);
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(HOLD_DAMAGE + victim.regen);
-                if (newTime <= 0) {
-                    attacker.control.freeze(false);
-                    victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
-                }
-            } else if (a.equals(SHOCK)) {
-                victim.hit(SHOCK_DAMAGE);
-            } else if (a.equals(Ability.KNOCKBACK)) {
-                victim.hit(attacker.damage * KNOCKBACK_MULTIPLIER);
-                victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * attacker.knockbackPower, attacker.angle);
-                newTime = 0;
-            } else if (a.equals(GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(GRAB_DAMAGE + victim.regen);
-                if (newTime <= 0) {
-                    victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
-                }
-            } else if (a.equals(SUPERBITE)) {
-                victim.hit(attacker.damage * SUPERBITE_MULTIPLIER);
-                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
-                newTime = 0;
-            } else if (a.equals(INKSPILL)) {
-                victim.hit(BLEED_DAMAGE);
-                victim.x = (float) (attacker.x - (Math.cos(attacker.angle) * (attacker.getWidth() + 1)));
-                victim.y = (float) (attacker.y - (Math.sin(attacker.angle) * (attacker.getWidth() + 1)));
-                victim.angle = (float) (attacker.angle + Math.PI);
-                victim.setBlind(BLINDNESS);
-            } else if (a.equals(POISON)) {
-                victim.hit(POISON_DAMAGE + victim.regen);
-            } else if (a.equals(PRISON)) {
-                victim.x = ((Guardian) attacker).mouseX;
-                victim.y = ((Guardian) attacker).mouseY;
-                victim.velocity = 0;
-                victim.angle += Math.PI / 9;
-            } else if (a.equals(REGEN)) {
-                victim.hit(attacker.damage);
-                attacker.health += REGEN_AMOUNT;
-            } else if (a.equals(REGEN_GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                attacker.health += 2;
-            } else if (a.equals(SLOW_DOWN)) {
-                victim.velocity = 1;
-            } else if (a.equals(HORN)) {
-                victim.hit(attacker.damage * HORN_MULTIPLIER);
-                newTime = 0;
-                victim.setMoveInAngle(attacker.knockbackPower, attacker.angle);
-                abilities.add(BLEED);
-                attackers.add(attacker);
-                victims.add(victim);
-                time.add(attacker.abilityTime);
-            } else if (a.equals(SHORT_GRAB)) {
-                victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
-                victim.angle = (float) (attacker.angle + Math.PI / 2);
-                victim.hit(attacker.damage / 4);
-                if (newTime <= 0) {
-                    victim.setMoveInAngle(attacker.knockbackPower * KNOCKBACK_MULTIPLIER, attacker.angle);
-                }
-            } else if (a.equals(ELECTRIC_HORN)) {
-                victim.hit(SHOCK_DAMAGE);
-                victim.control.freeze(true);
-                if (newTime <= 4) {
-                    victim.energy = Math.max(victim.energy - 0.1F, 0);
-                    victim.control.freeze(false);
-                }
-
-            } else if (a.equals(BLEEDING_KNOCKBACK)) {
-                victim.hit(attacker.damage);
-                victim.setMoveInAngle(SUPERBITE_MULTIPLIER * attacker.knockbackPower, attacker.angle);
-                newTime = 0;
-                abilities.add(BLEED);
-                attackers.add(attacker);
-                victims.add(victim);
-                time.add(attacker.abilityTime);
-            } else if (a.equals(STUN)) {
-                victim.control.freeze(true);
-                if (newTime <= 0) {
-                    victim.control.freeze(false);
-                }
             }
             time.set(i, newTime);
             if (newTime <= 0) {

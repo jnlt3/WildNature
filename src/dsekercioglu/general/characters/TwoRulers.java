@@ -2,12 +2,8 @@ package dsekercioglu.general.characters;
 
 import static dsekercioglu.general.Defaults.*;
 import static dsekercioglu.general.characters.Ability.STUN;
-import static dsekercioglu.general.characters.Ability.SUPERBITE;
 import static dsekercioglu.general.characters.Animal.TWO_RULERS;
-import dsekercioglu.general.control.BackTrackControl;
-import dsekercioglu.general.control.BaseBackTrackControl;
-import dsekercioglu.general.control.StraightAttackControl;
-import dsekercioglu.general.control.TwinControl;
+import dsekercioglu.general.control.SwarmControl;
 import dsekercioglu.server.Environment;
 import java.util.ArrayList;
 import processing.core.PApplet;
@@ -40,9 +36,9 @@ public class TwoRulers extends Swimmer {
         this.damage = TWO_RULERS_DAMAGE;
         this.abilityTime = TWO_RULERS_ABILITY_TIME;
         this.boostTime = TWO_RULERS_BOOST_TIME;
+        this.armor = TWO_RULERS_ARMOR;
+        this.armorPiercing = TWO_RULERS_ARMOR_PIERCING;
         this.ability1 = STUN;
-        // = SLOW_DOWN;
-        // = REGEN_BOOST;
 
         this.type = TWO_RULERS;
     }
@@ -62,7 +58,7 @@ public class TwoRulers extends Swimmer {
         }
         if (time == 0 && cloneNum < 1) {
             TwoRulers ruler = new TwoRulers(this.getName() + " X", x, y, null, e);
-            ruler.control = new TwinControl(ruler, this, e);
+            ruler.control = new SwarmControl(ruler, this, e);
             ruler.clone = true;
             ruler.team = team;
             e.characters.add(ruler);

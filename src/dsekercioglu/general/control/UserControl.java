@@ -20,17 +20,6 @@ public class UserControl extends Control {
             stop = false;
         }
         moveAngle = (float) Math.atan2(mouseY - 300, mouseX - 600);
-        this.mousePressed = mousePressed; 
+        this.mousePressed = mousePressed;
     }
-
-    @Override
-    public void ownerAttacked() {
-
-    }
-
-    @Override
-    public void ownerHit() {
-
-    }
-
 }

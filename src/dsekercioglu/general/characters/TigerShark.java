@@ -27,9 +27,9 @@ public class TigerShark extends Swimmer {
         this.damage = TIGER_SHARK_DAMAGE;
         this.abilityTime = TIGER_SHARK_ABILITY_TIME;
         this.boostTime = TIGER_SHARK_BOOST_TIME;
+        this.armor = TIGER_SHARK_ARMOR;
+        this.armorPiercing = TIGER_SHARK_ARMOR_PIERCING;
         this.ability1 = SHORT_GRAB;
-        // = DAMAGE_BOOST;
-        // = BLEED;
 
         this.type = TIGER_SHARK;
     }

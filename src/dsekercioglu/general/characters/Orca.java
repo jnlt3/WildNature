@@ -27,9 +27,9 @@ public class Orca extends Swimmer {
         this.damage = ORCA_DAMAGE;
         this.abilityTime = ORCA_ABILITY_TIME;
         this.boostTime = ORCA_BOOST_TIME;
+        this.armor = ORCA_ARMOR;
+        this.armorPiercing = ORCA_ARMOR_PIERCING;
         this.ability1 = GRAB;
-        // = KNOCKBACK;
-        // = DRAIN_HIT;
 
         this.type = ORCA;
     }

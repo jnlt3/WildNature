@@ -31,9 +31,9 @@ public class Guardian extends Swimmer {
         this.damage = GUARDIAN_DAMAGE;
         this.abilityTime = GUARDIAN_ABILITY_TIME;
         this.boostTime = GUARDIAN_BOOST_TIME;
+        this.armor = GUARDIAN_ARMOR;
+        this.armor = GUARDIAN_ARMOR_PIERCING;
         this.ability1 = PRISON;
-        // = SLOW_DOWN;
-        // = REGEN_BOOST;
 
         this.type = GUARDIAN;
     }

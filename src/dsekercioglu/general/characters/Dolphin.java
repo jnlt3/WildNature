@@ -28,8 +28,8 @@ public class Dolphin extends Swimmer {
         this.abilityTime = DOLPHIN_ABILITY_TIME;
         this.boostTime = DOLPHIN_BOOST_TIME;
         this.ability1 = REGEN;
-        // = DAMAGE_BOOST;
-        // = BLEED;
+        this.armor = DOLPHIN_ARMOR;
+        this.armorPiercing = DOLPHIN_ARMOR_PIERCING;
 
         this.type = DOLPHIN;
     }

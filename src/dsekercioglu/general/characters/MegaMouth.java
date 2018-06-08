@@ -28,9 +28,9 @@ public class MegaMouth extends Swimmer {
         this.damage = MEGA_MOUTH_SHARK_DAMAGE;
         this.abilityTime = MEGA_MOUTH_SHARK_ABILITY_TIME;
         this.boostTime = MEGA_MOUTH_SHARK_BOOST_TIME;
+        this.armor = MEGA_MOUTH_SHARK_ARMOR;
+        this.armorPiercing = MEGA_MOUTH_SHARK_ARMOR_PIERCING;
         this.ability1 = REGEN_GRAB;
-        // = GRAB;
-        // = HOLD;
 
         this.type = MEGA_MOUTH;
     }

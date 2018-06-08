@@ -29,9 +29,9 @@ public class MakoShark extends Swimmer {
         this.damage = MAKO_SHARK_DAMAGE;
         this.abilityTime = MAKO_SHARK_ABILITY_TIME;
         this.boostTime = MAKO_SHARK_BOOST_TIME;
+        this.armor = MAKO_SHARK_ARMOR;
+        this.armorPiercing = MAKO_SHARK_ARMOR_PIERCING;
         this.ability1 = BLEEDING_KNOCKBACK;
-        // = DAMAGE_BOOST;
-        // = BLEED;
 
         this.type = MAKO_SHARK;
     }

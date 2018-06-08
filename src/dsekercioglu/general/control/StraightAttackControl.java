@@ -59,14 +59,6 @@ public class StraightAttackControl extends Control {
         this.mousePressed = mousePressed;
     }
 
-    @Override
-    public void ownerAttacked() {
-    }
-
-    @Override
-    public void ownerHit() {
-    }
-
     private class Pair<T extends Comparable, U> implements Comparable {
 
         T comparable;

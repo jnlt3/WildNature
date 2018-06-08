@@ -38,10 +38,10 @@ public class Marlinium extends Swimmer {
         this.damage = MARLINIUM_DAMAGE;
         this.abilityTime = MARLINIUM_ABILITY_TIME;
         this.boostTime = MARLINIUM_BOOST_TIME;
+        this.armor = MARLINIUM_ARMOR;
+        this.armorPiercing = MARLINIUM_ARMOR_PIERCING;       
         this.ability1 = SUPERBITE;
-        // = KNOCKBACK;
-        // = HORN;
-
+        
         this.type = MARLINIUM;
     }
 

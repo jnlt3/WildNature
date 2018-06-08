@@ -28,9 +28,8 @@ public class ColossalSquid extends Swimmer {
         this.abilityTime = COLOSSAL_SQUID_ABILITY_TIME;
         this.boostTime = COLOSSAL_SQUID_BOOST_TIME;
         this.ability1 = INKSPILL;
-        // = DRAIN_HIT;
-        // = DAMAGE_BOOST;
-
+        this.armor = COLOSSAL_SQUID_ARMOR;
+        this.armorPiercing = COLOSSAL_SQUID_ARMOR_PIERCING;
         this.type = COLOSSAL_SQUID;
     }
 

@@ -30,9 +30,7 @@ public class Ghost extends Swimmer {
         this.abilityTime = GHOST_ABILITY_TIME;
         this.boostTime = GHOST_BOOST_TIME;
         this.ability1 = ELECTRIC_HORN;
-        // = DRAIN_HIT;
-        // = HORN;
-
+        
         this.type = GHOST;
     }
 

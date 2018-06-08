@@ -2,7 +2,7 @@ package dsekercioglu.general;
 
 public class Defaults {
 
-    public static final float MARLIN_TURN = 0.08726646F;
+    public static final float MARLIN_TURN = 0.09F;
     public static final float MARLIN_LENGTH = 140.0F;
     public static final float MARLIN_WEIGHT = 2000.0F;
     public static final float MARLIN_SPEED = 0.1F * 7.0F;
@@ -14,21 +14,25 @@ public class Defaults {
     public static final float MARLIN_DAMAGE = 180F; // 300
     public static final int MARLIN_BOOST_TIME = 50;
     public static final int MARLIN_ABILITY_TIME = 60;
+    public static final int MARLIN_ARMOR = 0;
+    public static final int MARLIN_ARMOR_PIERCING = 1;
 
-    public static final float BLACK_MARLIN_TURN = 0.08726646F;
+    public static final float BLACK_MARLIN_TURN = 0.085F;
     public static final float BLACK_MARLIN_LENGTH = 140.0F;
     public static final float BLACK_MARLIN_WEIGHT = 1650.0F;
     public static final float BLACK_MARLIN_SPEED = 0.1F * 8.0F;
     public static final float BLACK_MARLIN_PASSIVE_ABILITY = 3.0F;
-    public static final float BLACK_MARLIN_MAX_ENERGY = 2.0F;
+    public static final float BLACK_MARLIN_MAX_ENERGY = 3.0F;
     public static final float BLACK_MARLIN_ENERGY_INCREASE = 0.0025F;
     public static final float BLACK_MARLIN_MAX_HEALTH = 600;
     public static final float BLACK_MARLIN_HEALTH_REGEN = 0.5F;
     public static final float BLACK_MARLIN_DAMAGE = 180F; // 320
     public static final int BLACK_MARLIN_BOOST_TIME = 28;
     public static final int BLACK_MARLIN_ABILITY_TIME = 75;
+    public static final float BLACK_MARLIN_ARMOR = 0;
+    public static final float BLACK_MARLIN_ARMOR_PIERCING = 1;
 
-    public static final float CROCODILE_TURN = 0.08726646F;
+    public static final float CROCODILE_TURN = 0.04F;
     public static final float CROCODILE_LENGTH = 170.0F;
     public static final float CROCODILE_WEIGHT = 2500.0F;
     public static final float CROCODILE_SPEED = 0.1F * 5.1F;
@@ -40,8 +44,10 @@ public class Defaults {
     public static final float CROCODILE_DAMAGE = 120F; // 270
     public static final int CROCODILE_BOOST_TIME = 40;
     public static final int CROCODILE_ABILITY_TIME = 90;
+    public static final float CROCODILE_ARMOR = 0.75F;
+    public static final float CROCODILE_ARMOR_PIERCING = 0.2F;
 
-    public static final float SHARK_TURN = 0.045F;
+    public static final float SHARK_TURN = 0.05F;
     public static final float SHARK_LENGTH = 170.0F;
     public static final float SHARK_WEIGHT = 3200.0F;
     public static final float SHARK_SPEED = 0.1F * 5.3F;
@@ -52,9 +58,11 @@ public class Defaults {
     public static final float SHARK_HEALTH_REGEN = 0.5F;
     public static final float SHARK_DAMAGE = 160F; // 240
     public static final int SHARK_BOOST_TIME = 120;
-    public static final int SHARK_ABILITY_TIME = 0;
+    public static final int SHARK_ABILITY_TIME = 1;
+    public static final float SHARK_ARMOR = 0.5F;
+    public static final float SHARK_ARMOR_PIERCING = 0.5F;
 
-    public static final float MEGA_MOUTH_SHARK_TURN = 0.045F;
+    public static final float MEGA_MOUTH_SHARK_TURN = 0.06F;
     public static final float MEGA_MOUTH_SHARK_LENGTH = 170.0F;
     public static final float MEGA_MOUTH_SHARK_WEIGHT = 1600.0F;
     public static final float MEGA_MOUTH_SHARK_SPEED = 0.1F * 5.5F;
@@ -66,6 +74,8 @@ public class Defaults {
     public static final float MEGA_MOUTH_SHARK_DAMAGE = 100; //300
     public static final int MEGA_MOUTH_SHARK_BOOST_TIME = 40;
     public static final int MEGA_MOUTH_SHARK_ABILITY_TIME = 150;
+    public static final float MEGA_MOUTH_SHARK_ARMOR = 0.4F;
+    public static final float MEGA_MOUTH_SHARK_ARMOR_PIERCING = 0.3F;
 
     public static final float ORCA_TURN = 0.045F;
     public static final float ORCA_LENGTH = 170.0F;
@@ -79,8 +89,10 @@ public class Defaults {
     public static final float ORCA_DAMAGE = 150F; // 240
     public static final int ORCA_BOOST_TIME = 40;
     public static final int ORCA_ABILITY_TIME = 75;
+    public static final float ORCA_ARMOR = 0.6F;
+    public static final float ORCA_ARMOR_PIERCING = 0.6F;
 
-    public static final float HIPPO_TURN = 0.06F;
+    public static final float HIPPO_TURN = 0.035F;
     public static final float HIPPO_LENGTH = 165.0F;
     public static final float HIPPO_WEIGHT = 7000.0F;
     public static final float HIPPO_SPEED = 0.1F * 5.5F;
@@ -91,10 +103,12 @@ public class Defaults {
     public static final float HIPPO_HEALTH_REGEN = 0.5F;
     public static final float HIPPO_DAMAGE = 100F; // 400
     public static final int HIPPO_BOOST_TIME = 1000;
-    public static final int HIPPO_ABILITY_TIME = 0;
+    public static final int HIPPO_ABILITY_TIME = 1;
+    public static final float HIPPO_ARMOR = 0.65F;
+    public static final float HIPPO_ARMOR_PIERCING = 0.8F;
 
-    public static final float COLOSSAL_SQUID_TURN = 0.08726646F;
-    public static final float COLOSSAL_SQUID_LENGTH = 50.0F;
+    public static final float COLOSSAL_SQUID_TURN = 0.075F;
+    public static final float COLOSSAL_SQUID_LENGTH = 175.0F;
     public static final float COLOSSAL_SQUID_WEIGHT = 1000.0F;
     public static final float COLOSSAL_SQUID_SPEED = 0.1F * 4.8F;
     public static final float COLOSSAL_SQUID_PASSIVE_ABILITY = 2.0F;
@@ -105,6 +119,8 @@ public class Defaults {
     public static final float COLOSSAL_SQUID_DAMAGE = 120F; // 120
     public static final int COLOSSAL_SQUID_BOOST_TIME = 75;
     public static final int COLOSSAL_SQUID_ABILITY_TIME = 48;
+    public static final float COLOSSAL_SQUID_ARMOR = 0.3F;
+    public static final float COLOSSAL_SQUID_ARMOR_PIERCING = 0.75F;
 
     public static final float DOOD_FISH_TURN = 0.12F;
     public static final float DOOD_FISH_LENGTH = 90.0F;
@@ -118,6 +134,8 @@ public class Defaults {
     public static final float DOOD_FISH_DAMAGE = 100; //210
     public static final int DOOD_FISH_BOOST_TIME = 600;
     public static final int DOOD_FISH_ABILITY_TIME = 70;
+    public static final float DOOD_FISH_ARMOR = 0;
+    public static final float DOOD_FISH_ARMOR_PIERCING = 0.05F;
 
     public static final float ELECTRIC_MARLIN_TURN = 0.16F;
     public static final float ELECTRIC_MARLIN_LENGTH = 140.0F;
@@ -131,8 +149,10 @@ public class Defaults {
     public static final float ELECTRIC_MARLIN_DAMAGE = 180F; // 320
     public static final int ELECTRIC_MARLIN_BOOST_TIME = 50;
     public static final int ELECTRIC_MARLIN_ABILITY_TIME = 40;
+    public static final float ELECTRIC_MARLIN_ARMOR = 0;
+    public static final float ELECTRIC_MARLIN_ARMOR_PIERCING = 1;
 
-    public static final float SHARKODILE_TURN = 0.045F;
+    public static final float SHARKODILE_TURN = 0.04F;
     public static final float SHARKODILE_LENGTH = 200.0F;
     public static final float SHARKODILE_WEIGHT = 4000.0F;
     public static final float SHARKODILE_SPEED = 0.1F * 5.2F;
@@ -144,6 +164,8 @@ public class Defaults {
     public static final float SHARKODILE_DAMAGE = 170F;
     public static final int SHARKODILE_BOOST_TIME = 60;
     public static final int SHARKODILE_ABILITY_TIME = 100;
+    public static final float SHARKODILE_ARMOR = 0.9F;
+    public static final float SHARKODILE_ARMOR_PIERCING = 0.4F;
 
     public static final float MARLINIUM_TURN = 0.1F;
     public static final float MARLINIUM_LENGTH = 140.0F;
@@ -151,14 +173,16 @@ public class Defaults {
     public static final float MARLINIUM_SPEED = 0.1F * 7.0F;
     public static final float MARLINIUM_PASSIVE_ABILITY = 3.0F;
     public static final float MARLINIUM_MAX_ENERGY = 2.0F;
-    public static final float MARLINIUM_ENERGY_INCREASE = 0.002F;
+    public static final float MARLINIUM_ENERGY_INCREASE = 0.004F;
     public static final float MARLINIUM_MAX_HEALTH = 900;
     public static final float MARLINIUM_HEALTH_REGEN = 1F;
     public static final float MARLINIUM_DAMAGE = 200F;
     public static final int MARLINIUM_BOOST_TIME = 60;
     public static final int MARLINIUM_ABILITY_TIME = 100;
+    public static final float MARLINIUM_ARMOR = 0.85F;
+    public static final float MARLINIUM_ARMOR_PIERCING = 1;
 
-    public static final float MINI_MARLIN_TURN = 0.08726646F;
+    public static final float MINI_MARLIN_TURN = 0.16F;
     public static final float MINI_MARLIN_LENGTH = 100.0F;
     public static final float MINI_MARLIN_WEIGHT = 1000.0F;
     public static final float MINI_MARLIN_SPEED = 0.1F * 8.0F;
@@ -170,8 +194,10 @@ public class Defaults {
     public static final float MINI_MARLIN_DAMAGE = 50F;
     public static final int MINI_MARLIN_BOOST_TIME = 40;
     public static final int MINI_MARLIN_ABILITY_TIME = 50;
+    public static final float MINI_MARLIN_ARMOR = 0;
+    public static final float MINI_MARLIN_ARMOR_PIERCING = 0.8F;
 
-    public static final float TIGER_SHARK_TURN = 0.1F;
+    public static final float TIGER_SHARK_TURN = 0.08F;
     public static final float TIGER_SHARK_LENGTH = 140.0F;
     public static final float TIGER_SHARK_WEIGHT = 1500.0F;
     public static final float TIGER_SHARK_SPEED = 0.1F * 6F;
@@ -183,8 +209,10 @@ public class Defaults {
     public static final float TIGER_SHARK_DAMAGE = 160F; // 300
     public static final int TIGER_SHARK_BOOST_TIME = 60;
     public static final int TIGER_SHARK_ABILITY_TIME = 4;
+    public static final float TIGER_SHARK_ARMOR = 0.3F;
+    public static final float TIGER_SHARK_ARMOR_PIERCING = 0.6F;
 
-    public static final float DOLPHIN_TURN = 0.1F;
+    public static final float DOLPHIN_TURN = 0.08F;
     public static final float DOLPHIN_LENGTH = 140.0F;
     public static final float DOLPHIN_WEIGHT = 1500.0F;
     public static final float DOLPHIN_SPEED = 0.1F * 5.7F;
@@ -195,9 +223,11 @@ public class Defaults {
     public static final float DOLPHIN_HEALTH_REGEN = 0.5F;
     public static final float DOLPHIN_DAMAGE = 135F; // 200
     public static final int DOLPHIN_BOOST_TIME = 140;
-    public static final int DOLPHIN_ABILITY_TIME = 0;
+    public static final int DOLPHIN_ABILITY_TIME = 1;
+    public static final float DOLPHIN_ARMOR = 0.2F;
+    public static final float DOLPHIN_ARMOR_PIERCING = 0F;
 
-    public static final float MAKO_SHARK_TURN = 0.1F;
+    public static final float MAKO_SHARK_TURN = 0.09F;
     public static final float MAKO_SHARK_LENGTH = 140.0F;
     public static final float MAKO_SHARK_WEIGHT = 1500.0F;
     public static final float MAKO_SHARK_SPEED = 0.1F * 7F;
@@ -206,9 +236,11 @@ public class Defaults {
     public static final float MAKO_SHARK_ENERGY_INCREASE = 0.0025F;
     public static final float MAKO_SHARK_MAX_HEALTH = 650;
     public static final float MAKO_SHARK_HEALTH_REGEN = 0.75F;
-    public static final float MAKO_SHARK_DAMAGE = 160F; // 320
+    public static final float MAKO_SHARK_DAMAGE = 170F; // 330
     public static final int MAKO_SHARK_BOOST_TIME = 50;
     public static final int MAKO_SHARK_ABILITY_TIME = 32;
+    public static final float MAKO_SHARK_ARMOR = 0.25F;
+    public static final float MAKO_SHARK_ARMOR_PIERCING = 0.65F;
 
     public static final float TWO_RULERS_TURN = 0.1F;
     public static final float TWO_RULERS_LENGTH = 100.0F;
@@ -222,8 +254,10 @@ public class Defaults {
     public static final float TWO_RULERS_DAMAGE = 80; //120
     public static final int TWO_RULERS_BOOST_TIME = 50;
     public static final int TWO_RULERS_ABILITY_TIME = 150;
+    public static final float TWO_RULERS_ARMOR = 0.6F;
+    public static final float TWO_RULERS_ARMOR_PIERCING = 0.1F;
 
-    public static final float GUARDIAN_TURN = 0.045F;
+    public static final float GUARDIAN_TURN = 0.05F;
     public static final float GUARDIAN_LENGTH = 90.0F;
     public static final float GUARDIAN_WEIGHT = 3000.0F;
     public static final float GUARDIAN_SPEED = 0.1F * 4.0F;
@@ -235,6 +269,23 @@ public class Defaults {
     public static final float GUARDIAN_DAMAGE = 60F;
     public static final int GUARDIAN_BOOST_TIME = 1000;
     public static final int GUARDIAN_ABILITY_TIME = 30;
+    public static final float GUARDIAN_ARMOR = 0.9F;
+    public static final float GUARDIAN_ARMOR_PIERCING = 0;
+
+    public static final float ALIEN_TURN = 0.06F;
+    public static final float ALIEN_LENGTH = 140.0F;
+    public static final float ALIEN_WEIGHT = 1500.0F;
+    public static final float ALIEN_SPEED = 0.1F * 5F;
+    public static final float ALIEN_PASSIVE_ABILITY = 1.0F;
+    public static final float ALIEN_MAX_ENERGY = 3.0F;
+    public static final float ALIEN_ENERGY_INCREASE = 0.0025F;
+    public static final float ALIEN_MAX_HEALTH = 700;
+    public static final float ALIEN_HEALTH_REGEN = 0.5F;
+    public static final float ALIEN_DAMAGE = 170F; // ?
+    public static final int ALIEN_BOOST_TIME = 120;
+    public static final int ALIEN_ABILITY_TIME = 1;
+    public static final float ALIEN_ARMOR = 0;
+    public static final float ALIEN_ARMOR_PIERCING = 0.95F;
 
     public static final float GHOST_TURN = 1.58F;
     public static final float GHOST_LENGTH = 80.0F;
@@ -247,6 +298,6 @@ public class Defaults {
     public static final float GHOST_HEALTH_REGEN = 0;
     public static final float GHOST_DAMAGE = 0;
     public static final int GHOST_BOOST_TIME = 3;
-    public static final int GHOST_ABILITY_TIME = 0;
+    public static final int GHOST_ABILITY_TIME = 1;
 
 }
