@@ -61,7 +61,7 @@ public class GreenlandShark extends Swimmer {
 
     @Override
     public int getHeight() {
-        return 34;
+        return 47;
     }
 
 }
