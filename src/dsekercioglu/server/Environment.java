@@ -71,7 +71,15 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
+        Swimmer a = new Orca("Petable", 0, 0, null, this);
+        a.control = new StraightAttackControl(a, this);
+        a.team = RED;
+        addCharacter(a);
 
+        Swimmer d = new Sharkodile("Nihahah", 0, 0, null, this);
+        d.control = new StraightAttackControl(d, this);
+        d.team = DOMINATOR;
+        addCharacter(d);
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -306,6 +314,14 @@ public class Environment {
                     victim.characterHit(attacker.damage, attacker.armorPiercing);
                     victim.setMoveInAngle(KNOCKBACK_MULTIPLIER * attacker.knockbackPower, attacker.angle);
                     attacker.energyTime = 120;
+                    break;
+                case TAKE_DOWN:
+                    victim.hiding = true;
+                    attacker.hiding = true;
+                    victim.abilityHit(GRAB_DAMAGE / 2);
+                    if (newTime <= 0) {
+                        victim.hiding = false;
+                    }
                 default:
                     break;
             }

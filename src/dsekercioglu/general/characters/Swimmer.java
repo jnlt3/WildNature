@@ -70,6 +70,7 @@ public abstract class Swimmer {
         blind--;
         blind = Math.max(blind, 0);
         invulnerabiltyTime--;
+        hiding = false;
     }
 
     public void regen() {

@@ -60,7 +60,7 @@ public class App extends Application {
 
         String[] fileNames = {"Marlin", "BlackMarlin", "Crocodile", "Shark", "Hippo",
             "MegaMouth", "Orca", "ColossalSquid", "Guardian",
-            "TigerShark", "Dolphin", "MakoShark", "ElectricMarlin", "TwoRulers", "DoodFish",
+            "TigerShark", "Dolphin", "MakoShark", "GreenlandShark", "ElectricMarlin", "TwoRulers", "DoodFish",
             "Alien", "Ghost"};
         RadioButton[] chars = new RadioButton[fileNames.length];
         for (int i = 0; i < fileNames.length; i++) {

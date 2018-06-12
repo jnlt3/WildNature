@@ -96,11 +96,14 @@ public class Visualizer {
         Gif twoRulers = new Gif(pa, "img/TwoRulers.gif");
         images.put("TWO_RULERS", twoRulers);
 
+        Gif ghost = new Gif(pa, "img/Ghost.gif");
+        images.put("GHOST", ghost);
+
         Gif alien = new Gif(pa, "img/Alien.gif");
         images.put("ALIEN", alien);
 
-        Gif ghost = new Gif(pa, "img/Ghost.gif");
-        images.put("GHOST", ghost);
+        Gif greenlandShark = new Gif(pa, "img/GreenlandShark.gif");
+        images.put("GREENLAND_SHARK", greenlandShark);
 
         Set<String> keySet = images.keySet();
         for (String key : keySet) {

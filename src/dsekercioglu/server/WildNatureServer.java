@@ -14,6 +14,7 @@ import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricMarlin;
 import dsekercioglu.general.characters.Ghost;
+import dsekercioglu.general.characters.GreenlandShark;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.MakoShark;
@@ -107,10 +108,12 @@ public class WildNatureServer {
                         p = new MakoShark(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.TWO_RULERS.name().equals(s)) {
                         p = new TwoRulers(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.ALIEN.name().equals(s)) {
-                        p = new Alien(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GHOST.name().equals(s)) {
                         p = new Ghost(name, 0.0F, 0.0F, null, env);
+                    }else if (Animal.ALIEN.name().equals(s)) {
+                        p = new Alien(name, 0.0F, 0.0F, null, env);
+                    }  else if (Animal.GREENLAND_SHARK.name().equals(s)) {
+                        p = new GreenlandShark(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
                         p.control = new UserControl(p);

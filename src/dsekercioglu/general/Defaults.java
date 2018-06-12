@@ -300,4 +300,19 @@ public class Defaults {
     public static final int GHOST_BOOST_TIME = 3;
     public static final int GHOST_ABILITY_TIME = 1;
 
+    public static final float GREENLAND_SHARK_TURN = 0.025F;
+    public static final float GREENLAND_SHARK_LENGTH = 180.0F;
+    public static final float GREENLAND_SHARK_WEIGHT = 3200.0F;
+    public static final float GREENLAND_SHARK_SPEED = 0.1F * 4.2F;
+    public static final float GREENLAND_SHARK_PASSIVE_ABILITY = 1.0F;
+    public static final float GREENLAND_SHARK_MAX_ENERGY = 2.0F;
+    public static final float GREENLAND_SHARK_ENERGY_INCREASE = 0.0025F;
+    public static final float GREENLAND_SHARK_MAX_HEALTH = 1200;
+    public static final float GREENLAND_SHARK_HEALTH_REGEN = 1F;
+    public static final float GREENLAND_SHARK_DAMAGE = 175F; // 240
+    public static final int GREENLAND_SHARK_BOOST_TIME = 180;
+    public static final int GREENLAND_SHARK_ABILITY_TIME = 200;
+    public static final float GREENLAND_SHARK_ARMOR = 0.6F;
+    public static final float GREENLAND_SHARK_ARMOR_PIERCING = 0.8F;
+
 }
