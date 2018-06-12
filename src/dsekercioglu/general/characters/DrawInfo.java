@@ -15,6 +15,5 @@ public class DrawInfo {
     public boolean blind;
     public Team team;
     public int score;
-    public int damageRecieved;
 
 }

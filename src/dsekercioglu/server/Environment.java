@@ -71,42 +71,7 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Angleraptor("7", 0, 0, null, this);
-//            m.team = GREEN;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-        for (int i = 0; i < 1; i++) {
-            Swimmer m = new Shark("Porpoz", 0, 0, null, this);
-            m.team = BLUE;
-            m.control = new StraightAttackControl(m, this);
-            addCharacter(m);
-        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Pirahna("Porpoz", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Sharkodile("Borb", 0, 0, null, this);
-//            m.team = BLUE;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Sharkodile("Borbe", 0, 0, null, this);
-//            m.team = BLUE;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Marlinium("Foof", 0, 0, null, this);
-//            m.team = BLUE;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
+
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -169,7 +134,6 @@ public class Environment {
         ci.characters = new ArrayList();
         for (int i = 0; i < this.characters.size(); i++) {
             DrawInfo di = ((Swimmer) this.characters.get(i)).getDrawInfo();
-            this.characters.get(i).damageRecieved = 0;
             try {
                 di.score = scores.get(di.name);
             } catch (NullPointerException e) {

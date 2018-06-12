@@ -56,9 +56,6 @@ public abstract class Swimmer {
     public boolean clone;
 
     int invulnerabiltyTime = 0;
-    
-    
-    public float damageRecieved = 0;
 
     public Swimmer(String name, PApplet p) {
         this.name = name;
@@ -156,12 +153,10 @@ public abstract class Swimmer {
         di.hiding = this.hiding;
         di.blind = blind > 0;
         di.team = this.team;
-        di.damageRecieved = (int)Math.round(damageRecieved);
         return di;
     }
 
     public void abilityHit(float damage) {
-        damageRecieved += damage;
         health -= damage;
         health = Math.max(health, 0);
     }
@@ -169,7 +164,6 @@ public abstract class Swimmer {
     public void characterHit(float damage, float armorPiercing) {
         if (invulnerabiltyTime <= 0) {
             float finalDamage = damage * Math.min(Math.max(1 - armor + armorPiercing, 0), 1);
-            damageRecieved += finalDamage;
             health -= finalDamage;
             health = Math.max(health, 0);
         }

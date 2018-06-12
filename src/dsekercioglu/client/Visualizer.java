@@ -153,7 +153,6 @@ public class Visualizer {
                 if (!di.hiding) {
                     float cx = di.x - Swimmer.cx + 600;
                     float cy = di.y - Swimmer.cy + 300;
-                    drawDamage(di.damageRecieved, cx, cy);
                     pa.fill(255);
                     pa.textSize(20);
                     pa.text(di.name, cx, cy - 110);
@@ -217,22 +216,6 @@ public class Visualizer {
         this.pa.rect(0, 600, 20, 600);
         this.pa.fill(0, 255, 255, 50);
         this.pa.rect(0, 600, 20, (float) -(600 * rate));
-    }
-
-    private void drawDamage(int damage, float x, float y) {
-        if (!(damage == 0)) {
-            Runnable r = () -> {
-                long time = System.currentTimeMillis();
-                while (System.currentTimeMillis() - time < 200) {
-                    pa.fill(255, 0, 0);
-                    pa.stroke(255, 0, 0);
-                    pa.textSize(20);
-                    pa.text(damage + "", x, y - 50);
-                }
-            };
-            Thread t = new Thread(r);
-            t.start();
-        }
     }
 
     private void drawVision(String type, ArrayList<DrawInfo> characters) {
