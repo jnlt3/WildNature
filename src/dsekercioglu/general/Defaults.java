@@ -129,7 +129,7 @@ public class Defaults {
     public static final float DOOD_FISH_PASSIVE_ABILITY = 2.0F;
     public static final float DOOD_FISH_MAX_ENERGY = 2.0F;
     public static final float DOOD_FISH_ENERGY_INCREASE = 0.0025F;
-    public static final float DOOD_FISH_MAX_HEALTH = 400;
+    public static final float DOOD_FISH_MAX_HEALTH = 550;
     public static final float DOOD_FISH_HEALTH_REGEN = 0.5F;
     public static final float DOOD_FISH_DAMAGE = 100; //210
     public static final int DOOD_FISH_BOOST_TIME = 600;
@@ -220,11 +220,11 @@ public class Defaults {
     public static final float DOLPHIN_MAX_ENERGY = 3.0F;
     public static final float DOLPHIN_ENERGY_INCREASE = 0.0025F;
     public static final float DOLPHIN_MAX_HEALTH = 640;
-    public static final float DOLPHIN_HEALTH_REGEN = 0.5F;
+    public static final float DOLPHIN_HEALTH_REGEN = 0.75F;
     public static final float DOLPHIN_DAMAGE = 135F; // 200
     public static final int DOLPHIN_BOOST_TIME = 140;
     public static final int DOLPHIN_ABILITY_TIME = 1;
-    public static final float DOLPHIN_ARMOR = 0.2F;
+    public static final float DOLPHIN_ARMOR = 0.4F;
     public static final float DOLPHIN_ARMOR_PIERCING = 0F;
 
     public static final float MAKO_SHARK_TURN = 0.09F;
@@ -251,10 +251,10 @@ public class Defaults {
     public static final float TWO_RULERS_ENERGY_INCREASE = 0.0025F;
     public static final float TWO_RULERS_MAX_HEALTH = 400;
     public static final float TWO_RULERS_HEALTH_REGEN = 1F;
-    public static final float TWO_RULERS_DAMAGE = 80; //120
+    public static final float TWO_RULERS_DAMAGE = 100; //120
     public static final int TWO_RULERS_BOOST_TIME = 50;
     public static final int TWO_RULERS_ABILITY_TIME = 150;
-    public static final float TWO_RULERS_ARMOR = 0.6F;
+    public static final float TWO_RULERS_ARMOR = 0.8F;
     public static final float TWO_RULERS_ARMOR_PIERCING = 0.1F;
 
     public static final float GUARDIAN_TURN = 0.05F;
@@ -285,7 +285,7 @@ public class Defaults {
     public static final int ALIEN_BOOST_TIME = 120;
     public static final int ALIEN_ABILITY_TIME = 1;
     public static final float ALIEN_ARMOR = 0;
-    public static final float ALIEN_ARMOR_PIERCING = 0.95F;
+    public static final float ALIEN_ARMOR_PIERCING = 0.75F;
 
     public static final float GHOST_TURN = 1.58F;
     public static final float GHOST_LENGTH = 80.0F;

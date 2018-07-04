@@ -179,6 +179,9 @@ public abstract class Swimmer {
         y = (float) (Math.random() * 2 * height - height);
         health = maxHealth;
         energy = maxEnergy;
+        blind = 0;
+        energyTime = 0;
+        control.freeze(false);
     }
 
     public void setBlind(int blind) {

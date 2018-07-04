@@ -115,10 +115,10 @@ public class Visualizer {
 
     public void update(ArrayList<DrawInfo> characters) {
         ControlInfo c = new ControlInfo();
-        c.mouseX = this.pa.mouseX;
-        c.mouseY = this.pa.mouseY;
-        c.power = this.pa.mousePressed || (this.pa.keyPressed && this.pa.key == ' ');
-        c.enter = this.pa.keyPressed;
+        c.mouseX = pa.mouseX;
+        c.mouseY = pa.mouseY;
+        c.power = pa.mousePressed || (pa.keyPressed && pa.key == ' ');
+        c.enter = pa.keyPressed;
         c.name = this.name;
         WildNature.client.sendUDP(c);
         drawGrids();
@@ -137,18 +137,18 @@ public class Visualizer {
                     drawVision(animal.name(), characters);
                 }
                 Swimmer.setCenter(d.x, d.y);
-                this.pa.fill(0, 0, 0, 0);
-                this.pa.stroke(255);
-                this.pa.ellipse(600, 300, 200, 200);
+                pa.fill(0, 0, 0, 0);
+                pa.stroke(255);
+                pa.ellipse(600, 300, 200, 200);
                 drawEnergyBar(d.energy / d.maxEnergy);
             }
         }
         if (!characterSpotted) {
-            this.pa.fill(255);
-            this.pa.stroke(255);
-            this.pa.textSize(30);
+            pa.fill(255);
+            pa.stroke(255);
+            pa.textSize(30);
             String text = "Press Any Key to Respawn";
-            this.pa.text(text, 600 - pa.textWidth(text) / 2, 285);
+            pa.text(text, 600 - pa.textWidth(text) / 2, 285);
         }
         if (!blind) {
             for (int i = 0; i < characters.size(); i++) {
@@ -179,88 +179,88 @@ public class Visualizer {
     }
 
     private void drawGrids() {
-        this.pa.stroke(0, 0, 255);
-        this.pa.fill(0, 0, 255);
-        this.pa.rect(0.0F, 0.0F, 1200.0F, 600.0F);
-        this.pa.stroke(0.0F, 0, 230);
-        this.pa.strokeWeight(3.0F);
+        pa.stroke(0, 0, 255);
+        pa.fill(0, 0, 255);
+        pa.rect(0.0F, 0.0F, 1200.0F, 600.0F);
+        pa.stroke(0.0F, 0, 230);
+        pa.strokeWeight(3.0F);
         float cx = Swimmer.cx % 60.0F;
         float cy = Swimmer.cy % 60.0F;
         for (int y = 0; y < 600; y += 60) {
-            this.pa.line(0.0F, y - cy, 1200.0F, y - cy);
+            pa.line(0.0F, y - cy, 1200.0F, y - cy);
         }
         for (int x = 0; x < 1200; x += 60) {
-            this.pa.line(x - cx, 0.0F, x - cx, 600.0F);
+            pa.line(x - cx, 0.0F, x - cx, 600.0F);
         }
-        this.pa.stroke(255.0F, 0.0F, 0.0F);
-        this.pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
-        this.pa.rect(-WIDTH - Swimmer.cx + 600.0F, -HEIGHT - Swimmer.cy + 300.0F, WIDTH * 2, HEIGHT * 2);
+        pa.stroke(255.0F, 0.0F, 0.0F);
+        pa.fill(0.0F, 0.0F, 0.0F, 0.0F);
+        pa.rect(-WIDTH - Swimmer.cx + 600.0F, -HEIGHT - Swimmer.cy + 300.0F, WIDTH * 2, HEIGHT * 2);
 
     }
 
     private void drawHealthBar(float rate, float x, float y) {
         float healthBarLength = 50;
-        this.pa.fill(0);
-        this.pa.stroke(0);
-        this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength, 5);
+        pa.fill(0);
+        pa.stroke(0);
+        pa.rect(x - healthBarLength / 2, y - 110, healthBarLength, 5);
 
         int red = (int) Math.min(510 - (rate * 510), 255);
         int green = (int) Math.min(rate * 510, 255);
-        this.pa.fill(red, green, 0);
-        this.pa.stroke(red, green, 0);
-        this.pa.rect(x - healthBarLength / 2, y - 110, healthBarLength * rate, 5);
+        pa.fill(red, green, 0);
+        pa.stroke(red, green, 0);
+        pa.rect(x - healthBarLength / 2, y - 110, healthBarLength * rate, 5);
 
     }
-
+    
     private void drawEnergyBar(double rate) {
-        this.pa.fill(0, 0, 0, 0);
-        this.pa.strokeWeight(3);
-        this.pa.stroke(0, 255, 255);
-        this.pa.rect(0, 600, 20, 600);
-        this.pa.fill(0, 255, 255, 50);
-        this.pa.rect(0, 600, 20, (float) -(600 * rate));
+        pa.fill(0, 0, 0, 0);
+        pa.strokeWeight(3);
+        pa.stroke(0, 255, 255);
+        pa.rect(0, 600, 20, 600);
+        pa.fill(0, 255, 255, 50);
+        pa.rect(0, 600, 20, (float) -(600 * rate));
     }
 
     private void drawVision(String type, ArrayList<DrawInfo> characters) {
         if (type.equals(MARLIN.name()) || type.equals(BLACK_MARLIN.name()) || type.equals(ELECTRIC_MARLIN.name())) {
-            this.pa.fill(0);
-            this.pa.stroke(0);
+            pa.fill(0);
+            pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 2500 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
-                    this.pa.ellipse(x, y, 20, 20);
+                    pa.ellipse(x, y, 20, 20);
                 }
             }
         } else if (type.equals(SHARK.name())) {
-            this.pa.fill(255, 0, 0);
-            this.pa.stroke(255, 0, 0);
+            pa.fill(255, 0, 0);
+            pa.stroke(255, 0, 0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 if (d.health != d.maxHealth && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 6000 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
-                    this.pa.ellipse(x, y, 20, 20);
+                    pa.ellipse(x, y, 20, 20);
                 }
             }
         } else if (type.equals(COLOSSAL_SQUID.name())) {
-            this.pa.fill(0);
-            this.pa.stroke(0);
+            pa.fill(0);
+            pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 2000 && !d.name.equals(name)) {
                     double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
-                    this.pa.ellipse(x, y, 20, 20);
+                    pa.ellipse(x, y, 20, 20);
                 }
             }
         } else if (type.equals(DOOD_FISH.name()) || type.equals(GHOST.name())) {
-            this.pa.fill(0);
-            this.pa.stroke(0);
+            pa.fill(0);
+            pa.stroke(0);
             for (int i = 0; i < characters.size(); i++) {
                 DrawInfo d = characters.get(i);
                 double distance = Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y);
@@ -269,32 +269,32 @@ public class Visualizer {
                     float x = (float) (600 + Math.cos(angle) * 100);
                     float y = (float) (300 + Math.sin(angle) * 100);
                     float radius = 30 - (float) (10 + (distance / 750));
-                    this.pa.ellipse(x, y, radius, radius);
+                    pa.ellipse(x, y, radius, radius);
                 }
             }
         }
 
-        this.pa.fill(0);
-        this.pa.stroke(0);
+        pa.fill(0);
+        pa.stroke(0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
             if (!d.hiding && Point2D.distance(Swimmer.cx, Swimmer.cy, d.x, d.y) < 1500 && !d.name.equals(name)) {
                 double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                 float x = (float) (600 + Math.cos(angle) * 100);
                 float y = (float) (300 + Math.sin(angle) * 100);
-                this.pa.ellipse(x, y, 10, 10);
+                pa.ellipse(x, y, 10, 10);
             }
         }
 
-        this.pa.fill(0, 255, 0);
-        this.pa.stroke(0, 255, 0);
+        pa.fill(0, 255, 0);
+        pa.stroke(0, 255, 0);
         for (int i = 0; i < characters.size(); i++) {
             DrawInfo d = characters.get(i);
             if (!d.name.equals(name) && d.team.equals(this.team)) {
                 double angle = Math.atan2(d.y - Swimmer.cy, d.x - Swimmer.cx);
                 float x = (float) (600 + Math.cos(angle) * 100);
                 float y = (float) (300 + Math.sin(angle) * 100);
-                this.pa.ellipse(x, y, 10, 10);
+                pa.ellipse(x, y, 10, 10);
             }
         }
     }

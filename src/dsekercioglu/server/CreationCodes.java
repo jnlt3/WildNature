@@ -116,5 +116,23 @@ public class CreationCodes {
 //            m.control = new AmbushControl(m, this);
 //            addCharacter(m);
 //        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new TwoRulers("14", 0, 0, null, this);
+//            m.team = RED;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Alien("15", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new GreenlandShark("16", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
     }
 }

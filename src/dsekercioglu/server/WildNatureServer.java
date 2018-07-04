@@ -110,9 +110,9 @@ public class WildNatureServer {
                         p = new TwoRulers(name, 0.0F, 0.0F, null, env);
                     } else if (Animal.GHOST.name().equals(s)) {
                         p = new Ghost(name, 0.0F, 0.0F, null, env);
-                    }else if (Animal.ALIEN.name().equals(s)) {
+                    } else if (Animal.ALIEN.name().equals(s)) {
                         p = new Alien(name, 0.0F, 0.0F, null, env);
-                    }  else if (Animal.GREENLAND_SHARK.name().equals(s)) {
+                    } else if (Animal.GREENLAND_SHARK.name().equals(s)) {
                         p = new GreenlandShark(name, 0.0F, 0.0F, null, env);
                     }
                     if (p != null) {
@@ -141,9 +141,10 @@ public class WildNatureServer {
         System.out.println("done: " + System.currentTimeMillis());
         Runnable r = () -> {
             while (true) {
+                long time = System.currentTimeMillis();
                 env.update(currentControls);
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(Math.max(10 - (System.currentTimeMillis() - time), 0));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Environment.class.getName()).log(Level.SEVERE, null, ex);
                 }

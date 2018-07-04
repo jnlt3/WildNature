@@ -11,6 +11,7 @@ import dsekercioglu.general.characters.DoodFish;
 import dsekercioglu.general.characters.Sharkodile;
 import dsekercioglu.general.characters.DrawInfo;
 import dsekercioglu.general.characters.ElectricMarlin;
+import dsekercioglu.general.characters.GreenlandShark;
 import dsekercioglu.general.characters.Guardian;
 import dsekercioglu.general.characters.Hippo;
 import dsekercioglu.general.characters.MakoShark;
@@ -71,15 +72,108 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-        Swimmer a = new Orca("Petable", 0, 0, null, this);
-        a.control = new StraightAttackControl(a, this);
-        a.team = RED;
-        addCharacter(a);
-
-        Swimmer d = new Sharkodile("Nihahah", 0, 0, null, this);
-        d.control = new StraightAttackControl(d, this);
-        d.team = DOMINATOR;
-        addCharacter(d);
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Hippo("Hippo", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Guardian("Guardian", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Shark("Shark", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new MakoShark("MakoShark", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new TwoRulers("TwoRulers", 0, 0, null, this);
+//            m.team = RED;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+        for (int i = 0; i < 1; i++) {
+            Swimmer m = new Crocodile("Crocodile", 0, 0, null, this);
+            m.team = INDEPENDENT;
+            m.control = new AmbushControl(m, this);
+            addCharacter(m);
+        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new ColossalSquid("ColossalSquid", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Dolphin("Dolphin", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new MegaMouth("MegaMouth", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Marlin("Marlin", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new Orca("Orca", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new TigerShark("TigerShark", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+        for (int i = 0; i < 1; i++) {
+            Swimmer m = new BlackMarlin("BlackMarlin", 0, 0, null, this);
+            m.team = INDEPENDENT;
+            m.control = new BackTrackControl(m, this);
+            addCharacter(m);
+        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new ElectricMarlin("ElectricMarlin", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new BackTrackControl(m, this);
+//            addCharacter(m);
+//        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new DoodFish("DoodFish", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new AmbushControl(m, this);
+//            addCharacter(m);
+//        }
+        for (int i = 0; i < 1; i++) {
+            Swimmer m = new Alien("Alien", 0, 0, null, this);
+            m.team = INDEPENDENT;
+            m.control = new StraightAttackControl(m, this);
+            addCharacter(m);
+        }
+//        for (int i = 0; i < 1; i++) {
+//            Swimmer m = new GreenlandShark("GreenlandShark", 0, 0, null, this);
+//            m.team = INDEPENDENT;
+//            m.control = new StraightAttackControl(m, this);
+//            addCharacter(m);
+//        }
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
@@ -196,9 +290,6 @@ public class Environment {
             int newTime = time.get(i) - 1;
             Swimmer victim = victims.get(i);
             Swimmer attacker = attackers.get(i);
-//            if (!attacker.isAlive() || (victim instanceof Guardian && victim.energyTime > 0)) {
-//                newTime = 0;
-//            }
             switch (a) {
                 case BLEED:
                     victims.get(i).abilityHit(BLEED_DAMAGE);
@@ -319,8 +410,12 @@ public class Environment {
                     victim.hiding = true;
                     attacker.hiding = true;
                     victim.abilityHit(GRAB_DAMAGE / 2);
+                    victim.x = (float) (attacker.x + (Math.cos(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.y = (float) (attacker.y + (Math.sin(attacker.angle) * ((attacker.getWidth() + victim.getHeight()) / 2 + 2)));
+                    victim.angle = (float) (attacker.angle + Math.PI / 2);
                     if (newTime <= 0) {
                         victim.hiding = false;
+                        victim.setMoveInAngle(attacker.knockbackPower * KNOCKBACK_MULTIPLIER, attacker.angle);
                     }
                 default:
                     break;
@@ -337,7 +432,7 @@ public class Environment {
         for (int i = 0; i < indices.size(); i++) {
             int index = indices.get(i) - i;
             if (index >= 0) {
-                victims.get(index).setInvulnerability(1);
+                victims.get(index).setInvulnerability(3);
                 abilities.remove(index);
                 victims.remove(index);
                 attackers.remove(index);
