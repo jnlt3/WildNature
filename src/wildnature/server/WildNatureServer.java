@@ -1,9 +1,11 @@
 package wildnature.server;
 
 import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryo.util.Util;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import java.io.File;
 import wildnature.general.characters.swimmers.Alien;
 import wildnature.general.characters.Animal;
 import wildnature.general.characters.swimmers.BlackMarlin;
@@ -23,6 +25,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import wildnature.client.WildNature;
 import wildnature.general.characters.swimmers.ColossalSquid;
 import wildnature.general.characters.swimmers.Crocodile;
 import wildnature.general.characters.swimmers.Dolphin;
@@ -39,8 +61,9 @@ import wildnature.general.characters.swimmers.Orca;
 import wildnature.general.characters.swimmers.Shark;
 import wildnature.general.characters.swimmers.TigerShark;
 import wildnature.general.characters.swimmers.TwoRulers;
+import wildnature.simplifier.SimplifiedGUI;
 
-public class WildNatureServer {
+public class WildNatureServer extends Application  {
 
     private static final HashMap<String, ControlInfo> currentControls = new HashMap();
     private static final Environment env = new Environment();
@@ -49,6 +72,12 @@ public class WildNatureServer {
     static int i = 0;
 
     public static void main(String[] args) throws IOException {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        
         server = new Server();
         Kryo kryo = server.getKryo();
         kryo.register(ControlInfo.class);
@@ -78,43 +107,13 @@ public class WildNatureServer {
                     s = s.replace(name + "/", "");
                     Swimmer p = null;
                     System.out.println(s);
-                    if (Animal.MARLIN.name().equals(s)) {
-                        p = new Marlin(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.BLACK_MARLIN.name().equals(s)) {
-                        p = new BlackMarlin(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.CROCODILE.name().equals(s)) {
-                        p = new Crocodile(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.SHARK.name().equals(s)) {
-                        p = new Shark(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.MEGA_MOUTH.name().equals(s)) {
-                        p = new MegaMouth(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.ORCA.name().equals(s)) {
-                        p = new Orca(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.HIPPO.name().equals(s)) {
-                        p = new Hippo(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.COLOSSAL_SQUID.name().equals(s)) {
-                        p = new ColossalSquid(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.DOOD_FISH.name().equals(s)) {
-                        p = new DoodFish(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.ELECTRIC_MARLIN.name().equals(s)) {
-                        p = new ElectricMarlin(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.GUARDIAN.name().equals(s)) {
-                        p = new Guardian(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.TIGER_SHARK.name().equals(s)) {
-                        p = new TigerShark(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.DOLPHIN.name().equals(s)) {
-                        p = new Dolphin(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.MAKO_SHARK.name().equals(s)) {
-                        p = new MakoShark(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.TWO_RULERS.name().equals(s)) {
-                        p = new TwoRulers(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.GHOST.name().equals(s)) {
-                        p = new Ghost(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.ALIEN.name().equals(s)) {
-                        p = new Alien(name, 0.0F, 0.0F, null, env);
-                    } else if (Animal.GREENLAND_SHARK.name().equals(s)) {
-                        p = new GreenlandShark(name, 0.0F, 0.0F, null, env);
+                    
+                    try {
+                        p = Utilities.getSwimmer(s, name, env);
+                    } catch (Utilities.NoSuchAnimalException ex) {
+                        Logger.getLogger(WildNatureServer.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
                     if (p != null) {
                         p.control = new UserControl(p);
                         ControlInfo c = new ControlInfo();
@@ -152,5 +151,87 @@ public class WildNatureServer {
         };
 
         new Thread(r).start();
+       
+        Label name_label = SimplifiedGUI.newLabel("Enter Name:");
+        TextField name_textField = SimplifiedGUI.newTextField("", 150, true);
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        
+        ListView<String> x = SimplifiedGUI.newListView(300, 100, SelectionMode.SINGLE);
+        
+        Button btn = SimplifiedGUI.newButton("Add", Color.GOLD, (a) -> {
+
+            String name = name_textField.getText();
+            name_textField.setText("");
+            Animal animal = Animal.values()[toggleGroup.getToggles().indexOf(toggleGroup.getSelectedToggle())];
+            //Swimmer m = new Hippo("3", 0, 0, null, this);
+            Swimmer swimmer = null;
+            try {
+                swimmer = Utilities.getSwimmer(animal.name(), name, env);
+            } catch (Utilities.NoSuchAnimalException ex) {
+                Logger.getLogger(WildNatureServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            swimmer.team = Team.INDEPENDENT;
+            swimmer.control = new StraightAttackControl(swimmer, env);
+            env.addCharacter(swimmer);
+            
+            ObservableList<String> items = x.getItems();
+            items.add(name);
+
+        });
+        
+        Node[][] gridNodes = {{name_label},{name_textField, btn}};
+
+        GridPane gridPane = SimplifiedGUI.newGridPane(20, 10, 30, Color.ALICEBLUE, gridNodes);
+
+        
+
+
+        
+        
+
+        Label character_label = SimplifiedGUI.newLabel("Select character to add...");
+
+        String[] fileNames = {"Marlin", "BlackMarlin", "Crocodile", "Shark", "Hippo",
+            "MegaMouth", "Orca", "ColossalSquid", "Guardian",
+            "TigerShark", "Dolphin", "MakoShark", "GreenlandShark", "ElectricMarlin", "TwoRulers", "DoodFish",
+            "Alien", "Ghost"};
+        
+        RadioButton[] chars = new RadioButton[fileNames.length];
+        for (int i = 0; i < fileNames.length; i++) {
+            chars[i] = SimplifiedGUI.newRadioButton("", true, toggleGroup);
+            File imageFile = new File("resources/" + fileNames[i] + ".png");
+            Image image = new Image(imageFile.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(150);
+            chars[i].setGraphic(imageView);
+        }
+
+        int numOfRows = 3;
+        Node[][] characterNodes = new Node[numOfRows][(int) Math.ceil((double) fileNames.length / numOfRows)];
+        int k = 0;
+        for (int i = 0; i < numOfRows; i++) {
+            for (int j = 0; j < characterNodes[i].length; j++) {
+                if (k == fileNames.length) {
+                    break;
+                }
+                characterNodes[i][j] = chars[k];
+                k++;
+            }
+        }
+
+        Node[][] swimmersGridNodes = {{x}};
+        GridPane swimmersPane = SimplifiedGUI.newGridPane(20, 10, 30, Color.ALICEBLUE, swimmersGridNodes);
+        
+        GridPane characterPane = SimplifiedGUI.newGridPane(10, 10, 15, Color.ALICEBLUE, characterNodes);
+        
+        Node[] nodes = {character_label, characterPane, gridPane, swimmersPane};
+        VBox root = SimplifiedGUI.newVBox(30, 30, Color.ALICEBLUE, nodes);
+
+        stage.setTitle("Wild Nature");
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
     }
 }
