@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import wildnature.general.characters.swimmers.Guardian;
+import wildnature.general.characters.swimmers.Marlinium;
+import wildnature.general.characters.swimmers.Sharkodile;
 
 public class Environment {
 
@@ -49,7 +51,11 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-
+        Marlinium sk = new Marlinium("Hacker36", 0, 0, null, this);
+        sk.team = DOMINATOR;
+        sk.respawn(WIDTH, HEIGHT);
+        addCharacter(sk);
+        
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
