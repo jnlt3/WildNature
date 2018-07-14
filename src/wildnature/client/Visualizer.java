@@ -39,70 +39,70 @@ public class Visualizer {
     }
 
     public void setImages() {
-        Gif marlin = new Gif(pa, "src/dsekercioglu/img/Marlin.gif");
+        Gif marlin = new Gif(pa, "resources/Marlin.gif");
         images.put("MARLIN", marlin);
 
-        Gif blackMarlin = new Gif(pa, "src/dsekercioglu/img/BlackMarlin.gif");
+        Gif blackMarlin = new Gif(pa, "resources/BlackMarlin.gif");
         images.put("BLACK_MARLIN", blackMarlin);
 
-        Gif crocodile = new Gif(pa, "src/dsekercioglu/img/Crocodile.gif");
+        Gif crocodile = new Gif(pa, "resources/Crocodile.gif");
         images.put("CROCODILE", crocodile);
 
-        Gif shark = new Gif(pa, "src/dsekercioglu/img/Shark.gif");
+        Gif shark = new Gif(pa, "resources/Shark.gif");
         images.put("SHARK", shark);
 
-        Gif megaMouth = new Gif(pa, "src/dsekercioglu/img/MegaMouth.gif");
+        Gif megaMouth = new Gif(pa, "resources/MegaMouth.gif");
         images.put("MEGA_MOUTH", megaMouth);
 
-        Gif orca = new Gif(pa, "src/dsekercioglu/img/Orca.gif");
+        Gif orca = new Gif(pa, "resources/Orca.gif");
         images.put("ORCA", orca);
 
-        Gif hippo = new Gif(pa, "src/dsekercioglu/img/Hippo.gif");
+        Gif hippo = new Gif(pa, "resources/Hippo.gif");
         images.put("HIPPO", hippo);
 
-        Gif colossalSquid = new Gif(pa, "src/dsekercioglu/img/ColossalSquid.gif");
+        Gif colossalSquid = new Gif(pa, "resources/ColossalSquid.gif");
         images.put("COLOSSAL_SQUID", colossalSquid);
 
-        Gif doodFish = new Gif(pa, "src/dsekercioglu/img/DoodFish.gif");
+        Gif doodFish = new Gif(pa, "resources/DoodFish.gif");
         images.put("DOOD_FISH", doodFish);
 
-        Gif electricMarlin = new Gif(pa, "src/dsekercioglu/img/ElectricMarlin.gif");
+        Gif electricMarlin = new Gif(pa, "resources/ElectricMarlin.gif");
         images.put("ELECTRIC_MARLIN", electricMarlin);
 
-        Gif guardian = new Gif(pa, "src/dsekercioglu/img/Guardian.gif");
+        Gif guardian = new Gif(pa, "resources/Guardian.gif");
         images.put("GUARDIAN", guardian);
 
-        Gif sharkodile = new Gif(pa, "src/dsekercioglu/img/Sharkodile.gif");
+        Gif sharkodile = new Gif(pa, "resources/Sharkodile.gif");
         images.put("SHARKODILE", sharkodile);
 
-        Gif marlinium = new Gif(pa, "src/dsekercioglu/img/Marlinium.gif");
+        Gif marlinium = new Gif(pa, "resources/Marlinium.gif");
         images.put("MARLINIUM", marlinium);
 
-        Gif miniMarlin = new Gif(pa, "src/dsekercioglu/img/MiniMarlin.gif");
+        Gif miniMarlin = new Gif(pa, "resources/MiniMarlin.gif");
         images.put("MINI_MARLIN", miniMarlin);
 
-        Gif angleraptor = new Gif(pa, "src/dsekercioglu/img/Angleraptor.gif");
+        Gif angleraptor = new Gif(pa, "resources/Angleraptor.gif");
         images.put("ANGLERAPTOR", angleraptor);
 
-        Gif tigerShark = new Gif(pa, "src/dsekercioglu/img/TigerShark.gif");
+        Gif tigerShark = new Gif(pa, "resources/TigerShark.gif");
         images.put("TIGER_SHARK", tigerShark);
 
-        Gif dolphin = new Gif(pa, "src/dsekercioglu/img/Dolphin.gif");
+        Gif dolphin = new Gif(pa, "resources/Dolphin.gif");
         images.put("DOLPHIN", dolphin);
 
-        Gif makoShark = new Gif(pa, "src/dsekercioglu/img/MakoShark.gif");
+        Gif makoShark = new Gif(pa, "resources/MakoShark.gif");
         images.put("MAKO_SHARK", makoShark);
 
-        Gif twoRulers = new Gif(pa, "src/dsekercioglu/img/TwoRulers.gif");
+        Gif twoRulers = new Gif(pa, "resources/TwoRulers.gif");
         images.put("TWO_RULERS", twoRulers);
 
-        Gif ghost = new Gif(pa, "src/dsekercioglu/img/Ghost.gif");
+        Gif ghost = new Gif(pa, "resources/Ghost.gif");
         images.put("GHOST", ghost);
 
-        Gif alien = new Gif(pa, "src/dsekercioglu/img/Alien.gif");
+        Gif alien = new Gif(pa, "resources/Alien.gif");
         images.put("ALIEN", alien);
 
-        Gif greenlandShark = new Gif(pa, "src/dsekercioglu/img/GreenlandShark.gif");
+        Gif greenlandShark = new Gif(pa, "resources/GreenlandShark.gif");
         images.put("GREENLAND_SHARK", greenlandShark);
 
         Set<String> keySet = images.keySet();

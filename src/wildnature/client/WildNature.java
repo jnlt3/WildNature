@@ -29,7 +29,7 @@ public class WildNature extends PApplet {
 
     @Override
     public void setup() {
-        surface.setIcon(loadImage("img/Icon.png"));
+        surface.setIcon(loadImage("resources/Icon.png"));
         v = new Visualizer(name, animal, this);
         v.setImages();
     }

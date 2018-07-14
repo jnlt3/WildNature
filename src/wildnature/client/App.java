@@ -65,7 +65,7 @@ public class App extends Application {
         RadioButton[] chars = new RadioButton[fileNames.length];
         for (int i = 0; i < fileNames.length; i++) {
             chars[i] = SimplifiedGUI.newRadioButton("", true, toggleGroup);
-            File imageFile = new File("src/dsekercioglu/img/" + fileNames[i] + ".png");
+            File imageFile = new File("resources/" + fileNames[i] + ".png");
             Image image = new Image(imageFile.toURI().toString());
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);

@@ -1,6 +1,6 @@
 package wildnature.general.control;
 
-import wildnature.general.characters.Ghost;
+import wildnature.general.characters.swimmers.Ghost;
 import wildnature.general.characters.Swimmer;
 import static wildnature.general.characters.Team.INDEPENDENT;
 import wildnature.general.multiPlayer.ControlInfo;

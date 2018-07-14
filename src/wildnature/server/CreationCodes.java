@@ -13,20 +13,6 @@ public class CreationCodes {
     
     public void codeKeeper() { 
 //        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new ElectricEel("1", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Barracuda("2", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//
-//        for (int i = 0; i < 1; i++) {
 //            Swimmer m = new Hippo("3", 0, 0, null, this);
 //            m.team = INDEPENDENT;
 //            m.control = new StraightAttackControl(m, this);

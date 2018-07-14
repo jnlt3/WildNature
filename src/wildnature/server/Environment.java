@@ -2,37 +2,13 @@ package wildnature.server;
 
 import wildnature.general.characters.Ability;
 import static wildnature.general.characters.Ability.*;
-import wildnature.general.characters.Alien;
-import wildnature.general.characters.BlackMarlin;
-import wildnature.general.characters.ColossalSquid;
-import wildnature.general.characters.Crocodile;
-import wildnature.general.characters.Dolphin;
-import wildnature.general.characters.DoodFish;
-import wildnature.general.characters.Sharkodile;
 import wildnature.general.characters.DrawInfo;
-import wildnature.general.characters.ElectricMarlin;
-import wildnature.general.characters.GreenlandShark;
-import wildnature.general.characters.Guardian;
-import wildnature.general.characters.Hippo;
-import wildnature.general.characters.MakoShark;
-import wildnature.general.characters.Marlin;
-import wildnature.general.characters.Marlinium;
-import wildnature.general.characters.MegaMouth;
-import wildnature.general.characters.MiniMarlin;
-import wildnature.general.characters.Orca;
-import wildnature.general.characters.Shark;
 import wildnature.general.characters.Swimmer;
 import wildnature.general.characters.Team;
-import static wildnature.general.characters.Team.BLUE;
 import static wildnature.general.characters.Team.INDEPENDENT;
 import static wildnature.general.characters.Team.DOMINATOR;
-import static wildnature.general.characters.Team.GREEN;
 import static wildnature.general.characters.Team.RED;
-import static wildnature.general.characters.Team.YELLOW;
-import wildnature.general.characters.TigerShark;
-import wildnature.general.characters.TwoRulers;
-import wildnature.general.control.AmbushControl;
-import wildnature.general.control.BackTrackControl;
+
 import wildnature.general.control.StraightAttackControl;
 import wildnature.general.multiPlayer.CharacterInfo;
 import wildnature.general.multiPlayer.ControlInfo;
@@ -43,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import wildnature.general.characters.swimmers.Guardian;
 
 public class Environment {
 
@@ -72,108 +49,7 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Hippo("Hippo", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Guardian("Guardian", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Shark("Shark", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new MakoShark("MakoShark", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new TwoRulers("TwoRulers", 0, 0, null, this);
-//            m.team = RED;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-        for (int i = 0; i < 1; i++) {
-            Swimmer m = new Crocodile("Crocodile", 0, 0, null, this);
-            m.team = INDEPENDENT;
-            m.control = new AmbushControl(m, this);
-            addCharacter(m);
-        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new ColossalSquid("ColossalSquid", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Dolphin("Dolphin", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new MegaMouth("MegaMouth", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Marlin("Marlin", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new Orca("Orca", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new TigerShark("TigerShark", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-        for (int i = 0; i < 1; i++) {
-            Swimmer m = new BlackMarlin("BlackMarlin", 0, 0, null, this);
-            m.team = INDEPENDENT;
-            m.control = new BackTrackControl(m, this);
-            addCharacter(m);
-        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new ElectricMarlin("ElectricMarlin", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new BackTrackControl(m, this);
-//            addCharacter(m);
-//        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new DoodFish("DoodFish", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new AmbushControl(m, this);
-//            addCharacter(m);
-//        }
-        for (int i = 0; i < 1; i++) {
-            Swimmer m = new Alien("Alien", 0, 0, null, this);
-            m.team = INDEPENDENT;
-            m.control = new StraightAttackControl(m, this);
-            addCharacter(m);
-        }
-//        for (int i = 0; i < 1; i++) {
-//            Swimmer m = new GreenlandShark("GreenlandShark", 0, 0, null, this);
-//            m.team = INDEPENDENT;
-//            m.control = new StraightAttackControl(m, this);
-//            addCharacter(m);
-//        }
+
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
