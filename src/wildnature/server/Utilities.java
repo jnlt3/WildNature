@@ -17,9 +17,12 @@ import wildnature.general.characters.swimmers.Guardian;
 import wildnature.general.characters.swimmers.Hippo;
 import wildnature.general.characters.swimmers.MakoShark;
 import wildnature.general.characters.swimmers.Marlin;
+import wildnature.general.characters.swimmers.Marlinium;
 import wildnature.general.characters.swimmers.MegaMouth;
+import wildnature.general.characters.swimmers.MiniMarlin;
 import wildnature.general.characters.swimmers.Orca;
 import wildnature.general.characters.swimmers.Shark;
+import wildnature.general.characters.swimmers.Sharkodile;
 import wildnature.general.characters.swimmers.TigerShark;
 import wildnature.general.characters.swimmers.TwoRulers;
 
@@ -62,6 +65,12 @@ public class Utilities {
             return new Alien(name, 0.0F, 0.0F, null, env);
         } else if (Animal.GREENLAND_SHARK.name().equals(type)) {
             return new GreenlandShark(name, 0.0F, 0.0F, null, env);
+        } else if (Animal.SHARKODILE.name().equals(type)) {
+            return new Sharkodile(name, 0.0F, 0.0F, null, env);
+        } else if (Animal.MARLINIUM.name().equals(type)) {
+            return new Marlinium(name, 0.0F, 0.0F, null, env);
+        } else if (Animal.MINI_MARLIN.name().equals(type)) {
+            return new MiniMarlin(name, 0.0F, 0.0F, null, env);
         }
         throw new NoSuchAnimalException("No Animal Named " + type);
     }

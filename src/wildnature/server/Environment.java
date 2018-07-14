@@ -51,11 +51,11 @@ public class Environment {
     public HashMap<String, Integer> scores = new HashMap<>();
 
     public Environment() {
-        Marlinium sk = new Marlinium("Hacker36", 0, 0, null, this);
-        sk.team = DOMINATOR;
-        sk.respawn(WIDTH, HEIGHT);
-        addCharacter(sk);
-        
+//        Marlinium sk = new Marlinium("Hacker36", 0, 0, null, this);
+//        sk.team = DOMINATOR;
+//        sk.respawn(WIDTH, HEIGHT);
+//        addCharacter(sk);
+//        
     }
 
     public void update(HashMap<String, ControlInfo> hashMap) {
